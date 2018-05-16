@@ -1,3 +1,11 @@
-# project-client-black-mirror
+# Purple Gorilla 🦍
 
-React Native app component.
+## Architecture 🛠
+
+## Setup 🚀
+
+## Deployment 🛳
+
+## Authors 📝
+
+## Acknowledgments 🤓
