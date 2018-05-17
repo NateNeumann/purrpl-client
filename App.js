@@ -1,12 +1,26 @@
 import React from 'react';
-import MainTabBar from './navigation/main_tab_bar';
+import { Font } from 'expo';
+import Login from './components/login';
 
 // disable really annoying in app warnings
 console.disableYellowBox = true;
 
-const App = (props) => {
-  return <MainTabBar />;
-};
+export default class App extends React.Component {
+  state = {
+    fontLoaded: false,
+  };
 
+  async componentDidMount() {
+    await Font.loadAsync({
+      'raleway-semi-bold': require('./assets/fonts/Raleway-SemiBold.ttf'),
+    });
 
-export default App;
+    this.setState({ fontLoaded: true });
+  }
+
+  render() {
+    return (
+      <Login />
+    );
+  }
+}
