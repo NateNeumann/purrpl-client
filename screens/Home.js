@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 80,
     right: 20,
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: 'raleway-semi-bold',
   },
   row: {
