@@ -9,7 +9,12 @@ import Home from './screens/Home'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
-  Home: { screen: Home },
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      gesturesEnabled: false,
+    },
+  },
 })
 
 class App extends React.Component {
