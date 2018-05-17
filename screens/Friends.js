@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
-import { CheckBox } from 'react-native-elements'
 import Menu from './../components/Menu'
 
 export default class Friends extends React.Component {
@@ -24,7 +23,29 @@ export default class Friends extends React.Component {
           <Text style={styles.header}>FRIENDS</Text>
         </View>
         <View>
-          <View style={styles.welcomeContainer}>
+          <FlatList
+            data={[
+              { key: 'a', firstName: 'Nate', lastName: 'Neumann' },
+              { key: 'b', firstName: 'Amy', lastName: 'Guan' },
+              { key: 'c', firstName: 'Christina', lastName: 'Lu' },
+              { key: 'd', firstName: 'Sofia', lastName: 'Stanescu-Bellu' },
+              { key: 'e', firstName: 'Raul', lastName: 'Rodriguez' },
+            ]}
+            renderItem={({ item }) => {
+              return (
+                <View style={styles.friendContainer}>
+                  <Image
+                    style={styles.animal}
+                    source={require('./../assets/images/plantcircle.png')}
+                  />
+                  <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
+                  <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
+                </View>
+              )
+            }
+            }
+          />
+          <View style={styles.friendContainer}>
             <View style={styles.row}>
               <Image
                 style={styles.animal}
@@ -99,7 +120,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 105,
   },
-  welcomeContainer: {
+  friendContainer: {
     flexDirection: 'row',
     padding: 20,
     borderBottomColor: '#bbb',
@@ -145,16 +166,21 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  reminderText: {
+  nameText: {
     fontSize: 20,
     fontFamily: 'raleway-regular',
     marginTop: 20,
     width: 177,
+    color: '#053867',
   },
   row: {
     flexDirection: 'row',
   },
   bold: {
     fontFamily: 'raleway-bold',
+    fontSize: 20,
+    paddingLeft: 20,
+    marginTop: 20,
+    color: '#053867',
   },
 })
