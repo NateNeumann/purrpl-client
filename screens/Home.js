@@ -24,7 +24,7 @@ export default class Home extends React.Component {
         <View>
           <View style={styles.welcomeContainer}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, styles.welcomeText]}>IJEMMA!</Text>
+              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>IJEMMA!</Text>
             </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
             <Text style={styles.welcomeText}>72 F</Text>
@@ -41,7 +41,7 @@ export default class Home extends React.Component {
               data={[
                 { key: 'a', time: '8 AM', reminder: 'Apply sunscreen' },
                 { key: 'b', time: '9 AM', reminder: 'Drink water' },
-                { key: 'c', time: '11 AM', reminder: 'Take meds' }
+                { key: 'c', time: '11 AM', reminder: 'Take meds' },
               ]}
               renderItem={({ item }) => {
                 return (
@@ -51,8 +51,8 @@ export default class Home extends React.Component {
                       onPress={() => this.handleCheckbox()}
                       containerStyle={styles.checkboxContainer}
                     />
-                    <Text style={styles.bold}>{item.time} </Text>
-                    <Text>{item.reminder}</Text>
+                    <Text style={[styles.bold, { fontSize: 18 }]}>{item.time} </Text>
+                    <Text style={styles.reminderText}>{item.reminder}</Text>
                   </View>
                 )
               }
@@ -115,11 +115,15 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 18,
     marginBottom: 5,
+    fontFamily: 'raleway-regular',
   },
   row: {
     flexDirection: 'row',
   },
+  reminderText: {
+    fontFamily: 'raleway-regular',
+  },
   bold: {
-    fontWeight: 'bold'
-  }
+    fontFamily: 'raleway-bold',
+  },
 })
