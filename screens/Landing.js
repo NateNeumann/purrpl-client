@@ -18,6 +18,9 @@ class Landing extends Component {
           <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
             <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => { navigate('Home') }} >
+            <Text style={styles.secondButtonText}>Log In</Text>
+          </TouchableOpacity>
         </LinearGradient>
       </View>
     );
@@ -68,6 +71,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'raleway-bold',
     fontSize: 24,
+  },
+  secondButtonText: {
+    color: 'white',
+    fontFamily: 'raleway-semi-bold',
+    fontSize: 22,
+    marginTop: 20,
   },
 });
 
