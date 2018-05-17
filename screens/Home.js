@@ -30,7 +30,7 @@ export default class Home extends React.Component {
             <Text style={styles.welcomeText}>72 F</Text>
           </View>
           <View>
-            <Text>I'm thirsty</Text>
+            <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I'm thirsty</Text>
             <Image
               style={styles.plant}
               source={require('./../assets/images/plant.png')}
@@ -116,6 +116,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
     fontFamily: 'raleway-regular',
+  },
+  animalUpdate: {
+    position: 'absolute',
+    top: 80,
+    right: 20,
+    fontSize: 22,
+    fontFamily: 'raleway-semi-bold',
   },
   row: {
     flexDirection: 'row',
