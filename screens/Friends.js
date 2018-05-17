@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
 import Menu from './../components/Menu'
 
 export default class Friends extends React.Component {
@@ -33,69 +33,20 @@ export default class Friends extends React.Component {
             ]}
             renderItem={({ item }) => {
               return (
-                <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
-                  <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
-                  <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
-                </View>
+                <TouchableOpacity>
+                  <View style={styles.friendContainer}>
+                    <Image
+                      style={styles.animal}
+                      source={require('./../assets/images/plantcircle.png')}
+                    />
+                    <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
+                    <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
+                  </View>
+                </TouchableOpacity>
               )
             }
             }
           />
-          <View style={styles.friendContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/plantcircle.png')}
-              />
-              <Text style={[styles.bold, { fontSize: 20, paddingLeft: 20, marginTop: 20 }]}>NATE</Text>
-              <Text style={styles.reminderText}> NEUMANN</Text>
-            </View>
-          </View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/plantcircle.png')}
-              />
-              <Text style={[styles.bold, { fontSize: 20, paddingLeft: 20, marginTop: 20 }]}>AMY</Text>
-              <Text style={styles.reminderText}> GUAN</Text>
-            </View>
-          </View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/plantcircle.png')}
-              />
-              <Text style={[styles.bold, { fontSize: 20, paddingLeft: 20, marginTop: 20 }]}>CHRISTINA</Text>
-              <Text style={styles.reminderText}> LU</Text>
-            </View>
-          </View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/plantcircle.png')}
-              />
-              <Text style={[styles.bold, { fontSize: 20, paddingLeft: 20, marginTop: 20 }]}>SOFIA </Text>
-              <Text style={styles.reminderText}>STANESCU-BELLU</Text>
-            </View>
-          </View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/plantcircle.png')}
-              />
-              <Text style={[styles.bold, { fontSize: 20, paddingLeft: 20, marginTop: 20 }]}>RAUL</Text>
-              <Text style={styles.reminderText}> RODRIGUEZ</Text>
-            </View>
-          </View>
-
         </View>
       </View>
     )
