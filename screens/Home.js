@@ -21,7 +21,7 @@ export default class Home extends React.Component {
           </View>
           <View>
             <View style={styles.speechBubble}>
-              <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I'm thirsty</Text>
+              <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
             </View>
             <Image
               style={styles.animal}
