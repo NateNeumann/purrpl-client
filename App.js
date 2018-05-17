@@ -1,26 +1,35 @@
 import React from 'react';
-import { Font } from 'expo';
-import Login from './components/login';
+import { Font, AppLoading } from 'expo';
+import Landing from './screens/Landing';
 
 // disable really annoying in app warnings
 console.disableYellowBox = true;
 
-export default class App extends React.Component {
-  state = {
-    fontLoaded: false,
-  };
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { loading: true };
+  }
 
-  async componentDidMount() {
+  async componentWillMount() {
     await Font.loadAsync({
+      'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
+      'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
       'raleway-semi-bold': require('./assets/fonts/Raleway-SemiBold.ttf'),
     });
-
-    this.setState({ fontLoaded: true });
+    this.setState({ loading: false });
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <AppLoading />
+      );
+    }
     return (
-      <Login />
+      <Landing />
     );
   }
 }
+
+export default App;
