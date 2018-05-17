@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import Checkbox from './../components/Checkbox'
 
 export default class Home extends React.Component {
-  static navigationOptions = { header: null }
   render() {
     return (
       <View style={styles.container}>

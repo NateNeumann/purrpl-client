@@ -2,7 +2,7 @@ import React from 'react'
 import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './screens/Landing'
-import Home from './screens/Home'
+import TabBar from './components/TabBar'
 
 // disable really annoying in app warnings
 // console.disableYellowBox = true
@@ -10,8 +10,10 @@ import Home from './screens/Home'
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
   Home: {
-    screen: Home,
+    screen: TabBar,
     navigationOptions: {
+      header: null,
+      headerLeft: null,
       gesturesEnabled: false,
     },
   },
