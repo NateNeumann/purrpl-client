@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "scripts" : {
+  "scripts": {
     "test": "./node_modules/.bin/eslint src"
   },
   "private": true,
