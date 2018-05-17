@@ -2,6 +2,7 @@ import React from 'react'
 import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './screens/Landing'
+import Name from './screens/Name'
 import TabBar from './components/TabBar'
 
 // disable really annoying in app warnings
@@ -11,6 +12,14 @@ const RootStack = createStackNavigator({
   Landing: { screen: Landing },
   Home: {
     screen: TabBar,
+    navigationOptions: {
+      header: null,
+      headerLeft: null,
+      gesturesEnabled: false,
+    },
+  },
+  Name: {
+    screen: Name,
     navigationOptions: {
       header: null,
       headerLeft: null,
