@@ -1,13 +1,14 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
-import { View, Text } from 'react-native';
+import React from 'react'
+import { createBottomTabNavigator } from 'react-navigation'
+import { View, Text } from 'react-native'
+import Home from './../screens/Home'
 
 const FriendsTab = (props) => {
   return <View style={{ flex: 1, justifyContent: 'center' }}><Text>FRIENDS</Text></View>;
 };
 
 const HomeTab = (props) => {
-  return <View style={{ flex: 1, justifyContent: 'center' }}><Text>HOMNE</Text></View>;
+  return <Home />
 };
 
 const RemindersTab = (props) => {

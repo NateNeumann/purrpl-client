@@ -1,9 +1,23 @@
-import React from 'react';
-import { Font, AppLoading } from 'expo';
-import Landing from './screens/Landing';
+import React from 'react'
+import { Font, AppLoading } from 'expo'
+import { createStackNavigator } from 'react-navigation'
+import Landing from './screens/Landing'
+import TabBar from './components/TabBar'
 
 // disable really annoying in app warnings
-console.disableYellowBox = true;
+// console.disableYellowBox = true
+
+const RootStack = createStackNavigator({
+  Landing: { screen: Landing },
+  Home: {
+    screen: TabBar,
+    navigationOptions: {
+      header: null,
+      headerLeft: null,
+      gesturesEnabled: false,
+    },
+  },
+})
 
 class App extends React.Component {
   constructor(props) {
@@ -27,9 +41,9 @@ class App extends React.Component {
       );
     }
     return (
-      <Landing />
+      <RootStack />
     );
   }
 }
 
-export default App;
+export default App

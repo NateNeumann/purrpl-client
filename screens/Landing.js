@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo';
+import React, { Component } from 'react'
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { LinearGradient } from 'expo'
 
 class Landing extends Component {
+  static navigationOptions = { header: null }
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <LinearGradient
@@ -13,7 +15,7 @@ class Landing extends Component {
           <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
           <Text style={styles.title}>Purple Gorilla</Text>
           <Text style={styles.subtitle}>Keeping track of your wellness</Text>
-          <TouchableOpacity style={styles.button} onPress={() => {}} >
+          <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
             <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
           </TouchableOpacity>
         </LinearGradient>
