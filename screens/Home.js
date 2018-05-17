@@ -30,9 +30,11 @@ export default class Home extends React.Component {
             <Text style={styles.welcomeText}>72 F</Text>
           </View>
           <View>
-            <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I'm thirsty</Text>
+            <View style={styles.speechBubble}>
+              <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I'm thirsty</Text>
+            </View>
             <Image
-              style={styles.plant}
+              style={styles.animal}
               source={require('./../assets/images/plant.png')}
             />
           </View>
@@ -86,9 +88,24 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginRight: 15,
   },
-  plant: {
+  animal: {
     alignSelf: 'flex-start',
     marginLeft: 30,
+  },
+  animalUpdate: {
+    fontSize: 20,
+    fontFamily: 'raleway-semi-bold',
+  },
+  speechBubble: {
+    display: 'flex',
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 10,
+    height: 120,
+    width: 130,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
   },
   checkItemContainer: {
     flexDirection: 'column',
@@ -116,13 +133,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
     fontFamily: 'raleway-regular',
-  },
-  animalUpdate: {
-    position: 'absolute',
-    top: 80,
-    right: 20,
-    fontSize: 20,
-    fontFamily: 'raleway-semi-bold',
   },
   row: {
     flexDirection: 'row',
