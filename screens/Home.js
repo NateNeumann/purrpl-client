@@ -1,21 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import Checkbox from './../components/Checkbox'
 
 export default class Home extends React.Component {
-  static navigationOptions = { header: null };
-  constructor(props) {
-    super(props)
-    this.state = {
-      checked: false,
-    }
-  }
-
-  handleCheckbox = () => {
-    this.setState({ checked: !this.state.checked })
-  }
+  static navigationOptions = { header: null }
   render() {
-    console.log(this.state.checked)
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -48,13 +37,10 @@ export default class Home extends React.Component {
               renderItem={({ item }) => {
                 return (
                   <View style={styles.checkContainer}>
-                    <CheckBox
-                      checked={this.state.checked}
-                      onPress={() => this.handleCheckbox()}
-                      containerStyle={styles.checkboxContainer}
-                    />
-                    <Text style={[styles.bold, { fontSize: 18 }]}>{item.time} </Text>
-                    <Text style={styles.reminderText}>{item.reminder}</Text>
+                    <Checkbox
+                      time={item.time}
+                      reminder={item.reminder}
+                      />
                   </View>
                 )
               }
@@ -80,8 +66,8 @@ const styles = StyleSheet.create({
   },
   header: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
     fontSize: 24,
+    fontFamily: 'raleway-bold',
   },
   welcomeContainer: {
     alignItems: 'flex-end',
@@ -90,7 +76,7 @@ const styles = StyleSheet.create({
   },
   animal: {
     alignSelf: 'flex-start',
-    marginLeft: 30,
+    marginLeft: 10,
   },
   animalUpdate: {
     fontSize: 20,
@@ -101,8 +87,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    right: 10,
-    height: 120,
+    right: 20,
+    height: 100,
     width: 130,
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
@@ -122,16 +108,9 @@ const styles = StyleSheet.create({
     width: '50%',
     backgroundColor: 'transparent',
   },
-  checkboxContainer: {
-    backgroundColor: '#F4FCFF',
-    borderColor: '#B2CBFB',
-    borderWidth: 2,
-    width: 20,
-    height: 20,
-  },
   welcomeText: {
     fontSize: 18,
-    marginBottom: 5,
+    marginBottom: 10,
     fontFamily: 'raleway-regular',
   },
   row: {
