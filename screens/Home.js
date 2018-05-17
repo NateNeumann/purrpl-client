@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 
 export default class Home extends React.Component {
+  static navigationOptions = { header: null };
   constructor(props) {
     super(props)
     this.state = {
-      checked: false
+      checked: false,
     }
   }
 
@@ -22,9 +23,9 @@ export default class Home extends React.Component {
         </View>
         <View>
           <View style={styles.welcomeContainer}>
-          <View style={styles.row}>
-            <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, styles.welcomeText]}>IJEMMA!</Text>
-          </View>
+            <View style={styles.row}>
+              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, styles.welcomeText]}>IJEMMA!</Text>
+            </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
             <Text style={styles.welcomeText}>72 F</Text>
           </View>
