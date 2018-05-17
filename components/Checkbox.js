@@ -26,7 +26,7 @@ export default class Checkbox extends React.Component {
     if (this.state.checked) {
       return (
         <Image
-          style={{ height: 30, width: 30 }}
+          style={{ height: 27, width: 27 }}
           source={require('./../assets/images/check.png')}
         />
       )
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     height: 30,
     backgroundColor: '#F4FCFF',
     borderColor: '#B2CBFB',
+    borderWidth: 2,
     borderRadius: 3,
     marginRight: 5,
   },
