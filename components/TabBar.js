@@ -2,9 +2,11 @@ import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 import { View, Text } from 'react-native'
 import Home from './../screens/Home'
+import Friends from './../screens/Friends'
+import Reminders from './../screens/Reminders'
 
 const FriendsTab = (props) => {
-  return <View style={{ flex: 1, justifyContent: 'center' }}><Text>FRIENDS</Text></View>;
+  return <Friends />;
 };
 
 const HomeTab = (props) => {
@@ -12,7 +14,7 @@ const HomeTab = (props) => {
 };
 
 const RemindersTab = (props) => {
-  return <View style={{ flex: 1, justifyContent: 'center' }}><Text>REMINDERS</Text></View>;
+  return <Reminders />;
 };
 
 const MainTabBar = createBottomTabNavigator({
@@ -20,7 +22,7 @@ const MainTabBar = createBottomTabNavigator({
   HomeTab,
   RemindersTab,
 }, {
-  initialRouteName: 'FriendsTab',
+  initialRouteName: 'HomeTab',
   tabBarOptions: {
     showLabel: true,
     activeTintColor: 'white',
