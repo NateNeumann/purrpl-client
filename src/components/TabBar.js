@@ -3,9 +3,11 @@ import { createBottomTabNavigator } from 'react-navigation'
 import { View } from 'react-native'
 import Home from './../screens/Home'
 import Friends from './../screens/Friends'
+import AddFriends from './../screens/AddFriends'
 
 const FriendsTab = (props) => {
-  return <Friends navigation={props.navigation} />;
+  // return <Friends navigation={props.navigation} />;
+  return <AddFriends navigation={props.navigation} />;
 };
 
 const HomeTab = (props) => {
