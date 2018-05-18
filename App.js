@@ -1,13 +1,10 @@
 import React from 'react'
 import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
-import Landing from './screens/Landing'
-import TabBar from './components/TabBar'
-import Friends from './screens/Friends'
-import IndividualFriend from './screens/IndividualFriend'
-
-// disable really annoying in app warnings
-// console.disableYellowBox = true
+import Landing from './src/screens/Landing'
+import TabBar from './src/components/TabBar'
+import Friends from './src/screens/Friends'
+import IndividualFriend from './src/screens/IndividualFriend'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -31,9 +28,9 @@ class App extends React.Component {
 
   async componentWillMount() {
     await Font.loadAsync({
-      'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
-      'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
-      'raleway-semi-bold': require('./assets/fonts/Raleway-SemiBold.ttf'),
+      'raleway-bold': require('./src/assets/fonts/Raleway-Bold.ttf'),
+      'raleway-regular': require('./src/assets/fonts/Raleway-Regular.ttf'),
+      'raleway-semi-bold': require('./src/assets/fonts/Raleway-SemiBold.ttf'),
     });
     this.setState({ loading: false });
   }
