@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
+import moment from 'moment'
 import Back from './../components/Back'
 import FriendAction from './../components/FriendAction'
 
@@ -15,8 +16,13 @@ export default class IndividualFriend extends React.Component {
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
+
   render() {
     const name = this.props.navigation.state.params.name
+    const username = this.props.navigation.state.params.username
+    const encourage = { userId: '5afe44ee30dd09960685afd5', type: 'encourage', time: moment() }
+    const affirm = { userId: '5afe44ee30dd09960685afd5', type: 'affirm', time: moment() }
+    const concern = { userId: '5afe44ee30dd09960685afd5', type: 'concern', time: moment() }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -31,14 +37,23 @@ export default class IndividualFriend extends React.Component {
           <FriendAction
             image={require('./../assets/images/heart.png')}
             label="encourage"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={encourage}
           />
           <FriendAction
             image={require('./../assets/images/high-five.png')}
             label="affirm"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={affirm}
           />
           <FriendAction
             image={require('./../assets/images/smile.png')}
             label="concern"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={concern}
           />
         </View>
       </View>

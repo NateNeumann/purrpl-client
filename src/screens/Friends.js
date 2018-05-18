@@ -15,7 +15,6 @@ export default class Friends extends React.Component {
 
   componentWillMount = () => {
     fetchFriends('5afe44ee30dd09960685afd5').then((value) => {
-      console.log(value)
       this.setState({ friends: value.map(item => Object.assign(item, { key: item.id })) })
     })
   }
@@ -29,19 +28,12 @@ export default class Friends extends React.Component {
     if (this.state.friends) {
       return (
         <FlatList
-          // data={[
-          //   { key: 'a', name: 'Nate Neumann' },
-          //   { key: 'b', name: 'Amy Guan' },
-          //   { key: 'c', name: 'Christina Lu' },
-          //   { key: 'd', name: 'Sofia Stanescu-Bellu' },
-          //   { key: 'e', name: 'Raul Rodriguez' },
-          // ]}
           data={this.state.friends}
           style={{ height: '100%' }}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name })}
+                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username })}
               >
                 <View style={styles.friendContainer}>
                   <Image
