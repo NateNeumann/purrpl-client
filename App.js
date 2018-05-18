@@ -37,6 +37,7 @@ class App extends React.Component {
   async componentWillMount() {
     await Font.loadAsync({
       'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
+      'raleway-medium': require('./assets/fonts/Raleway-Medium.ttf'),
       'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
       'raleway-semi-bold': require('./assets/fonts/Raleway-SemiBold.ttf'),
     });
