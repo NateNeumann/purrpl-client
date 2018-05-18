@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo'
 
-class Landing extends Component {
+export default class Landing extends Component {
   static navigationOptions = { header: null }
   render() {
     const { navigate } = this.props.navigation
@@ -12,12 +12,17 @@ class Landing extends Component {
           colors={['#3B0170', '#6A1EB0']}
           style={styles.gradient}
         >
-          <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
-          <Text style={styles.title}>Purple Gorilla</Text>
-          <Text style={styles.subtitle}>Keeping track of your wellness</Text>
-          <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
-            <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
-          </TouchableOpacity>
+          <View style={styles.landing}>
+            <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
+            <Text style={styles.title}>Purple Gorilla</Text>
+            <Text style={styles.subtitle}>Keeping track of your wellness</Text>
+            <TouchableOpacity style={styles.button} onPress={() => { navigate('Name') }} >
+              <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { navigate('Home') }} >
+              <Text style={styles.secondButtonText}>Log In</Text>
+            </TouchableOpacity>
+          </View>
         </LinearGradient>
       </View>
     );
@@ -35,6 +40,10 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     width: '100%',
+  },
+  landing: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   gorilla: {
     height: 240,
@@ -69,6 +78,10 @@ const styles = StyleSheet.create({
     fontFamily: 'raleway-bold',
     fontSize: 24,
   },
+  secondButtonText: {
+    color: 'white',
+    fontFamily: 'raleway-semi-bold',
+    fontSize: 22,
+    marginTop: 20,
+  },
 });
-
-export default Landing;
