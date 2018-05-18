@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Username extends Component {
   static navigationOptions = { header: null }
 
-  state = {
-    password: '',
-    passwordConfirmed: '',
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      password: '',
+      passwordConfirmed: '',
+    }
+
+    this.validatePassword = this.validatePassword.bind(this)
   }
 
   handlePassword = (text) => {
@@ -18,8 +24,19 @@ export default class Username extends Component {
     this.setState({ passwordConfirmed: text })
   }
 
+  validatePassword() {
+    if (this.state.password !== this.state.passwordConfirmed) {
+      Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
+    } else {
+      console.log(this.props.navigation.state.params.name)
+      console.log(this.props.navigation.state.params.username)
+      console.log(this.state.password)
+      console.log(this.state.passwordConfirmed)
+      this.props.navigation.navigate('Home')
+    }
+  }
+
   render() {
-    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <LinearGradient
@@ -29,10 +46,10 @@ export default class Username extends Component {
           <View style={styles.content}>
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
             <Text style={styles.nameText}>Create a <Text style={styles.bold}>password:</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handlePassword} value={this.state.password} />
+            <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
             <Text style={styles.nameText}>Confirm <Text style={styles.bold}>password:</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleConfirmPassword} value={this.state.passwordConfirmed} />
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
+            <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handleConfirmPassword} value={this.state.passwordConfirmed} />
+            <TouchableOpacity style={styles.button} onPress={this.validatePassword} >
               <Text style={styles.buttonText}>{'Sign Up'.toUpperCase()}</Text>
             </TouchableOpacity>
           </View>

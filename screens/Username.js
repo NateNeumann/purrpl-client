@@ -23,7 +23,7 @@ export default class Username extends Component {
     if (this.state.username !== '') {
       this.props.navigation.navigate('Password', { name: this.props.navigation.state.params.name, username: this.state.username })
     } else {
-      Alert.alert('Username Field Empty', 'Please enter a valid username')
+      Alert.alert('Username Field Empty', 'Please enter a valid username.')
     }
   }
 

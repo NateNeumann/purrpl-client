@@ -25,7 +25,7 @@ export default class Name extends Component {
     if (this.state.name !== '') {
       this.props.navigation.navigate('Username', { name: this.state.name })
     } else {
-      Alert.alert('Name Field Empty', 'Please enter a valid name')
+      Alert.alert('Name Field Empty', 'Please enter a valid name.')
     }
   }
 
