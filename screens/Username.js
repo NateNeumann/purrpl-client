@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
 import { LinearGradient } from 'expo'
 
-export default class Name extends Component {
+export default class Username extends Component {
   static navigationOptions = { header: null }
 
   state = {
-    name: '',
+    username: '',
   }
 
-  handleName = (text) => {
-    this.setState({ name: text })
+  handleUsername = (text) => {
+    this.setState({ username: text })
   }
 
   render() {
@@ -23,9 +23,9 @@ export default class Name extends Component {
         >
           <View style={styles.content}>
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
-            <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Username') }}>
+            <Text style={styles.nameText}>Create your <Text style={styles.bold}>username:</Text></Text>
+            <TextInput style={styles.input} onChangeText={this.handleUsername} value={this.state.username} />
+            <TouchableOpacity style={styles.button} onPress={() => { navigate('Password') }}>
               <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
             </TouchableOpacity>
           </View>

@@ -2,15 +2,20 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
 import { LinearGradient } from 'expo'
 
-export default class Name extends Component {
+export default class Username extends Component {
   static navigationOptions = { header: null }
 
   state = {
-    name: '',
+    password: '',
+    passwordConfirmed: '',
   }
 
-  handleName = (text) => {
-    this.setState({ name: text })
+  handlePassword = (text) => {
+    this.setState({ password: text })
+  }
+
+  handleConfirmPassword = (text) => {
+    this.setState({ passwordConfirmed: text })
   }
 
   render() {
@@ -23,10 +28,12 @@ export default class Name extends Component {
         >
           <View style={styles.content}>
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
-            <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Username') }}>
-              <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
+            <Text style={styles.nameText}>Create a <Text style={styles.bold}>password:</Text></Text>
+            <TextInput style={styles.input} onChangeText={this.handlePassword} value={this.state.password} />
+            <Text style={styles.nameText}>Confirm <Text style={styles.bold}>password:</Text></Text>
+            <TextInput style={styles.input} onChangeText={this.handleConfirmPassword} value={this.state.passwordConfirmed} />
+            <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
+              <Text style={styles.buttonText}>{'Sign Up'.toUpperCase()}</Text>
             </TouchableOpacity>
           </View>
         </LinearGradient>
@@ -75,9 +82,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 275,
   },
-  arrow: {
-    height: 60,
-    marginTop: 30,
-    width: 60,
+  button: {
+    backgroundColor: '#A87FFF',
+    borderRadius: 5,
+    marginTop: 50,
+    paddingBottom: 15,
+    paddingLeft: 70,
+    paddingRight: 70,
+    paddingTop: 15,
+  },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'raleway-bold',
+    fontSize: 24,
   },
 });

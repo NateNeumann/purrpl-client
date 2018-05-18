@@ -3,6 +3,8 @@ import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './screens/Landing'
 import Name from './screens/Name'
+import Username from './screens/Username'
+import Password from './screens/Password'
 import TabBar from './components/TabBar'
 
 // disable really annoying in app warnings
@@ -21,6 +23,22 @@ const RootStack = createStackNavigator({
   Name: {
     screen: Name,
     navigationOptions: {
+      header: null,
+      headerLeft: null,
+      gesturesEnabled: false,
+    },
+  },
+  Username: {
+    screen: Username,
+    navigationOptions: {
+      header: null,
+      headerLeft: null,
+      gesturesEnabled: false,
+    },
+  },
+  Password: {
+    screen: Password,
+    navigateOptions: {
       header: null,
       headerLeft: null,
       gesturesEnabled: false,
