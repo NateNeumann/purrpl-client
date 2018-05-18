@@ -5,10 +5,9 @@ import Landing from './screens/Landing'
 import Name from './screens/Name'
 import Username from './screens/Username'
 import Password from './screens/Password'
-import TabBar from './components/TabBar'
-
-// disable really annoying in app warnings
-// console.disableYellowBox = true
+import TabBar from './src/components/TabBar'
+import Friends from './src/screens/Friends'
+import IndividualFriend from './src/screens/IndividualFriend'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -44,6 +43,8 @@ const RootStack = createStackNavigator({
       gesturesEnabled: false,
     },
   },
+  Friends: { screen: Friends },
+  IndividualFriend: { screen: IndividualFriend },
 })
 
 class App extends React.Component {

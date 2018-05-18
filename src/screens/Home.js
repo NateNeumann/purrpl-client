@@ -1,12 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import Checkbox from './../components/Checkbox'
+import Menu from './../components/Menu'
 
 export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
+          <Menu style={[{ marginTop: 50 }]} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>
@@ -60,18 +62,21 @@ const styles = StyleSheet.create({
   headerContainer: {
     backgroundColor: '#7FD1FF',
     height: 80,
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   header: {
     color: '#FFFFFF',
     fontSize: 24,
     fontFamily: 'raleway-bold',
+    marginTop: 20,
+    marginLeft: 120,
   },
   welcomeContainer: {
     alignItems: 'flex-end',
     marginTop: 5,
     marginRight: 15,
+    padding: 15,
   },
   animal: {
     alignSelf: 'flex-start',
