@@ -1,10 +1,10 @@
 import React from 'react'
 import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
-import Landing from './screens/Landing'
-import Name from './screens/Name'
-import Username from './screens/Username'
-import Password from './screens/Password'
+import Landing from './src/screens/Landing'
+import Name from './src/screens/Name'
+import Username from './src/screens/Username'
+import Password from './src/screens/Password'
 import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
 import IndividualFriend from './src/screens/IndividualFriend'
@@ -55,10 +55,10 @@ class App extends React.Component {
 
   async componentWillMount() {
     await Font.loadAsync({
-      'raleway-bold': require('./assets/fonts/Raleway-Bold.ttf'),
-      'raleway-medium': require('./assets/fonts/Raleway-Medium.ttf'),
-      'raleway-regular': require('./assets/fonts/Raleway-Regular.ttf'),
-      'raleway-semi-bold': require('./assets/fonts/Raleway-SemiBold.ttf'),
+      'raleway-bold': require('./src/assets/fonts/Raleway-Bold.ttf'),
+      'raleway-medium': require('./src/assets/fonts/Raleway-Medium.ttf'),
+      'raleway-regular': require('./src/assets/fonts/Raleway-Regular.ttf'),
+      'raleway-semi-bold': require('./src/assets/fonts/Raleway-SemiBold.ttf'),
     });
     this.setState({ loading: false });
   }

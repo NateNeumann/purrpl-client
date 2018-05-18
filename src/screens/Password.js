@@ -3,7 +3,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } fro
 import { LinearGradient } from 'expo'
 import axios from 'axios'
 
-export default class Username extends Component {
+export default class Password extends Component {
   static navigationOptions = { header: null }
 
   constructor(props) {
@@ -36,8 +36,10 @@ export default class Username extends Component {
       }
 
       axios.post('http://localhost:9090/api/signup', user).then((response) => {
+        console.log(response)
         this.props.navigation.navigate('Home')
       }).catch((error) => {
+        console.log(error)
         console.log(error.response)
       });
     }
