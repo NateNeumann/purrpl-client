@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import { createStackNavigator } from 'react-navigation'
 import Menu from './../components/Menu'
+import FriendAction from './../components/FriendAction'
 
-export default class Friends extends React.Component {
+export default class IndividualFriend extends React.Component {
   static navigationOptions = { header: null };
   constructor(props) {
     super(props)
@@ -16,39 +16,31 @@ export default class Friends extends React.Component {
     this.setState({ checked: !this.state.checked })
   }
   render() {
-    const { navigate } = this.props.navigation
+    const firstName = this.props.navigation.state.params.firstName
+    const lastName = this.props.navigation.state.params.lastName
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Menu style={[{ marginTop: 50 }]} />
-          <Text style={styles.header}>FRIENDS</Text>
+          <Text style={styles.header}>FRIEND</Text>
         </View>
         <View>
-          <FlatList
-            data={[
-              { key: 'a', firstName: 'Nate', lastName: 'Neumann' },
-              { key: 'b', firstName: 'Amy', lastName: 'Guan' },
-              { key: 'c', firstName: 'Christina', lastName: 'Lu' },
-              { key: 'd', firstName: 'Sofia', lastName: 'Stanescu-Bellu' },
-              { key: 'e', firstName: 'Raul', lastName: 'Rodriguez' },
-            ]}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => navigate('IndividualFriend', { firstName: item.firstName, lastName: item.lastName })}
-                >
-                  <View style={styles.friendContainer}>
-                    <Image
-                      style={styles.animal}
-                      source={require('./../assets/images/plantcircle.png')}
-                    />
-                    <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
-                    <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            }
-            }
+          <Image style={{ alignSelf: 'center', height: 260, width: 260 }} source={require('./../assets/images/plant.png')} />
+          <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
+            <Text style={styles.bold}>{firstName.toUpperCase()}</Text>
+            <Text style={styles.bold}>{lastName.toUpperCase()}</Text>
+          </View>
+          <FriendAction
+            image={require('./../assets/images/heart.png')}
+            label="encourage"
+          />
+          <FriendAction
+            image={require('./../assets/images/high-five.png')}
+            label="affirm"
+          />
+          <FriendAction
+            image={require('./../assets/images/smile.png')}
+            label="concern"
           />
         </View>
       </View>

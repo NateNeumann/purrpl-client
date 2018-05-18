@@ -5,15 +5,15 @@ import Home from './../screens/Home'
 import Friends from './../screens/Friends'
 
 const FriendsTab = (props) => {
-  return <Friends />;
+  return <Friends navigation={props.navigation} />;
 };
 
 const HomeTab = (props) => {
-  return <Home />
+  return <Home navigation={props.navigation} />
 };
 
 const RemindersTab = (props) => {
-  return <View />;
+  return <View navigation={props.navigation} />;
 };
 
 const MainTabBar = createBottomTabNavigator({

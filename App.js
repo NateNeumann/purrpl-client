@@ -3,6 +3,8 @@ import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './screens/Landing'
 import TabBar from './components/TabBar'
+import Friends from './screens/Friends'
+import IndividualFriend from './screens/IndividualFriend'
 
 // disable really annoying in app warnings
 // console.disableYellowBox = true
@@ -17,6 +19,8 @@ const RootStack = createStackNavigator({
       gesturesEnabled: false,
     },
   },
+  Friends: { screen: Friends },
+  IndividualFriend: { screen: IndividualFriend },
 })
 
 class App extends React.Component {
