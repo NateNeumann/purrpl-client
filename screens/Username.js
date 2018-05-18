@@ -1,20 +1,33 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Username extends Component {
   static navigationOptions = { header: null }
 
-  state = {
-    username: '',
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      username: '',
+    }
+
+    this.submitUsername = this.submitUsername.bind(this)
   }
 
   handleUsername = (text) => {
     this.setState({ username: text })
   }
 
+  submitUsername() {
+    if (this.state.username !== '') {
+      this.props.navigation.navigate('Password', { name: this.props.navigation.state.params.name, username: this.state.username })
+    } else {
+      Alert.alert('Username Field Empty', 'Please enter a valid username')
+    }
+  }
+
   render() {
-    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <LinearGradient
@@ -24,8 +37,8 @@ export default class Username extends Component {
           <View style={styles.content}>
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
             <Text style={styles.nameText}>Create your <Text style={styles.bold}>username:</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleUsername} value={this.state.username} />
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Password') }}>
+            <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
+            <TouchableOpacity style={styles.button} onPress={this.submitUsername}>
               <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
             </TouchableOpacity>
           </View>
