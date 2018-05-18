@@ -8,7 +8,7 @@ export default class Home extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-
+          <Menu style={[{ marginTop: 50 }]} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>
