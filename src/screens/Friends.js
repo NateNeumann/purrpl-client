@@ -12,11 +12,11 @@ export default class Friends extends React.Component {
       friends: null,
     }
   }
-  
+
   componentWillMount = () => {
     fetchFriends('5afe44ee30dd09960685afd5').then((value) => {
       console.log(value)
-      this.setState({ friends: value })
+      this.setState({ friends: value.map(item => Object.assign(item, { key: item.id })) })
     })
   }
 
@@ -37,6 +37,7 @@ export default class Friends extends React.Component {
           //   { key: 'e', name: 'Raul Rodriguez' },
           // ]}
           data={this.state.friends}
+          style={{ height: '100%' }}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
@@ -58,7 +59,15 @@ export default class Friends extends React.Component {
     } else {
       return (
         <View>
-          <Text>Loading</Text>
+          <Text style={{
+            marginTop: 10,
+            textAlign: 'center',
+            color: '#053867',
+            fontSize: 22,
+            }}
+          >
+            Loading
+          </Text>
         </View>
       )
     }
