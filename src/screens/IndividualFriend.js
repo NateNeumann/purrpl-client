@@ -20,9 +20,9 @@ export default class IndividualFriend extends React.Component {
   render() {
     const name = this.props.navigation.state.params.name
     const username = this.props.navigation.state.params.username
-    const encourage = { userId: '5afe44ee30dd09960685afd5', type: 'encourage', time: moment() }
-    const affirm = { userId: '5afe44ee30dd09960685afd5', type: 'affirm', time: moment() }
-    const concern = { userId: '5afe44ee30dd09960685afd5', type: 'concern', time: moment() }
+    const encourage = { senderId: '5afe44ee30dd09960685afd5', action: 'encourage', time: moment() }
+    const affirm = { senderId: '5afe44ee30dd09960685afd5', action: 'affirm', time: moment() }
+    const concern = { senderId: '5afe44ee30dd09960685afd5', action: 'concern', time: moment() }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
