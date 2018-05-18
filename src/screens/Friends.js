@@ -9,15 +9,62 @@ export default class Friends extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      friends: null,
     }
+  }
+  
+  componentWillMount = () => {
+    fetchFriends('5afe44ee30dd09960685afd5').then((value) => {
+      console.log(value)
+      this.setState({ friends: value })
+    })
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
-  render() {
+
+  renderFriends = () => {
     const { navigate } = this.props.navigation
-    fetchFriends('5afe44ee30dd09960685afd5')
+    if (this.state.friends) {
+      return (
+        <FlatList
+          // data={[
+          //   { key: 'a', name: 'Nate Neumann' },
+          //   { key: 'b', name: 'Amy Guan' },
+          //   { key: 'c', name: 'Christina Lu' },
+          //   { key: 'd', name: 'Sofia Stanescu-Bellu' },
+          //   { key: 'e', name: 'Raul Rodriguez' },
+          // ]}
+          data={this.state.friends}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => navigate('IndividualFriend', { name: item.name })}
+              >
+                <View style={styles.friendContainer}>
+                  <Image
+                    style={styles.animal}
+                    source={require('./../assets/images/plantcircle.png')}
+                  />
+                  <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                </View>
+              </TouchableOpacity>
+            )
+          }
+          }
+        />
+      )
+    } else {
+      return (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      )
+    }
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -25,31 +72,7 @@ export default class Friends extends React.Component {
           <Text style={styles.header}>FRIENDS</Text>
         </View>
         <View>
-          <FlatList
-            data={[
-              { key: 'a', name: 'Nate Neumann' },
-              { key: 'b', name: 'Amy Guan' },
-              { key: 'c', name: 'Christina Lu' },
-              { key: 'd', name: 'Sofia Stanescu-Bellu' },
-              { key: 'e', name: 'Raul Rodriguez' },
-            ]}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => navigate('IndividualFriend', { name: item.name })}
-                >
-                  <View style={styles.friendContainer}>
-                    <Image
-                      style={styles.animal}
-                      source={require('./../assets/images/plantcircle.png')}
-                    />
-                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            }
-            }
-          />
+          {this.renderFriends()}
         </View>
       </View>
     )
