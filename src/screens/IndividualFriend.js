@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import Menu from './../components/Menu'
+import Back from './../components/Back'
 import FriendAction from './../components/FriendAction'
 
 export default class IndividualFriend extends React.Component {
@@ -21,7 +21,7 @@ export default class IndividualFriend extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-          <Menu style={[{ marginTop: 50 }]} />
+          <Back navigation={this.props.navigation} />
           <Text style={styles.header}>FRIEND</Text>
         </View>
         <View>
