@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
+import axios from 'axios'
 
 export default class Username extends Component {
   static navigationOptions = { header: null }
@@ -28,11 +29,17 @@ export default class Username extends Component {
     if (this.state.password !== this.state.passwordConfirmed) {
       Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
     } else {
-      console.log(this.props.navigation.state.params.name)
-      console.log(this.props.navigation.state.params.username)
-      console.log(this.state.password)
-      console.log(this.state.passwordConfirmed)
-      this.props.navigation.navigate('Home')
+      const user = {
+        name: this.props.navigation.state.params.name,
+        username: this.props.navigation.state.params.username,
+        password: this.state.password,
+      }
+
+      axios.post('http://localhost:9090/api/signup', user).then((response) => {
+        this.props.navigation.navigate('Home')
+      }).catch((error) => {
+        console.log(error.response)
+      });
     }
   }
 
