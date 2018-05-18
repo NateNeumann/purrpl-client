@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
 import Menu from './../components/Menu'
+import { fetchFriends } from './../actions/friends-actions'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
@@ -16,6 +17,7 @@ export default class Friends extends React.Component {
   }
   render() {
     const { navigate } = this.props.navigation
+    fetchFriends('5afe44ee30dd09960685afd5')
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -25,24 +27,23 @@ export default class Friends extends React.Component {
         <View>
           <FlatList
             data={[
-              { key: 'a', firstName: 'Nate', lastName: 'Neumann' },
-              { key: 'b', firstName: 'Amy', lastName: 'Guan' },
-              { key: 'c', firstName: 'Christina', lastName: 'Lu' },
-              { key: 'd', firstName: 'Sofia', lastName: 'Stanescu-Bellu' },
-              { key: 'e', firstName: 'Raul', lastName: 'Rodriguez' },
+              { key: 'a', name: 'Nate Neumann' },
+              { key: 'b', name: 'Amy Guan' },
+              { key: 'c', name: 'Christina Lu' },
+              { key: 'd', name: 'Sofia Stanescu-Bellu' },
+              { key: 'e', name: 'Raul Rodriguez' },
             ]}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
-                  onPress={() => navigate('IndividualFriend', { firstName: item.firstName, lastName: item.lastName })}
+                  onPress={() => navigate('IndividualFriend', { name: item.name })}
                 >
                   <View style={styles.friendContainer}>
                     <Image
                       style={styles.animal}
                       source={require('./../assets/images/plantcircle.png')}
                     />
-                    <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
-                    <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
+                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                   </View>
                 </TouchableOpacity>
               )

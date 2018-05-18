@@ -16,8 +16,7 @@ export default class IndividualFriend extends React.Component {
     this.setState({ checked: !this.state.checked })
   }
   render() {
-    const firstName = this.props.navigation.state.params.firstName
-    const lastName = this.props.navigation.state.params.lastName
+    const name = this.props.navigation.state.params.name
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -27,8 +26,7 @@ export default class IndividualFriend extends React.Component {
         <View>
           <Image style={{ alignSelf: 'center', height: 260, width: 260 }} source={require('./../assets/images/plant.png')} />
           <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
-            <Text style={styles.bold}>{firstName.toUpperCase()}</Text>
-            <Text style={styles.bold}>{lastName.toUpperCase()}</Text>
+            <Text style={styles.bold}>{name.toUpperCase()}</Text>
           </View>
           <FriendAction
             image={require('./../assets/images/heart.png')}
