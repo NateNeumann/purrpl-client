@@ -1,20 +1,35 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Name extends Component {
   static navigationOptions = { header: null }
 
-  state = {
-    name: '',
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name: '',
+    }
+
+    this.submitName = this.submitName.bind(this)
   }
 
   handleName = (text) => {
-    this.setState({ name: text })
+    this.setState({
+      name: text.replace(/[^A-Za-z]/, ''),
+    });
+  }
+
+  submitName() {
+    if (this.state.name !== '') {
+      this.props.navigation.navigate('Username', { name: this.state.name })
+    } else {
+      Alert.alert('Name Field Empty', 'Please enter a valid name')
+    }
   }
 
   render() {
-    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <LinearGradient
@@ -25,7 +40,7 @@ export default class Name extends Component {
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
             <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
             <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Username') }}>
+            <TouchableOpacity style={styles.button} onPress={this.submitName}>
               <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
             </TouchableOpacity>
           </View>
