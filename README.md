@@ -20,5 +20,12 @@ exp ios
 ```
 
 ## Authors 📝
+* Raul Rodriguez '19
+* Ijemma Onwuzulike '19
+* Nate Neumann '20
+* Amy Guan '20
+* Christina Lu '20
+* Sofia Stanescu-Bellu '20
 
 ## Acknowledgments 🤓
+Again, thanks to Tim!
