@@ -42,7 +42,10 @@ export default class Friends extends React.Component {
                     style={styles.animal}
                     source={require('./../assets/images/plantcircle.png')}
                   />
-                  <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                  <View>
+                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                    <Text style={{ paddingLeft: 20 }}>@{item.username}</Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             )
