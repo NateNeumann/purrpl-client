@@ -79,7 +79,12 @@ export default class Friends extends React.Component {
           <Text style={styles.header}>FRIENDS</Text>
           <TouchableOpacity style={{ position: 'absolute', right: 10 }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
             <Image
-              style={{ height: 35, width: 35 }}
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 5,
+                marginRight: 10,
+              }}
               source={require('./../assets/images/white-plus.png')}
             />
           </TouchableOpacity>

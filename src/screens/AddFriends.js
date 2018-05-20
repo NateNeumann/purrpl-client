@@ -101,8 +101,8 @@ export default class AddFriends extends React.Component {
             autoCapitalize="none"
             placeholder="Search for Friends"
             onChangeText={text => this.handleSearch(text)}
+            tintColor="#053867"
             value={this.state.searchText}
-            style={styles.searchBar}
           />
           <TouchableOpacity onPress={this.searchForUsers}>
             <Image
