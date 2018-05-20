@@ -35,7 +35,7 @@ export default class Password extends Component {
         password: this.state.password,
       }
       createUser(user).then((response) => {
-        this.props.navigation.navigate('Home', response)
+        this.props.navigation.navigate('Home', { user: response })
       })
     }
   }
