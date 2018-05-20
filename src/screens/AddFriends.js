@@ -24,23 +24,13 @@ export default class AddFriends extends React.Component {
   }
   handleActionPress = (fn, userId, friendUsername) => {
     fn(userId, friendUsername).then((response) => {
-      // console.log(response)
-      // this.setState({ searchedUsers: response })
-      console.log(response)
       const newUsersResults = this.state.searchedUsers.map((user) => {
-        console.log('timeout', response)
         if (user.id === response.id) {
           return response
         }
         return user
       })
-      console.log('first', this.state.searchedUsers)
-      console.log('second', newUsersResults)
       this.setState({ searchedUsers: newUsersResults })
-      // fetchSearchedUsers('5afe44ee30dd09960685afd5', this.state.searchText).then((res1) => {
-      //   console.log(res1)
-      //   this.setState({ searchedUsers: res1 })
-      // })
     })
   }
   renderActionButton = (item) => {
@@ -69,7 +59,9 @@ export default class AddFriends extends React.Component {
             return (
               <View style={{ flexDirection: 'row', width: '100%' }}>
                 <TouchableOpacity
-                  onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username })}
+                  onPress={() => {
+                    if (item.isFriend) navigate('IndividualFriend', { name: item.name, username: item.username })
+                  }}
                 >
                   <View style={styles.friendContainer}>
                     <Image

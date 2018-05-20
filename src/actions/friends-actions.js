@@ -36,7 +36,6 @@ export function deleteFriend(id, username) {
 export function sendAction(id, username, action) {
   return new Promise((resolve, reject) => {
     axios.put(`${ROOT_URL}/friends/${id}`, { username, action }).then((response) => {
-      console.log(response.data)
       resolve(response.data)
     }).catch((error) => {
       reject(error)
