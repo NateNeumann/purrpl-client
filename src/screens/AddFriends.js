@@ -2,8 +2,10 @@ import React from 'react'
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image } from 'react-native'
 import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
+import Back from './../components/Back'
 
 export default class AddFriends extends React.Component {
+  static navigationOptions = { header: null }
   constructor(props) {
     super(props)
 
@@ -90,6 +92,10 @@ export default class AddFriends extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Back navigation={this.props.navigation} />
+          <Text style={styles.header}>ADD FRIENDS</Text>
+        </View>
         <View style={styles.searchBarContainer}>
           <TextInput
             autoCapitalize="none"
@@ -115,6 +121,19 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF5E7',
     height: '100%',
+  },
+  headerContainer: {
+    backgroundColor: '#EF8E8E',
+    height: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  header: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginTop: 20,
+    marginLeft: 105,
   },
   searchBarContainer: {
     flexDirection: 'row',

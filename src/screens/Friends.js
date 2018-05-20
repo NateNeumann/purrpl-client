@@ -68,11 +68,18 @@ export default class Friends extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Menu style={[{ marginTop: 50 }]} />
           <Text style={styles.header}>FRIENDS</Text>
+          <TouchableOpacity style={{ position: 'absolute', right: 10 }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
+            <Image
+              style={{ height: 35, width: 35 }}
+              source={require('./../assets/images/white-plus.png')}
+            />
+          </TouchableOpacity>
         </View>
         <View>
           {this.renderFriends()}
