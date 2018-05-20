@@ -13,9 +13,9 @@ export function fetchUsers() {
   })
 }
 
-export function fetchSearchedUsers(searchTerm) {
+export function fetchSearchedUsers(id, searchTerm) {
   return new Promise((resolve, reject) => {
-    axios.get(`${ROOT_URL}/users/${searchTerm}`).then((response) => {
+    axios.get(`${ROOT_URL}/users/${id}&${searchTerm}`).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)

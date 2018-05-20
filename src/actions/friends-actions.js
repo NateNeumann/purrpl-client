@@ -15,7 +15,7 @@ export function fetchFriends(id) {
 
 export function addFriend(id, username) {
   return new Promise((resolve, reject) => {
-    axios.post(`${ROOT_URL}/friends/${id}`, username).then((response) => {
+    axios.post(`${ROOT_URL}/friends/${id}`, { username }).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)
@@ -25,7 +25,7 @@ export function addFriend(id, username) {
 
 export function deleteFriend(id, username) {
   return new Promise((resolve, reject) => {
-    axios.delete(`${ROOT_URL}/friends/${id}`, username).then((response) => {
+    axios.delete(`${ROOT_URL}/friends/${id}&${username}`).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)

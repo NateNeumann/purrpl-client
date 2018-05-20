@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image } from 'react-native'
 import { fetchSearchedUsers } from './../actions/user-actions'
+import { addFriend, deleteFriend } from './../actions/friends-actions'
 
 export default class AddFriends extends React.Component {
   constructor(props) {
@@ -16,9 +17,25 @@ export default class AddFriends extends React.Component {
   }
   searchForUsers = () => {
     if (this.state.searchText) {
-      fetchSearchedUsers(this.state.searchText).then((response) => {
+      fetchSearchedUsers('5afe44ee30dd09960685afd5', this.state.searchText).then((response) => {
+        console.log(response)
         this.setState({ searchedUsers: response })
       })
+    }
+  }
+  renderActionButton = (item) => {
+    if (item.isFriend) {
+      return (
+        <TouchableOpacity onPress={() => deleteFriend('5afe44ee30dd09960685afd5', item.username)}>
+          <Image style={styles.actionIcon} source={require('./../assets/images/check.png')} />
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity onPress={() => addFriend('5afe44ee30dd09960685afd5', item.username)}>
+          <Image style={styles.actionIcon} source={require('./../assets/images/plus.png')} />
+        </TouchableOpacity>
+      )
     }
   }
   renderSearchedUsers = () => {
@@ -30,18 +47,23 @@ export default class AddFriends extends React.Component {
           style={{ height: '100%' }}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username })}
-              >
-                <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
-                  <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
-                  <Text>@{item.username}</Text>
-                </View>
-              </TouchableOpacity>
+              <View style={{ flexDirection: 'row', width: '100%' }}>
+                <TouchableOpacity
+                  onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username })}
+                >
+                  <View style={styles.friendContainer}>
+                    <Image
+                      style={styles.animal}
+                      source={require('./../assets/images/plantcircle.png')}
+                    />
+                    <View>
+                      <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                      <Text>@{item.username}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                {this.renderActionButton(item)}
+              </View>
             )
           }
           }
@@ -101,6 +123,11 @@ const styles = StyleSheet.create({
     width: 30,
     marginTop: 20,
     marginLeft: 10,
+  },
+  actionIcon: {
+    height: 40,
+    width: 40,
+    marginRight: 15,
   },
   friendContainer: {
     flexDirection: 'row',
