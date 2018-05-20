@@ -44,7 +44,7 @@ export default class Friends extends React.Component {
                   />
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
-                    <Text style={{ paddingLeft: 20 }}>@{item.username}</Text>
+                    <Text style={styles.userAt}>@{item.username}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -165,6 +165,11 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  userAt: {
+    fontFamily: 'raleway-semi-bold',
+    paddingLeft: 20,
+    color: '#333333',
   },
   bold: {
     fontFamily: 'raleway-bold',
