@@ -57,8 +57,9 @@ export default class AddFriends extends React.Component {
           style={{ height: '100%' }}
           renderItem={({ item }) => {
             return (
-              <View style={{ flexDirection: 'row', width: '100%' }}>
+              <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center' }}>
                 <TouchableOpacity
+                  style={{ width: '85%' }}
                   onPress={() => {
                     if (item.isFriend) navigate('IndividualFriend', { name: item.name, username: item.username })
                   }}
@@ -68,9 +69,9 @@ export default class AddFriends extends React.Component {
                       style={styles.animal}
                       source={require('./../assets/images/plantcircle.png')}
                     />
-                    <View>
+                    <View style={{ alignItems: 'flex-start' }}>
                       <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
-                      <Text>@{item.username}</Text>
+                      <Text style={{ paddingLeft: 20 }}>@{item.username}</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -101,7 +102,6 @@ export default class AddFriends extends React.Component {
               style={styles.searchIcon}
               source={require('./../assets/images/search.png')}
             />
-            {/* <Text>Search</Text> */}
           </TouchableOpacity>
         </View>
         {this.renderSearchedUsers()}
