@@ -10,6 +10,7 @@ export default class AddFriends extends React.Component {
     this.state = {
       searchText: '',
       searchedUsers: [],
+      user: this.props.navigation.state.params.user,
     }
   }
   handleSearch = (text) => {
@@ -17,7 +18,7 @@ export default class AddFriends extends React.Component {
   }
   searchForUsers = () => {
     if (this.state.searchText) {
-      fetchSearchedUsers('5afe44ee30dd09960685afd5', this.state.searchText).then((response) => {
+      fetchSearchedUsers(this.state.user.id, this.state.searchText).then((response) => {
         this.setState({ searchedUsers: response })
       })
     }
@@ -36,13 +37,13 @@ export default class AddFriends extends React.Component {
   renderActionButton = (item) => {
     if (item.isFriend) {
       return (
-        <TouchableOpacity onPress={() => this.handleActionPress(deleteFriend, '5afe44ee30dd09960685afd5', item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(deleteFriend, this.state.user.id, item.username)}>
           <Image style={styles.actionIcon} source={require('./../assets/images/check.png')} />
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, '5afe44ee30dd09960685afd5', item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, this.state.user.id, item.username)}>
           <Image style={styles.actionIcon} source={require('./../assets/images/plus.png')} />
         </TouchableOpacity>
       )
@@ -61,7 +62,7 @@ export default class AddFriends extends React.Component {
                 <TouchableOpacity
                   style={{ width: '85%' }}
                   onPress={() => {
-                    if (item.isFriend) navigate('IndividualFriend', { name: item.name, username: item.username })
+                    if (item.isFriend) navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })
                   }}
                 >
                   <View style={styles.friendContainer}>

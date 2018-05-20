@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
-import axios from 'axios'
+import { createUser } from './../actions/user-actions'
 
 export default class Password extends Component {
   static navigationOptions = { header: null }
@@ -34,14 +34,9 @@ export default class Password extends Component {
         username: this.props.navigation.state.params.username,
         password: this.state.password,
       }
-
-      axios.post('http://localhost:9090/api/signup', user).then((response) => {
-        console.log(response)
-        this.props.navigation.navigate('Home')
-      }).catch((error) => {
-        console.log(error)
-        console.log(error.response)
-      });
+      createUser(user).then((response) => {
+        this.props.navigation.navigate('Home', response)
+      })
     }
   }
 

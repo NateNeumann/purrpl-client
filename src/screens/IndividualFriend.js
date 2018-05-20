@@ -10,6 +10,7 @@ export default class IndividualFriend extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      user: this.props.navigation.state.params.user,
     }
   }
 
@@ -20,9 +21,9 @@ export default class IndividualFriend extends React.Component {
   render() {
     const name = this.props.navigation.state.params.name
     const username = this.props.navigation.state.params.username
-    const encourage = { senderId: '5afe44ee30dd09960685afd5', action: 'encourage', time: moment() }
-    const affirm = { senderId: '5afe44ee30dd09960685afd5', action: 'affirm', time: moment() }
-    const concern = { senderId: '5afe44ee30dd09960685afd5', action: 'concern', time: moment() }
+    const encourage = { senderId: this.state.user.id, action: 'encourage', time: moment() }
+    const affirm = { senderId: this.state.user.id, action: 'affirm', time: moment() }
+    const concern = { senderId: this.state.user.id, action: 'concern', time: moment() }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>

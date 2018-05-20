@@ -19,7 +19,7 @@ export default class Landing extends Component {
             <TouchableOpacity style={styles.button} onPress={() => { navigate('Name') }} >
               <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigate('Home') }} >
+            <TouchableOpacity onPress={() => { navigate('Home', { user: { id: '5afe44ee30dd09960685afd5', name: 'Ijemma', username: 'ijemmao'} }) }} >
               <Text style={styles.secondButtonText}>Log In</Text>
             </TouchableOpacity>
           </View>

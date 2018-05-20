@@ -10,11 +10,13 @@ export default class Friends extends React.Component {
     this.state = {
       checked: false,
       friends: null,
+      user: this.props.navigation.state.params.user,
     }
   }
 
   componentWillMount = () => {
-    fetchFriends('5afe44ee30dd09960685afd5').then((value) => {
+    const userId = this.props.navigation.state.params.user.id
+    fetchFriends(userId).then((value) => {
       this.setState({ friends: value.map(item => Object.assign(item, { key: item.id })) })
     })
   }
@@ -33,7 +35,7 @@ export default class Friends extends React.Component {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username })}
+                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
               >
                 <View style={styles.friendContainer}>
                   <Image
