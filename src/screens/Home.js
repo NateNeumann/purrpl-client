@@ -21,7 +21,7 @@ export default class Home extends React.Component {
         <View>
           <View style={styles.welcomeContainer}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name}!</Text>
+              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
             <Text style={styles.welcomeText}>72 F</Text>
