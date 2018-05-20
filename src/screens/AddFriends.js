@@ -18,21 +18,41 @@ export default class AddFriends extends React.Component {
   searchForUsers = () => {
     if (this.state.searchText) {
       fetchSearchedUsers('5afe44ee30dd09960685afd5', this.state.searchText).then((response) => {
-        console.log(response)
         this.setState({ searchedUsers: response })
       })
     }
   }
+  handleActionPress = (fn, userId, friendUsername) => {
+    fn(userId, friendUsername).then((response) => {
+      // console.log(response)
+      // this.setState({ searchedUsers: response })
+      console.log(response)
+      const newUsersResults = this.state.searchedUsers.map((user) => {
+        console.log('timeout', response)
+        if (user.id === response.id) {
+          return response
+        }
+        return user
+      })
+      console.log('first', this.state.searchedUsers)
+      console.log('second', newUsersResults)
+      this.setState({ searchedUsers: newUsersResults })
+      // fetchSearchedUsers('5afe44ee30dd09960685afd5', this.state.searchText).then((res1) => {
+      //   console.log(res1)
+      //   this.setState({ searchedUsers: res1 })
+      // })
+    })
+  }
   renderActionButton = (item) => {
     if (item.isFriend) {
       return (
-        <TouchableOpacity onPress={() => deleteFriend('5afe44ee30dd09960685afd5', item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(deleteFriend, '5afe44ee30dd09960685afd5', item.username)}>
           <Image style={styles.actionIcon} source={require('./../assets/images/check.png')} />
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity onPress={() => addFriend('5afe44ee30dd09960685afd5', item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, '5afe44ee30dd09960685afd5', item.username)}>
           <Image style={styles.actionIcon} source={require('./../assets/images/plus.png')} />
         </TouchableOpacity>
       )
