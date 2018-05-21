@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import Hamburger from 'react-native-hamburger';
+import Hamburger from 'react-native-hamburger'
 
 export default class Menu extends React.Component {
   constructor(props) {

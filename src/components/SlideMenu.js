@@ -3,38 +3,45 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native'
 
 export default class SlideMenu extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.exitButton}>
-          <Text>X</Text>
-        </TouchableOpacity>
-        <Image
-          style={styles.userStatus}
-          source={require('./../assets/images/plantcircle.png')}
-        />
-        <Text style={styles.remindersCount}>16/32 Reminders</Text>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutButton}
-        >
-          <Text style={styles.logoutText}>LOGOUT</Text>
-        </TouchableOpacity>
-      </View>
-    )
+    if (this.props.visible) {
+      return (
+        <View style={styles.container}>
+          <TouchableOpacity
+            style={styles.exitButton}
+            onPress={this.props.toggleMenu}
+          >
+            <Text>X</Text>
+          </TouchableOpacity>
+          <Image
+            style={styles.userStatus}
+            source={require('./../assets/images/plantcircle.png')}
+          />
+          <Text style={styles.remindersCount}>16/32 Reminders</Text>
+          <TouchableOpacity
+            style={styles.optionButton}
+          >
+            <Text style={styles.optionText}>Here is some text</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionButton}
+          >
+            <Text style={styles.optionText}>Here is some text</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.optionButton}
+          >
+            <Text style={styles.optionText}>Here is some text</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.logoutButton}
+          >
+            <Text style={styles.logoutText}>LOGOUT</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 
