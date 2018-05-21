@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 
 export default class Friends extends React.Component {
@@ -24,9 +25,7 @@ export default class Friends extends React.Component {
       <View style={styles.container}>
         {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} /> : null}
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => this.setState({ menuVisible: !this.state.menuVisible })}>
-            <Text>MENU</Text>
-          </TouchableOpacity>
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>FRIENDS</Text>
         </View>
         <View>

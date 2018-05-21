@@ -16,9 +16,7 @@ export default class Menu extends React.Component {
         <Hamburger active={this.state.active}
           type="cross"
           color="white"
-          onPress={() => this.setState({
-              active: !this.state.active,
-            })}
+          onPress={this.props.action}
         />
       </View>
     )

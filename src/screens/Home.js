@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import Checkbox from './../components/Checkbox'
+import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 
 export default class Home extends React.Component {
@@ -19,9 +20,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} /> : null }
         <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => this.setState({ menuVisible: !this.state.menuVisible })}>
-            <Text>MENU</Text>
-          </TouchableOpacity>
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>
