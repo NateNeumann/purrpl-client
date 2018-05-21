@@ -46,7 +46,10 @@ export default class SlideMenu extends React.Component {
                 navigate('Landing')
               }}
             >
-              <Text style={styles.optionText}>Here is some text</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/profile.png')} />
+                <Text style={styles.optionText}>PROFILE</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.optionButton}
@@ -55,7 +58,10 @@ export default class SlideMenu extends React.Component {
                 navigate('Landing')
               }}
             >
-              <Text style={styles.optionText}>Here is some text</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/progress.png')} />
+                <Text style={styles.optionText}>PROGRESS</Text>
+              </View>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.optionButton}
@@ -64,7 +70,10 @@ export default class SlideMenu extends React.Component {
                 navigate('Landing')
               }}
             >
-              <Text style={styles.optionText}>Here is some text</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image style={{ height: 30, width: 30, marginRight: 10 }} source={require('./../assets/images/settings.png')} />
+                <Text style={styles.optionText}>SETTINGS</Text>
+              </View>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
