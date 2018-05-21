@@ -27,33 +27,39 @@ export default class SlideMenu extends React.Component {
           style={styles.exitButton}
           onPress={this.props.toggleMenu}
         >
-          <Text>X</Text>
+          <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
         </TouchableOpacity>
-        <Image
-          style={styles.userStatus}
-          source={require('./../assets/images/plantcircle.png')}
-        />
-        <Text style={styles.remindersCount}>16/32 Reminders</Text>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.optionButton}
-        >
-          <Text style={styles.optionText}>Here is some text</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutButton}
-        >
-          <Text style={styles.logoutText}>LOGOUT</Text>
-        </TouchableOpacity>
+        <View style={styles.firstHalf}>
+          <Image
+            style={styles.userStatus}
+            source={require('./../assets/images/plantcircle.png')}
+          />
+          <Text style={styles.remindersCount}>16/32 Reminders</Text>
+        </View>
+        <View style={styles.secondHalf}>
+          <View style={{ width: '100%', alignItems: 'center' }}>
+            <TouchableOpacity
+              style={styles.optionButton}
+            >
+              <Text style={styles.optionText}>Here is some text</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.optionButton}
+            >
+              <Text style={styles.optionText}>Here is some text</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.optionButton}
+            >
+              <Text style={styles.optionText}>Here is some text</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity
+            style={styles.logoutButton}
+          >
+            <Text style={styles.logoutText}>LOGOUT</Text>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     )
   }
@@ -75,16 +81,29 @@ const styles = StyleSheet.create({
     right: 15,
   },
   userStatus: {
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
   },
   remindersCount: {
     color: '#053867',
     fontSize: 20,
     fontFamily: 'raleway-regular',
+    marginTop: 10,
+  },
+  firstHalf: {
+    justifyContent: 'flex-end',
+    width: '100%',
+    height: '30%',
+    alignItems: 'center',
+  },
+  secondHalf: {
+    justifyContent: 'space-around',
+    width: '100%',
+    height: '70%',
+    alignItems: 'center',
   },
   optionButton: {
-    width: '90%',
+    width: '80%',
     height: 75,
     justifyContent: 'center',
     borderBottomWidth: 1,
