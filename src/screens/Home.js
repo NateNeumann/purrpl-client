@@ -30,7 +30,7 @@ export default class Home extends React.Component {
               <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>IJEMMA!</Text>
             </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
-            <Text style={styles.welcomeText}>{this.state.weather.temp} F</Text>
+            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
           </View>
           <View>
             <View style={styles.speechBubble}>
