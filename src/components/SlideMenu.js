@@ -14,7 +14,7 @@ export default class SlideMenu extends React.Component {
     if (this.props.visible) {
       toValue = 0
     }
-    Animated.timing(
+    Animated.spring(
       this.state.bounceValue,
       {
         toValue,

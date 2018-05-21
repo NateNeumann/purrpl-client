@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
 import Checkbox from './../components/Checkbox'
-import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 
 export default class Home extends React.Component {

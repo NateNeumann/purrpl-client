@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import Menu from './../components/Menu'
+import SlideMenu from './../components/SlideMenu'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
@@ -8,18 +8,25 @@ export default class Friends extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      menuVisible: false,
     }
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
+  toggleMenu = () => {
+    this.setState({ menuVisible: !this.state.menuVisible })
+  }
   render() {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
+        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} /> : null}
         <View style={styles.headerContainer}>
-          <Menu style={[{ marginTop: 50 }]} />
+          <TouchableOpacity onPress={() => this.setState({ menuVisible: !this.state.menuVisible })}>
+            <Text>MENU</Text>
+          </TouchableOpacity>
           <Text style={styles.header}>FRIENDS</Text>
         </View>
         <View>
