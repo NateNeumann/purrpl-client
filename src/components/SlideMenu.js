@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   remindersCount: {
     color: '#053867',
     fontSize: 20,
-    fontFamily: 'raleway-regular',
+    fontFamily: 'raleway-semi-bold',
     marginTop: 10,
   },
   firstHalf: {
