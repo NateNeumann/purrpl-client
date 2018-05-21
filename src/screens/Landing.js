@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo'
-import SlideMenu from './../components/SlideMenu'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
@@ -13,7 +12,6 @@ export default class Landing extends Component {
           colors={['#3B0170', '#6A1EB0']}
           style={styles.gradient}
         >
-          <SlideMenu />
           <View style={styles.landing}>
             <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
             <Text style={styles.title}>Purple Gorilla</Text>
