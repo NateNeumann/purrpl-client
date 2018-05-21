@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 10,
     right: 15,
+    zIndex: 2,
   },
   userStatus: {
     width: 120,
