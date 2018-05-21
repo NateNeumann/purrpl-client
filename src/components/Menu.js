@@ -1,24 +1,12 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import Hamburger from 'react-native-hamburger'
+import { StyleSheet, Image, TouchableOpacity } from 'react-native'
 
 export default class Menu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      active: false,
-    }
-  }
-
   render() {
     return (
-      <View style={styles.container}>
-        <Hamburger active={this.state.active}
-          type="cross"
-          color="white"
-          onPress={this.props.action}
-        />
-      </View>
+      <TouchableOpacity onPress={this.props.action} style={styles.container}>
+        <Image source={require('./../assets/images/hamburger.png')} />
+      </TouchableOpacity>
     )
   }
 }
@@ -27,6 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginTop: 10,
+    marginLeft: 20,
   },
 })
