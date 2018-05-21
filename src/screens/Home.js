@@ -1,9 +1,22 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      weather: {},
+    }
+  }
+  componentWillMount = () => {
+    getWeather(43.7005122, -72.2839756).then((response) => {
+      this.setState({ weather: response })
+    })
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -17,7 +30,7 @@ export default class Home extends React.Component {
               <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>IJEMMA!</Text>
             </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
-            <Text style={styles.welcomeText}>72 F</Text>
+            <Text style={styles.welcomeText}>{this.state.weather.temp} F</Text>
           </View>
           <View>
             <View style={styles.speechBubble}>
