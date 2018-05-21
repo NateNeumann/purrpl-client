@@ -10,6 +10,7 @@ export default class SlideMenu extends React.Component {
     }
   }
   render() {
+    const { navigate } = this.props.navigation
     let toValue = -100
     if (this.props.visible) {
       toValue = 0
@@ -40,16 +41,28 @@ export default class SlideMenu extends React.Component {
           <View style={{ width: '100%', alignItems: 'center' }}>
             <TouchableOpacity
               style={styles.optionButton}
+              onPress={() => {
+                this.props.toggleMenu()
+                navigate('Landing')
+              }}
             >
               <Text style={styles.optionText}>Here is some text</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.optionButton}
+              onPress={() => {
+                this.props.toggleMenu()
+                navigate('Landing')
+              }}
             >
               <Text style={styles.optionText}>Here is some text</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.optionButton}
+              onPress={() => {
+                this.props.toggleMenu()
+                navigate('Landing')
+              }}
             >
               <Text style={styles.optionText}>Here is some text</Text>
             </TouchableOpacity>
