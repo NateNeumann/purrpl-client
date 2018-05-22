@@ -49,11 +49,11 @@ export default class Password extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#3B0170', '#6A1EB0']}
+          colors={['#420A75', '#5B1997']}
           style={styles.gradient}
         >
           <View style={styles.content}>
-            <Image style={styles.gorilla} source={require('../assets/images/purple_cat.png')} />
+            <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
             <Text style={styles.nameText}>Create a <Text style={styles.bold}>password:</Text></Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
             <Text style={styles.nameText}>Confirm <Text style={styles.bold}>password:</Text></Text>
@@ -84,9 +84,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  gorilla: {
-    height: 100,
-    width: 100,
+  cat: {
+    height: 115,
+    width: 107,
   },
   nameText: {
     color: 'white',

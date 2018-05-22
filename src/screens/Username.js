@@ -31,11 +31,11 @@ export default class Username extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#9963F3', 'BE9FFF']}
+          colors={['#420A75', '#5B1997']}
           style={styles.gradient}
         >
           <View style={styles.content}>
-            <Image style={styles.gorilla} source={require('../assets/images/purple_cat.png')} />
+            <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
             <Text style={styles.nameText}>Create your <Text style={styles.bold}>username:</Text></Text>
             <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
             <TouchableOpacity style={styles.button} onPress={this.submitUsername}>
@@ -64,9 +64,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  gorilla: {
-    height: 100,
-    width: 100,
+  cat: {
+    height: 115,
+    width: 107,
   },
   nameText: {
     color: 'white',
