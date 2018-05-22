@@ -1,11 +1,15 @@
 import React from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { sendAction } from './../actions/friends-actions'
 
 export default class FriendAction extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          sendAction(this.props.id, this.props.username, this.props.content)
+        }}
+        >
           <View style={styles.actionContainer}>
             <View style={styles.iconContainer}>
               <Image
