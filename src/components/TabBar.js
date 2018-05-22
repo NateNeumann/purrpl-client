@@ -5,7 +5,7 @@ import Home from './../screens/Home'
 import Friends from './../screens/Friends'
 
 const FriendsTab = (props) => {
-  return <Friends navigation={props.navigation} />;
+  return <Friends navigation={props.navigation} />
 };
 
 const HomeTab = (props) => {
