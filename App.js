@@ -9,6 +9,7 @@ import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
 import IndividualFriend from './src/screens/IndividualFriend'
 import AddFriends from './src/screens/AddFriends'
+import ProgressTracking from './src/screens/ProgressTracking'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -47,6 +48,7 @@ const RootStack = createStackNavigator({
   Friends: { screen: Friends },
   IndividualFriend: { screen: IndividualFriend },
   AddFriends: { screen: AddFriends },
+  ProgressTracking: { screen: ProgressTracking },
 })
 
 class App extends React.Component {

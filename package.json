@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "d3-shape": "^1.2.0",
     "expo": "^27.0.1",
     "moment": "^2.22.1",
     "react": "16.3.1",
@@ -14,6 +15,7 @@
     "react-native-button": "^2.3.0",
     "react-native-drawer": "^2.5.0",
     "react-native-elements": "^0.19.1",
+    "react-native-svg-charts": "^5.0.0",
     "react-navigation": "^2.0.1"
   },
   "devDependencies": {
