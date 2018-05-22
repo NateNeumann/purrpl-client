@@ -13,7 +13,8 @@ export default class Home extends React.Component {
       weather: {},
     }
   }
-  componentWillMount = () => {
+  componentDidMount = () => {
+    // lat and long for Hanover
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
     })

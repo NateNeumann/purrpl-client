@@ -36,7 +36,6 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    console.log(this.state.checked)
     return (
       <View style={styles.container}>
         <TouchableHighlight
