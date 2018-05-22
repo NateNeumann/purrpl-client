@@ -29,6 +29,52 @@ export default class Friends extends React.Component {
   toggleMenu = () => {
     this.setState({ menuVisible: !this.state.menuVisible })
   }
+
+  renderFriends = () => {
+    const { navigate } = this.props.navigation
+    if (this.state.friends) {
+      return (
+        <FlatList
+          data={this.state.friends}
+          style={{ height: '100%' }}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
+              >
+                <View style={styles.friendContainer}>
+                  <Image
+                    style={styles.animal}
+                    source={require('./../assets/images/plantcircle.png')}
+                  />
+                  <View>
+                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                    <Text style={styles.userAt}>@{item.username}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )
+          }
+          }
+        />
+      )
+    } else {
+      return (
+        <View>
+          <Text style={{
+            marginTop: 10,
+            textAlign: 'center',
+            color: '#053867',
+            fontSize: 22,
+          }}
+          >
+            Loading
+          </Text>
+        </View>
+      )
+    }
+  }
+  
   render() {
     const { navigate } = this.props.navigation
     return (
