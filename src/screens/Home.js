@@ -16,14 +16,14 @@ export default class Home extends React.Component {
       user: this.props.navigation.state.params.user,
     }
   }
-  toggleMenu = () => {
-    this.setState({ menuVisible: !this.state.menuVisible })
-  }
   componentDidMount = () => {
     // lat and long for Hanover
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
     })
+  }
+  toggleMenu = () => {
+    this.setState({ menuVisible: !this.state.menuVisible })
   }
   render() {
     return (
