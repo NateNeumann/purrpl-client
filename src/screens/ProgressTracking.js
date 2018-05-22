@@ -4,7 +4,7 @@ import { XAxis, YAxis, AreaChart, Grid } from 'react-native-svg-charts'
 import { StyleSheet, View, Text } from 'react-native'
 import SlideMenu from './../components/SlideMenu'
 import Menu from './../components/Menu'
-import { getProgress } from './../actions/progress-actions'
+import { getFeelingToday } from './../actions/progress-actions'
 
 export default class ProgressTracking extends React.Component {
   static navigationOptions = { header: null };
@@ -14,11 +14,12 @@ export default class ProgressTracking extends React.Component {
     this.state = {
       menuVisible: false,
       user: this.props.navigation.state.params.user,
+      progressData: null,
     }
   }
   componentWillMount = () => {
-    getProgress(this.state.user.id).then((progress) => {
-      console.log(progress)
+    getFeelingToday(this.state.user.id).then((progress) => {
+      this.setState({ progressData: progress.feelingToday })
     })
   }
   toggleMenu = () => {
@@ -45,7 +46,8 @@ export default class ProgressTracking extends React.Component {
     }
   }
   render() {
-    const data = [90, 20, 40, 95, 20, 20, 85]
+    let data = []
+    if (this.state.progressData) data = this.state.progressData
     const contentInset = { top: 20, bottom: 20 }
     return (
       <View style={{ height: '100%' }}>
