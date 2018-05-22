@@ -4,15 +4,20 @@ import moment from 'moment'
 import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
+import SlideMenu from './../components/SlideMenu'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
+      menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
     }
+  }
+  toggleMenu = () => {
+    this.setState({ menuVisible: !this.state.menuVisible })
   }
   componentDidMount = () => {
     // lat and long for Hanover
@@ -23,8 +28,9 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
         <View style={styles.headerContainer}>
-          <Menu style={[{ marginTop: 50 }]} />
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>

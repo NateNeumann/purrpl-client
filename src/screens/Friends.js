@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
 import Menu from './../components/Menu'
+import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
 
 export default class Friends extends React.Component {
@@ -9,6 +10,7 @@ export default class Friends extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      menuVisible: false,
       friends: null,
       user: this.props.navigation.state.params.user,
     }
@@ -24,58 +26,16 @@ export default class Friends extends React.Component {
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
-
-  renderFriends = () => {
-    const { navigate } = this.props.navigation
-    if (this.state.friends) {
-      return (
-        <FlatList
-          data={this.state.friends}
-          style={{ height: '100%' }}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
-              >
-                <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
-                  <View>
-                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
-                    <Text style={styles.userAt}>@{item.username}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            )
-          }
-          }
-        />
-      )
-    } else {
-      return (
-        <View>
-          <Text style={{
-            marginTop: 10,
-            textAlign: 'center',
-            color: '#053867',
-            fontSize: 22,
-            }}
-          >
-            Loading
-          </Text>
-        </View>
-      )
-    }
+  toggleMenu = () => {
+    this.setState({ menuVisible: !this.state.menuVisible })
   }
-
   render() {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
+        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
         <View style={styles.headerContainer}>
-          <Menu style={[{ marginTop: 50 }]} />
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>FRIENDS</Text>
           <TouchableOpacity style={{ position: 'absolute', right: 10 }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
             <Image
