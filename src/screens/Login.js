@@ -1,48 +1,41 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput /* Alert */ } from 'react-native'
 import { LinearGradient } from 'expo'
 import axios from 'axios'
 
-export default class Password extends Component {
+export default class Login extends Component {
   static navigationOptions = { header: null }
 
   constructor(props) {
     super(props)
 
     this.state = {
+      email: '',
       password: '',
-      passwordConfirmed: '',
     }
 
-    this.validatePassword = this.validatePassword.bind(this)
+    this.validateAccount = this.validateAccount.bind(this)
+  }
+
+  handleEmail = (text) => {
+    this.setState({ email: text })
   }
 
   handlePassword = (text) => {
     this.setState({ password: text })
   }
 
-  handleConfirmPassword = (text) => {
-    this.setState({ passwordConfirmed: text })
-  }
+  validateAccount() {
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+    };
 
-  validatePassword() {
-    if (this.state.password !== this.state.passwordConfirmed) {
-      Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
-    } else {
-      const user = {
-        name: this.props.navigation.state.params.name,
-        username: this.props.navigation.state.params.username,
-        password: this.state.password,
-      }
-
-      axios.post('http://localhost:9090/api/signup', user).then((response) => {
-        console.log(response)
-        this.props.navigation.navigate('Home')
-      }).catch((error) => {
-        console.log(error)
-        console.log(error.response)
-      });
-    }
+    axios.post('http://localhost:9090/api/signin', user).then((response) => {
+      this.props.navigation.navigate('Home')
+    }).catch((error) => {
+      console.log(error.response);
+    });
   }
 
   render() {
@@ -54,12 +47,12 @@ export default class Password extends Component {
         >
           <View style={styles.content}>
             <Image style={styles.gorilla} source={require('../assets/images/purple_cat.png')} />
-            <Text style={styles.nameText}>Create a <Text style={styles.bold}>password:</Text></Text>
+            <Text style={styles.nameText}>Enter your <Text style={styles.bold}>username:</Text></Text>
+            <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleEmail} value={this.state.email} />
+            <Text style={styles.nameText}>Enter your <Text style={styles.bold}>password:</Text></Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
-            <Text style={styles.nameText}>Confirm <Text style={styles.bold}>password:</Text></Text>
-            <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handleConfirmPassword} value={this.state.passwordConfirmed} />
-            <TouchableOpacity style={styles.button} onPress={this.validatePassword} >
-              <Text style={styles.buttonText}>{'Sign Up'.toUpperCase()}</Text>
+            <TouchableOpacity style={styles.button} onPress={this.validateAccount} >
+              <Text style={styles.buttonText}>{'Log In'.toUpperCase()}</Text>
             </TouchableOpacity>
           </View>
         </LinearGradient>

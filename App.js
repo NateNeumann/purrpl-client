@@ -5,6 +5,7 @@ import Landing from './src/screens/Landing'
 import Name from './src/screens/Name'
 import Username from './src/screens/Username'
 import Password from './src/screens/Password'
+import Login from './src/screens/Login'
 import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
 import IndividualFriend from './src/screens/IndividualFriend'
@@ -43,6 +44,14 @@ const RootStack = createStackNavigator({
       gesturesEnabled: false,
     },
   },
+  Login: {
+    screen: Login,
+    navigateOptions: {
+      header: null,
+      headerLeft: null,
+      gesturesEnabled: false,
+    },
+  },
   Friends: { screen: Friends },
   IndividualFriend: { screen: IndividualFriend },
 })
@@ -59,6 +68,7 @@ class App extends React.Component {
       'raleway-medium': require('./src/assets/fonts/Raleway-Medium.ttf'),
       'raleway-regular': require('./src/assets/fonts/Raleway-Regular.ttf'),
       'raleway-semi-bold': require('./src/assets/fonts/Raleway-SemiBold.ttf'),
+      'josefin-sans-bold': require('./src/assets/fonts/JosefinSans-Bold.ttf'),
     });
     this.setState({ loading: false });
   }

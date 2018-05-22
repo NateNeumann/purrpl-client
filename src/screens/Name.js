@@ -37,7 +37,7 @@ export default class Name extends Component {
           style={styles.gradient}
         >
           <View style={styles.content}>
-            <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
+            <Image style={styles.gorilla} source={require('../assets/images/purple_cat.png')} />
             <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
             <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
             <TouchableOpacity style={styles.button} onPress={this.submitName}>
