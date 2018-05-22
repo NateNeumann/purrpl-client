@@ -12,6 +12,7 @@ import Reminders from './src/screens/Reminders'
 import EditReminder from './src/screens/EditReminder'
 import Settings from './src/screens/Settings'
 import Notification from './src/screens/Notification'
+import AddFriends from './src/screens/AddFriends'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -53,6 +54,7 @@ const RootStack = createStackNavigator({
   EditReminder: { screen: EditReminder },
   Settings: { screen: Settings },
   Notification: { screen: Notification },
+  AddFriends: { screen: AddFriends },
 })
 
 class App extends React.Component {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
 import Menu from './../components/Menu'
+import { fetchFriends } from './../actions/friends-actions'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
@@ -8,12 +9,67 @@ export default class Friends extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      friends: null,
+      user: this.props.navigation.state.params.user,
     }
+  }
+
+  componentWillMount = () => {
+    const userId = this.props.navigation.state.params.user.id
+    fetchFriends(userId).then((value) => {
+      this.setState({ friends: value.map(item => Object.assign(item, { key: item.id })) })
+    })
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
+
+  renderFriends = () => {
+    const { navigate } = this.props.navigation
+    if (this.state.friends) {
+      return (
+        <FlatList
+          data={this.state.friends}
+          style={{ height: '100%' }}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
+              >
+                <View style={styles.friendContainer}>
+                  <Image
+                    style={styles.animal}
+                    source={require('./../assets/images/plantcircle.png')}
+                  />
+                  <View>
+                    <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
+                    <Text style={styles.userAt}>@{item.username}</Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            )
+          }
+          }
+        />
+      )
+    } else {
+      return (
+        <View>
+          <Text style={{
+            marginTop: 10,
+            textAlign: 'center',
+            color: '#053867',
+            fontSize: 22,
+            }}
+          >
+            Loading
+          </Text>
+        </View>
+      )
+    }
+  }
+
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -21,34 +77,20 @@ export default class Friends extends React.Component {
         <View style={styles.headerContainer}>
           <Menu style={[{ marginTop: 50 }]} />
           <Text style={styles.header}>FRIENDS</Text>
+          <TouchableOpacity style={{ position: 'absolute', right: 10 }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
+            <Image
+              style={{
+                height: 25,
+                width: 25,
+                marginTop: 5,
+                marginRight: 10,
+              }}
+              source={require('./../assets/images/white-plus.png')}
+            />
+          </TouchableOpacity>
         </View>
         <View>
-          <FlatList
-            data={[
-              { key: 'a', firstName: 'Nate', lastName: 'Neumann' },
-              { key: 'b', firstName: 'Amy', lastName: 'Guan' },
-              { key: 'c', firstName: 'Christina', lastName: 'Lu' },
-              { key: 'd', firstName: 'Sofia', lastName: 'Stanescu-Bellu' },
-              { key: 'e', firstName: 'Raul', lastName: 'Rodriguez' },
-            ]}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => navigate('IndividualFriend', { firstName: item.firstName, lastName: item.lastName })}
-                >
-                  <View style={styles.friendContainer}>
-                    <Image
-                      style={styles.animal}
-                      source={require('./../assets/images/plantcircle.png')}
-                    />
-                    <Text style={styles.bold}>{item.firstName.toUpperCase()}</Text>
-                    <Text style={styles.nameText}> {item.lastName.toUpperCase()}</Text>
-                  </View>
-                </TouchableOpacity>
-              )
-            }
-            }
-          />
+          {this.renderFriends()}
         </View>
       </View>
     )
@@ -128,6 +170,11 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
+  },
+  userAt: {
+    fontFamily: 'raleway-semi-bold',
+    paddingLeft: 20,
+    color: '#333333',
   },
   bold: {
     fontFamily: 'raleway-bold',

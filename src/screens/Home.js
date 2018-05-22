@@ -4,6 +4,13 @@ import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: this.props.navigation.state.params.user,
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -14,7 +21,7 @@ export default class Home extends React.Component {
         <View>
           <View style={styles.welcomeContainer}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>IJEMMA!</Text>
+              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>Sat, May 12</Text>
             <Text style={styles.welcomeText}>72 F</Text>

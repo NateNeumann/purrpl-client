@@ -6,7 +6,7 @@ import Friends from './../screens/Friends'
 import Reminders from './../screens/Reminders'
 
 const FriendsTab = (props) => {
-  return <Friends navigation={props.navigation} />;
+  return <Friends navigation={props.navigation} />
 };
 
 const HomeTab = (props) => {
