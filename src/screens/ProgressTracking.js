@@ -2,8 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { XAxis, YAxis, AreaChart, Grid } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
-import SlideMenu from './../components/SlideMenu'
-import Menu from './../components/Menu'
+import Back from './../components/Back'
 import { getFeelingToday } from './../actions/progress-actions'
 
 export default class ProgressTracking extends React.Component {
@@ -56,9 +55,8 @@ export default class ProgressTracking extends React.Component {
     const contentInset = { top: 20, bottom: 20 }
     return (
       <View style={{ height: '100%' }}>
-        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
         <View style={styles.headerContainer}>
-          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+          <Back navigation={this.props.navigation} />
           <Text style={styles.header}>PROGRESS TRACKER</Text>
         </View>
         <Text style={[styles.summary, { textAlign: 'center', marginTop: 15 }]}>General Wellness</Text>
