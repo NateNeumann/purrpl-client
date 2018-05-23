@@ -47,7 +47,7 @@ export default class Home extends React.Component {
             </View>
             <Image
               style={styles.animal}
-              source={require('./../assets/images/plant.png')}
+              source={require('./../assets/images/cat/cat_5.png')}
             />
           </View>
           <View style={styles.checkItemsContainer}>
@@ -119,10 +119,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
   },
-  checkItemContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+  checkItemsContainer: {
+    marginTop: 150,
     width: '100%',
     backgroundColor: 'transparent',
   },

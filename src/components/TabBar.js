@@ -29,7 +29,7 @@ const MainTabBar = createBottomTabNavigator({
       fontSize: 12,
     },
     style: {
-      backgroundColor: '#A995D2',
+      backgroundColor: '#5B9E61',
     },
   },
 });
