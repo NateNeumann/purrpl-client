@@ -6,7 +6,7 @@ export default class Back extends React.Component {
     return (
       <View>
         <TouchableOpacity onPress={() => this.props.navigation.pop()}>
-          <Image style={styles.back} source={require('./../assets/images/back.png')} />
+          <Image style={styles.back} source={require('./../assets/images/backarrow.png')} />
         </TouchableOpacity>
       </View>
     )
@@ -15,7 +15,6 @@ export default class Back extends React.Component {
 
 const styles = StyleSheet.create({
   back: {
-    height: 20,
     width: 20,
     marginTop: 5,
     marginLeft: 20,
