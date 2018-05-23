@@ -8,6 +8,10 @@ import Password from './src/screens/Password'
 import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
 import IndividualFriend from './src/screens/IndividualFriend'
+import Reminders from './src/screens/Reminders'
+import EditReminder from './src/screens/EditReminder'
+import Settings from './src/screens/Settings'
+import Notification from './src/screens/Notification'
 import AddFriends from './src/screens/AddFriends'
 import ProgressTracking from './src/screens/ProgressTracking'
 
@@ -47,6 +51,10 @@ const RootStack = createStackNavigator({
   },
   Friends: { screen: Friends },
   IndividualFriend: { screen: IndividualFriend },
+  Reminders: { screen: Reminders },
+  EditReminder: { screen: EditReminder },
+  Settings: { screen: Settings },
+  Notification: { screen: Notification },
   AddFriends: { screen: AddFriends },
   ProgressTracking: { screen: ProgressTracking },
 })
