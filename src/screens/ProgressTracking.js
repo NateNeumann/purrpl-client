@@ -85,7 +85,12 @@ export default class ProgressTracking extends React.Component {
           </AreaChart>
         </View>
         <XAxis
-          style={{ width: '100%', marginHorizontal: 10, paddingLeft: 20, paddingRight: 20 }}
+          style={{
+            width: '100%',
+            marginHorizontal: 10,
+            paddingLeft: 20,
+            paddingRight: 20,
+          }}
           data={data}
           formatLabel={(value, index) => this.formatDate(value, index)}
           contentInset={{ left: 20, right: 20 }}
