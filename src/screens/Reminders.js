@@ -21,7 +21,6 @@ export default class Reminders extends React.Component {
   }
   render() {
     const { navigate } = this.props.navigation
-    console.log(this.state.checked)
     return (
       <View style={styles.container}>
         {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
