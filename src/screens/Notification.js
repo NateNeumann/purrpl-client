@@ -1,11 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import ToggleSwitch from 'toggle-switch-react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
-import FriendAction from './../components/FriendAction'
-import Dropdown from './../components/Dropdown';
-import Dropdown2 from './../components/Dropdown2';
 
 export default class Notification extends React.Component {
   static navigationOptions = { header: null };

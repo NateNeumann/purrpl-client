@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import { CheckBox } from 'react-native-elements'
 import Menu from './../components/Menu'
 
 export default class Reminders extends React.Component {

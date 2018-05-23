@@ -1,28 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
-import CustomMultiPicker from 'react-native-multiple-select-list'
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
-import Menu from './../components/Menu'
-
-const timeList = {
-  9: '9:00 am',
-  10: '10:00 am',
-  11: '11:00 am',
-  12: '12:00 pm',
-  111: '1:00 pm',
-  112: '2:00 pm',
-  113: '3:00 pm',
-  114: '4:00 pm',
-  115: '5:00 pm',
-  116: '6:00 pm',
-  117: '7:00 pm',
-  118: '8:00 pm',
-  119: '9:00 pm',
-  210: '10:00 pm',
-}
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
