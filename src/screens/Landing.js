@@ -14,7 +14,7 @@ export default class Landing extends Component {
         >
           <View style={styles.landing}>
             <View style={{
- alignItems: 'center', alignSlef: 'center', flex: 1.5, justifyContent: 'center',
+ alignItems: 'center', alignSelf: 'center', flex: 1.5, justifyContent: 'center',
 }}
             >
               <Text style={styles.title}>purrpl</Text>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Font, AppLoading } from 'expo'
-import { createStackNavigator } from 'react-navigation'
+import { TouchableOpacity, Image } from 'react-native'
+import { navigation, createStackNavigator } from 'react-navigation'
 import Landing from './src/screens/Landing'
 import Name from './src/screens/Name'
 import Username from './src/screens/Username'
@@ -23,33 +24,22 @@ const RootStack = createStackNavigator({
   Name: {
     screen: Name,
     navigationOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
+      title: 'Name',
     },
   },
   Username: {
     screen: Username,
     navigationOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
     },
   },
   Password: {
     screen: Password,
     navigateOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
     },
   },
   Login: {
     screen: Login,
     navigateOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
     },
   },
   Friends: { screen: Friends },
