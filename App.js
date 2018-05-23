@@ -1,7 +1,6 @@
 import React from 'react'
 import { Font, AppLoading } from 'expo'
-import { TouchableOpacity, Image } from 'react-native'
-import { navigation, createStackNavigator } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import Landing from './src/screens/Landing'
 import Name from './src/screens/Name'
 import Username from './src/screens/Username'

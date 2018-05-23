@@ -10,15 +10,15 @@ export default class Login extends Component {
     super(props)
 
     this.state = {
-      email: '',
+      username: '',
       password: '',
     }
 
     this.validateAccount = this.validateAccount.bind(this)
   }
 
-  handleEmail = (text) => {
-    this.setState({ email: text })
+  handleUsername = (text) => {
+    this.setState({ username: text })
   }
 
   handlePassword = (text) => {
@@ -27,9 +27,11 @@ export default class Login extends Component {
 
   validateAccount() {
     const user = {
-      email: this.state.email,
+      username: this.state.username,
       password: this.state.password,
     };
+
+    console.log(this.state.username);
 
     axios.post('http://localhost:9090/api/signin', user).then((response) => {
       this.props.navigation.navigate('Home')
@@ -48,7 +50,7 @@ export default class Login extends Component {
           <View style={styles.content}>
             <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
             <Text style={styles.nameText}>Enter your <Text style={styles.bold}>username:</Text></Text>
-            <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleEmail} value={this.state.email} />
+            <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
             <Text style={styles.nameText}>Enter your <Text style={styles.bold}>password:</Text></Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
             <TouchableOpacity style={styles.button} onPress={this.validateAccount} >
