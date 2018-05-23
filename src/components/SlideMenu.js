@@ -32,7 +32,16 @@ export default class SlideMenu extends React.Component {
           <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
         </TouchableOpacity>
         <View style={styles.firstHalf}>
-          <Circle style={{ position: 'absolute', top: '19%', height: 135, width: 135 }} color="rgb(169, 222, 81)" borderWidth={0} size={135} animated animating={false} thickness={7} progress={0.5} />
+          <Circle
+            style={styles.progressCircle}
+            color="rgb(169, 222, 81)"
+            borderWidth={0}
+            size={135}
+            animated
+            animating={false}
+            thickness={7}
+            progress={0.5}
+          />
           <Image
             style={styles.userStatus}
             source={require('./../assets/images/plantcircle.png')}
@@ -104,6 +113,12 @@ const styles = StyleSheet.create({
     top: 10,
     right: 15,
     zIndex: 2,
+  },
+  progressCircle: {
+    position: 'absolute',
+    top: '19%',
+    height: 135,
+    width: 135,
   },
   userStatus: {
     width: 120,
