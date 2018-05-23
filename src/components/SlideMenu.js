@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Animated } from 'react-native'
+import { CircleSnail } from 'react-native-progress'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class SlideMenu extends React.Component {
           <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
         </TouchableOpacity>
         <View style={styles.firstHalf}>
+          <CircleSnail size={30} indeterminate />
           <Image
             style={styles.userStatus}
             source={require('./../assets/images/plantcircle.png')}

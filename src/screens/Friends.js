@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
+import { Circle } from 'react-native-progress'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
@@ -60,17 +61,11 @@ export default class Friends extends React.Component {
       )
     } else {
       return (
-        <View>
-          <Text style={{
-            marginTop: 10,
-            textAlign: 'center',
-            color: '#053867',
-            fontSize: 22,
-          }}
-          >
-            Loading
-          </Text>
-        </View>
+        <Circle
+          style={{ alignSelf: 'center', marginTop: 20 }}
+          size={50}
+          indeterminate
+        />
       )
     }
   }
