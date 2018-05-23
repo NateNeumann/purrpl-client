@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { Circle } from 'react-native-progress'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
-import { Circle } from 'react-native-progress'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
