@@ -6,17 +6,9 @@ import Back from './../components/Back'
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
-  constructor(props) {
-    super(props)
-    this.state = {
-      checked: false,
-    }
-  }
-
   render() {
     const image = this.props.navigation.state.params.image
     const text = this.props.navigation.state.params.text
-    console.log(this.state.checked)
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
