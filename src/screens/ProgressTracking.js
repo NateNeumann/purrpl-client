@@ -1,7 +1,7 @@
 import React from 'react'
-import * as shape from 'd3-shape'
-import { XAxis, YAxis, AreaChart, Grid } from 'react-native-svg-charts'
 import { StyleSheet, View, Text } from 'react-native'
+import { XAxis, YAxis, AreaChart, Grid } from 'react-native-svg-charts'
+import * as shape from 'd3-shape'
 import SlideMenu from './../components/SlideMenu'
 import Menu from './../components/Menu'
 import { getFeelingToday } from './../actions/progress-actions'
@@ -14,12 +14,13 @@ export default class ProgressTracking extends React.Component {
     this.state = {
       menuVisible: false,
       user: this.props.navigation.state.params.user,
-      progressData: null,
+      progress: null,
     }
   }
   componentWillMount = () => {
     getFeelingToday(this.state.user.id).then((progress) => {
-      this.setState({ progressData: progress.feelingToday })
+      console.log(progress)
+      this.setState({ progress })
     })
   }
   toggleMenu = () => {
@@ -47,7 +48,11 @@ export default class ProgressTracking extends React.Component {
   }
   render() {
     let data = []
-    if (this.state.progressData) data = this.state.progressData
+    let summary = ''
+    if (this.state.progress) {
+      data = this.state.progress.feelingToday
+      summary = this.state.progress.summary
+    }
     const contentInset = { top: 20, bottom: 20 }
     return (
       <View style={{ height: '100%' }}>
@@ -82,7 +87,7 @@ export default class ProgressTracking extends React.Component {
           </AreaChart>
         </View>
         <XAxis
-          style={{ width: '100%', marginHorizontal: 10, paddingLeft: 40, paddingRight: 40 }}
+          style={{ width: '100%', marginHorizontal: 10, paddingLeft: 20, paddingRight: 20 }}
           data={data}
           formatLabel={(value, index) => this.formatDate(value, index)}
           contentInset={{ left: 20, right: 20 }}
@@ -90,7 +95,7 @@ export default class ProgressTracking extends React.Component {
         />
         <View style={{ paddingLeft: 30 }}>
           <Text style={styles.summary}>Summary</Text>
-          <Text style={styles.summaryDescription}>There's not enough data to chart!</Text>
+          <Text style={styles.summaryDescription}>{summary}</Text>
         </View>
       </View>
     )
