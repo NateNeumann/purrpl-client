@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
+import moment from 'moment'
 import Back from './../components/Back'
 import FriendAction from './../components/FriendAction'
 
@@ -9,15 +10,20 @@ export default class IndividualFriend extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      user: this.props.navigation.state.params.user,
     }
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
+
   render() {
-    const firstName = this.props.navigation.state.params.firstName
-    const lastName = this.props.navigation.state.params.lastName
+    const name = this.props.navigation.state.params.name
+    const username = this.props.navigation.state.params.username
+    const encourage = { senderId: this.state.user.id, action: 'encourage', time: moment() }
+    const affirm = { senderId: this.state.user.id, action: 'affirm', time: moment() }
+    const concern = { senderId: this.state.user.id, action: 'concern', time: moment() }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -27,20 +33,28 @@ export default class IndividualFriend extends React.Component {
         <View>
           <Image style={{ alignSelf: 'center', height: 260, width: 260 }} source={require('./../assets/images/plant.png')} />
           <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
-            <Text style={styles.bold}>{firstName.toUpperCase()}</Text>
-            <Text style={styles.bold}>{lastName.toUpperCase()}</Text>
+            <Text style={styles.bold}>{name.toUpperCase()}</Text>
           </View>
           <FriendAction
             image={require('./../assets/images/heart.png')}
             label="encourage"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={encourage}
           />
           <FriendAction
             image={require('./../assets/images/high-five.png')}
             label="affirm"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={affirm}
           />
           <FriendAction
             image={require('./../assets/images/smile.png')}
             label="concern"
+            id="5afe44ee30dd09960685afd5"
+            username={username}
+            content={concern}
           />
         </View>
       </View>

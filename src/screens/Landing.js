@@ -1,9 +1,23 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo'
+import getUser from './../actions/testing-actions'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: null,
+    }
+  }
+
+  componentWillMount = () => {
+    getUser().then((user) => {
+      this.setState({ user })
+    })
+  }
   render() {
     const { navigate } = this.props.navigation
     return (
