@@ -32,17 +32,17 @@ export default class Reminders extends React.Component {
           <View style={styles.welcomeContainer}>
             <FlatList
               data={[
-            { key: '1', image: require('./../assets/images/drink.png'), text: 'drink a glass of water' },
-            { key: '2', image: require('./../assets/images/sunscreen.png'), text: 'apply sunscreen' },
-            { key: '3', image: require('./../assets/images/food.png'), text: 'eat meals' },
-            { key: '4', image: require('./../assets/images/meds.png'), text: 'take your medication' },
-            { key: '5', image: require('./../assets/images/bed.png'), text: 'go to sleep' },
+            { key: 'water', image: require('./../assets/images/drink.png'), text: 'drink a glass of water' },
+            { key: 'sunscreen', image: require('./../assets/images/sunscreen.png'), text: 'apply sunscreen' },
+            { key: 'food', image: require('./../assets/images/food.png'), text: 'eat meals' },
+            { key: 'medicine', image: require('./../assets/images/meds.png'), text: 'take your medication' },
+            { key: 'sleep', image: require('./../assets/images/bed.png'), text: 'go to sleep' },
 
           ]}
               renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('EditReminder', { image: item.image, text: item.text })}
+                onPress={() => navigate('EditReminder', { image: item.image, text: item.text, type: item.key })}
               >
                 <View style={styles.welcomeContainer}>
                   <View style={styles.row}>
