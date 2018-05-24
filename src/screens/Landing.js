@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Landing extends Component {
@@ -38,7 +38,7 @@ export default class Landing extends Component {
     );
   }
 }
-
+const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   },
   cat: {
     alignSelf: 'flex-end',
-    height: 330,
-    width: 325,
+    height: height * 0.41,
+    width: width * 0.72,
   },
   title: {
     color: 'white',

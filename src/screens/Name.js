@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
+import Back from './../components/Back'
 
 export default class Name extends Component {
   static navigationOptions = { header: null }
