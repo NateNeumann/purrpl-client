@@ -5,11 +5,11 @@ import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
+import Avatar from './../components/Avatar'
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       menuVisible: false,
       weather: {},
@@ -45,10 +45,7 @@ export default class Home extends React.Component {
             <View style={styles.speechBubble}>
               <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
             </View>
-            <Image
-              style={styles.animal}
-              source={require('./../assets/images/cat/cat_5.png')}
-            />
+            <Avatar/>
           </View>
           <View style={styles.checkItemsContainer}>
             <FlatList
