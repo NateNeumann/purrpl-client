@@ -1,9 +1,23 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo'
+import getUser from './../actions/testing-actions'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: null,
+    }
+  }
+
+  componentWillMount = () => {
+    getUser().then((user) => {
+      this.setState({ user })
+    })
+  }
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -19,7 +33,7 @@ export default class Landing extends Component {
             <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
               <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigate('Home', { user: { id: '5afe44ee30dd09960685afd5', name: 'Ijemma', username: 'ijemmao' } }) }} >
+            <TouchableOpacity onPress={() => { navigate('Home', { user: this.state.user }) }} >
               <Text style={styles.secondButtonText}>Log In</Text>
             </TouchableOpacity>
           </View>
