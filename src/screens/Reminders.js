@@ -10,6 +10,7 @@ export default class Reminders extends React.Component {
     this.state = {
       menuVisible: false,
       checked: false,
+      user: this.props.navigation.state.params.user,
     }
   }
 
@@ -42,7 +43,12 @@ export default class Reminders extends React.Component {
               renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('EditReminder', { image: item.image, text: item.text, type: item.key })}
+                onPress={() => navigate('EditReminder', {
+                  user: this.state.user,
+                  image: item.image,
+                  text: item.text,
+                  type: item.key,
+                })}
               >
                 <View style={styles.welcomeContainer}>
                   <View style={styles.row}>

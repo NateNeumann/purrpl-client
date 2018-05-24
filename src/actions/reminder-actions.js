@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
 
-export function fetchReminders() { /* axios get */
-  axios.get(`${ROOT_URL}/reminders`).then((response) => {
+export function fetchReminders(id) { /* axios get */
+  axios.get(`${ROOT_URL}/reminders/${id}`).then((response) => {
     return response.data
   }).catch((error) => {
     console.log(error)
@@ -36,8 +36,8 @@ export function updateReminder(id, fields) { /* axios put */
   })
 }
 
-export function fetchReminder(id) { /* axios get */
-  axios.get(`${ROOT_URL}/posts/${id}`).then((response) => {
+export function fetchReminder(id, reminder) { /* axios get */
+  axios.get(`${ROOT_URL}/posts/${id}&${reminder}`).then((response) => {
     return response.data
   }).catch((error) => {
     console.log(error)

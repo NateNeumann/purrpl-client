@@ -3,9 +3,20 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
+import { fetchReminder } from './../actions/reminder-actions'
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: this.props.navigation.state.params.user,
+    }
+  }
+  componentWillMount = () => {
+
+  }
   render() {
     const image = this.props.navigation.state.params.image
     const text = this.props.navigation.state.params.text
