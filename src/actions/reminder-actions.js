@@ -1,12 +1,15 @@
 import axios from 'axios'
 
-const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
+// const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
+const ROOT_URL = 'http://localhost:9090/api'
 
 export function fetchReminders(id) { /* axios get */
-  axios.get(`${ROOT_URL}/reminders/${id}`).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/${id}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
@@ -18,29 +21,31 @@ export function createReminder(reminder, history) { /* axios post */
     times: reminder.times,
     toggle: reminder.toggle,
   }
-
-  axios.post(`${ROOT_URL}/reminders`, fields).then((response) => {
-    return true
-  }).catch((error) => {
-    console.log(error)
-    return false
+  return new Promise((resolve, reject) => {
+    axios.post(`${ROOT_URL}/reminders`, fields).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
 export function updateReminder(id, fields) { /* axios put */
-  axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
-    return false
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
 export function fetchReminder(id, reminder) { /* axios get */
-  axios.get(`${ROOT_URL}/posts/${id}&${reminder}`).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
-    return false
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/${id}&${reminder}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }

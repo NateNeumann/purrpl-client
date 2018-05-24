@@ -12,10 +12,13 @@ export default class EditReminder extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
+      type: this.props.navigation.state.params.type,
     }
   }
   componentWillMount = () => {
-
+    fetchReminder(this.state.user.id, this.state.type).then((response) => {
+      console.log(response)
+    })
   }
   render() {
     const image = this.props.navigation.state.params.image
