@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput /* Alert */ } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput } from 'react-native'
 import { LinearGradient } from 'expo'
-import axios from 'axios'
+import { loginUser } from './../actions/user-actions'
 
 export default class Login extends Component {
   static navigationOptions = { header: null }
@@ -13,8 +13,6 @@ export default class Login extends Component {
       username: '',
       password: '',
     }
-
-    this.validateAccount = this.validateAccount.bind(this)
   }
 
   handleUsername = (text) => {
@@ -25,19 +23,10 @@ export default class Login extends Component {
     this.setState({ password: text })
   }
 
-  validateAccount() {
-    const user = {
-      username: this.state.username,
-      password: this.state.password,
-    };
-
-    console.log(this.state.username);
-
-    axios.post('http://localhost:9090/api/signin', user).then((response) => {
-      this.props.navigation.navigate('Home')
-    }).catch((error) => {
-      console.log(error.response);
-    });
+  finalizeAccount = () => {
+    loginUser({ username: this.state.username, password: this.state.password }).then((response) => {
+      this.props.navigation.navigate('Home', { user: response })
+    })
   }
 
   render() {
@@ -53,7 +42,7 @@ export default class Login extends Component {
             <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
             <Text style={styles.nameText}>Enter your <Text style={styles.bold}>password:</Text></Text>
             <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
-            <TouchableOpacity style={styles.button} onPress={this.validateAccount} >
+            <TouchableOpacity style={styles.button} onPress={this.finalizeAccount} >
               <Text style={styles.buttonText}>{'Log In'.toUpperCase()}</Text>
             </TouchableOpacity>
           </View>

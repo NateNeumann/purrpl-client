@@ -12,8 +12,6 @@ export default class Name extends Component {
     this.state = {
       name: '',
     }
-
-    this.submitName = this.submitName.bind(this)
   }
 
   handleName = (text) => {
@@ -22,7 +20,7 @@ export default class Name extends Component {
     });
   }
 
-  submitName() {
+  submitName = () => {
     if (this.state.name !== '') {
       this.props.navigation.navigate('Username', { name: this.state.name })
     } else {

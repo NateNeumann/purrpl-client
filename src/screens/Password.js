@@ -13,8 +13,6 @@ export default class Password extends Component {
       password: '',
       passwordConfirmed: '',
     }
-
-    this.validatePassword = this.validatePassword.bind(this)
   }
 
   handlePassword = (text) => {
@@ -25,7 +23,7 @@ export default class Password extends Component {
     this.setState({ passwordConfirmed: text })
   }
 
-  validatePassword() {
+  validatePassword = () => {
     if (this.state.password !== this.state.passwordConfirmed) {
       Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
     } else {

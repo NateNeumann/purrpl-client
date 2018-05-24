@@ -11,15 +11,13 @@ export default class Username extends Component {
     this.state = {
       username: '',
     }
-
-    this.submitUsername = this.submitUsername.bind(this)
   }
 
   handleUsername = (text) => {
     this.setState({ username: text })
   }
 
-  submitUsername() {
+  submitUsername = () => {
     if (this.state.username !== '') {
       this.props.navigation.navigate('Password', { name: this.props.navigation.state.params.name, username: this.state.username })
     } else {

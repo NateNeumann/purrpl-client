@@ -2,12 +2,6 @@ import axios from 'axios'
 
 const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
 
-// export const ActionTypes = {
-//   FETCH_REMINDERS: 'FETCH_REMINDERS',
-//   FETCH_REMINDER: 'FETCH_REMINDER',
-// }
-
-
 export function fetchReminders() { /* axios get */
   axios.get(`${ROOT_URL}/reminders`).then((response) => {
     return response.data
@@ -24,7 +18,7 @@ export function createReminder(reminder, history) { /* axios post */
     times: reminder.times,
     toggle: reminder.toggle,
   }
-  // axios.post(`${ROOT_URL}/reminders`, fields, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+
   axios.post(`${ROOT_URL}/reminders`, fields).then((response) => {
     return true
   }).catch((error) => {
@@ -33,7 +27,6 @@ export function createReminder(reminder, history) { /* axios post */
   })
 }
 
-// need id??
 export function updateReminder(id, fields) { /* axios put */
   axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
     return response.data
