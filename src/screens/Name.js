@@ -11,8 +11,6 @@ export default class Name extends Component {
     this.state = {
       name: '',
     }
-
-    this.submitName = this.submitName.bind(this)
   }
 
   handleName = (text) => {
@@ -21,7 +19,7 @@ export default class Name extends Component {
     });
   }
 
-  submitName() {
+  submitName = () => {
     if (this.state.name !== '') {
       this.props.navigation.navigate('Username', { name: this.state.name })
     } else {
@@ -33,11 +31,11 @@ export default class Name extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#3B0170', '#6A1EB0']}
+          colors={['#420A75', '#5B1997']}
           style={styles.gradient}
         >
           <View style={styles.content}>
-            <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
+            <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
             <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
             <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
             <TouchableOpacity style={styles.button} onPress={this.submitName}>
@@ -66,9 +64,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  gorilla: {
-    height: 100,
-    width: 100,
+  cat: {
+    height: 115,
+    width: 107,
   },
   nameText: {
     color: 'white',
