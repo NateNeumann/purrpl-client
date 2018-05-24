@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Animated } from 'react-native'
+import { Circle } from 'react-native-progress'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -32,6 +33,16 @@ export default class SlideMenu extends React.Component {
           <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
         </TouchableOpacity>
         <View style={styles.firstHalf}>
+          <Circle
+            style={styles.progressCircle}
+            color="rgb(169, 222, 81)"
+            borderWidth={0}
+            size={135}
+            animated
+            animating={false}
+            thickness={7}
+            progress={0.5}
+          />
           <Image
             style={styles.userStatus}
             source={require('./../assets/images/plantcircle.png')}
@@ -104,9 +115,16 @@ const styles = StyleSheet.create({
     right: 15,
     zIndex: 2,
   },
+  progressCircle: {
+    position: 'absolute',
+    top: '19%',
+    height: 135,
+    width: 135,
+  },
   userStatus: {
     width: 120,
     height: 120,
+    marginBottom: '5%',
   },
   remindersCount: {
     color: '#053867',
@@ -117,13 +135,13 @@ const styles = StyleSheet.create({
   firstHalf: {
     justifyContent: 'flex-end',
     width: '100%',
-    height: '30%',
+    height: '35%',
     alignItems: 'center',
   },
   secondHalf: {
     justifyContent: 'space-around',
     width: '100%',
-    height: '70%',
+    height: '65%',
     alignItems: 'center',
   },
   optionButton: {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { Circle } from 'react-native-progress'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
@@ -60,17 +61,11 @@ export default class Friends extends React.Component {
       )
     } else {
       return (
-        <View>
-          <Text style={{
-            marginTop: 10,
-            textAlign: 'center',
-            color: '#053867',
-            fontSize: 22,
-          }}
-          >
-            Loading
-          </Text>
-        </View>
+        <Circle
+          style={{ alignSelf: 'center', marginTop: 20 }}
+          size={50}
+          indeterminate
+        />
       )
     }
   }
