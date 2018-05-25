@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
 import Back from './../components/Back'
+
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 export default class Name extends Component {
   static navigationOptions = { header: null }
@@ -22,9 +29,9 @@ export default class Name extends Component {
 
   submitName = () => {
     if (this.state.name !== '') {
-      this.props.navigation.navigate('Username', { name: this.state.name })
+      this.props.navigation.navigate('CreateAccount', { name: this.state.name })
     } else {
-      Alert.alert('Name Field Empty', 'Please enter a valid name.')
+      Alert.alert('Oh no!', 'Please enter a valid name 😺')
     }
   }
 
@@ -38,14 +45,16 @@ export default class Name extends Component {
           <View style={styles.backView}>
             <Back style={styles.backButton} navigation={this.props.navigation} />
           </View>
-          <View style={styles.content}>
-            <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
-            <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
-            <TouchableOpacity style={styles.button} onPress={this.submitName}>
-              <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
-            </TouchableOpacity>
-          </View>
+          <DismissKeyboard>
+            <View style={styles.content}>
+              <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
+              <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
+              <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
+              <TouchableOpacity style={styles.button} onPress={this.submitName}>
+                <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
+              </TouchableOpacity>
+            </View>
+          </DismissKeyboard>
         </LinearGradient>
       </View>
     );
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: 'white',
-    borderBottomWidth: 2,
+    borderBottomWidth: 1.3,
     color: 'white',
     fontFamily: 'raleway-medium',
     fontSize: 24,

@@ -25,6 +25,7 @@
     "react-native-dropdown-menu": "^2.0.0",
     "react-native-elements": "^0.19.1",
     "react-native-hamburger": "^0.0.2",
+    "react-native-keyboard-aware-scroll-view": "^0.5.0",
     "react-native-material-dropdown": "^0.11.1",
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-multiple-select-list": "^1.0.4",
