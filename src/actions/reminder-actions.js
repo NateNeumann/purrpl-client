@@ -13,6 +13,16 @@ export function fetchReminders(id) { /* axios get */
   })
 }
 
+export function fetchDailyReminders(id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/daily/${id}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
 export function createReminder(reminder, history) { /* axios post */
   const fields = {
     user: reminder.user,
@@ -29,16 +39,6 @@ export function createReminder(reminder, history) { /* axios post */
     })
   })
 }
-
-// export function updateReminder(id, fields) { /* axios put */
-//   return new Promise((resolve, reject) => {
-//     axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
-//       resolve(response.data)
-//     }).catch((error) => {
-//       reject(error)
-//     })
-//   })
-// }
 
 export function updateActive(id, active) {
   return new Promise((resolve, reject) => {

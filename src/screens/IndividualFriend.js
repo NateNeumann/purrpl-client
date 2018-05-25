@@ -38,21 +38,21 @@ export default class IndividualFriend extends React.Component {
           <FriendAction
             image={require('./../assets/images/heart.png')}
             label="encourage"
-            id="5afe44ee30dd09960685afd5"
+            id={this.state.user.id}
             username={username}
             content={encourage}
           />
           <FriendAction
             image={require('./../assets/images/high-five.png')}
             label="affirm"
-            id="5afe44ee30dd09960685afd5"
+            id={this.state.user.id}
             username={username}
             content={affirm}
           />
           <FriendAction
             image={require('./../assets/images/smile.png')}
             label="concern"
-            id="5afe44ee30dd09960685afd5"
+            id={this.state.user.id}
             username={username}
             content={concern}
           />

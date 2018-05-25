@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
 import moment from 'moment'
+import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
@@ -20,6 +21,9 @@ export default class Home extends React.Component {
     // lat and long for Hanover
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
+    })
+    fetchDailyReminders(this.state.user.id).then((response) => {
+      console.log(response)
     })
   }
   toggleMenu = () => {
