@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import { Circle } from 'react-native-progress'
+import * as Progress from 'react-native-progress';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
@@ -61,11 +61,28 @@ export default class Friends extends React.Component {
       )
     } else {
       return (
-        <Circle
-          style={{ alignSelf: 'center', marginTop: 20 }}
-          size={50}
-          indeterminate
-        />
+        <View>
+          <Image
+            style={{
+              alignSelf: 'center',
+              marginTop: 60,
+              resizeMode: 'contain',
+              height: 50,
+            }}
+            source={require('./../assets/images/light_purple_cat.png')}
+          />
+          <Progress.Bar
+            style={{
+              alignSelf: 'center',
+              marginTop: 20,
+            }}
+            unfilledColor="#F1EAFF"
+            color="#5B1997"
+            borderColor="#F1EAFF"
+            size={50}
+            indeterminate
+          />
+        </View>
       )
     }
   }
