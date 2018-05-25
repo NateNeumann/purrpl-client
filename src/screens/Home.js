@@ -39,7 +39,7 @@ export default class Home extends React.Component {
               <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
           </View>
           <View>
             <View style={styles.speechBubble}>
