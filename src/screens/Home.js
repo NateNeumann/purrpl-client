@@ -36,7 +36,7 @@ export default class Home extends React.Component {
         <View>
           <View style={styles.welcomeContainer}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
+              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
             <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
@@ -47,7 +47,7 @@ export default class Home extends React.Component {
             </View>
             <Image
               style={styles.animal}
-              source={require('./../assets/images/plant.png')}
+              source={require('./../assets/images/catinbox.png')}
             />
           </View>
           <View style={styles.checkItemsContainer}>
@@ -56,6 +56,7 @@ export default class Home extends React.Component {
                 { key: 'a', time: '8 AM', reminder: 'Apply sunscreen' },
                 { key: 'b', time: '9 AM', reminder: 'Drink water' },
                 { key: 'c', time: '11 AM', reminder: 'Take meds' },
+                { key: 'd', time: '12 AM', reminder: 'Eat lunch' },
               ]}
               renderItem={({ item }) => {
                 return (
@@ -78,7 +79,7 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     height: '100%',
   },
   headerContainer: {
@@ -101,8 +102,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   animal: {
-    alignSelf: 'flex-start',
-    marginLeft: 10,
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    width: 200,
+    marginLeft: -120,
   },
   animalUpdate: {
     fontSize: 20,
@@ -117,14 +120,15 @@ const styles = StyleSheet.create({
     height: 100,
     width: 130,
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    borderRadius: 70,
+    borderColor: '#000',
+    borderWidth: 1,
   },
-  checkItemContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
+  checkItemsContainer: {
     backgroundColor: 'transparent',
+    marginTop: 30,
+    height: 150,
+
   },
   checkContainer: {
     flexDirection: 'row',
