@@ -61,7 +61,7 @@ export default class Login extends Component {
               <KeyboardAwareScrollView>
                 <View style={styles.content}>
                   <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
-                  <Text style={styles.hiText}>Welcome back! 😸</Text>
+                  <Text style={styles.hiText}>Welcome back!</Text>
                   <Text style={styles.nameText}><Text style={styles.bold}>Username:</Text></Text>
                   <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
                   <Text style={styles.nameText}><Text style={styles.bold}>Password:</Text></Text>
