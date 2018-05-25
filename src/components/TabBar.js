@@ -1,5 +1,7 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
+import { StyleSheet, Image } from 'react-native'
+
 import Home from './../screens/Home'
 import Friends from './../screens/Friends'
 import Reminders from './../screens/Reminders'
@@ -17,22 +19,42 @@ const RemindersTab = (props) => {
 };
 
 const MainTabBar = createBottomTabNavigator({
-  FriendsTab,
-  HomeTab,
-  RemindersTab,
+  Friends: FriendsTab,
+  Home: HomeTab,
+  Reminders: RemindersTab,
 }, {
-  initialRouteName: 'HomeTab',
+  initialRouteName: 'Home',
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      if (routeName === 'Home') {
+        return <Image style={styles.icon} source={require('../assets/images/tabbar/home.png')} />;
+      } else if (routeName === 'Friends') {
+        return <Image style={styles.icon} source={require('../assets/images/tabbar/friends.png')} />;
+      } else if (routeName === 'Reminders') {
+        return <Image style={styles.icon} source={require('../assets/images/tabbar/reminders.png')} />;
+      }
+
+      return <Image style={styles.icon} source={require('../assets/images/tabbar/home.png')} />;
+    },
+  }),
   tabBarOptions: {
-    showLabel: true,
-    activeTintColor: 'white',
+    showLabel: false,
+    activeBackgroundColor: '#317B34',
     labelStyle: {
       fontSize: 12,
     },
     style: {
-      backgroundColor: '#A995D2',
+      backgroundColor: '#5B9E61',
     },
   },
 });
 
+const styles = StyleSheet.create({
+  icon: {
+    height: 45,
+    width: 45,
+  },
+});
 
 export default MainTabBar;

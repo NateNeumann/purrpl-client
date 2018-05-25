@@ -1,7 +1,13 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "name": "purrpl",
   "scripts": {
     "test": "./node_modules/.bin/eslint src"
+  },
+  "rnpm": {
+    "assets": [
+      "assets/fonts"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -24,7 +30,9 @@
     "react-native-multiple-select-list": "^1.0.4",
     "react-native-progress": "^3.4.0",
     "react-native-select-multiple": "^1.2.0",
+    "react-native-svg": "^6.3.1",
     "react-native-svg-charts": "^5.0.0",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.1",
     "toggle-switch-react-native": "^0.2.0"
   },
@@ -34,6 +42,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2"
+    "eslint-plugin-react": "^7.8.2",
+    "svg-sprite-loader": "^3.7.3"
   }
 }

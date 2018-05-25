@@ -25,6 +25,7 @@ export default class Login extends Component {
 
   finalizeAccount = () => {
     loginUser({ username: this.state.username, password: this.state.password }).then((response) => {
+      console.log(response);
       this.props.navigation.navigate('Home', { user: response })
     })
   }
