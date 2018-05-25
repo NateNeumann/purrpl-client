@@ -39,13 +39,18 @@ export default class Home extends React.Component {
               <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./../assets/images/sun.png')}
+              />
+              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+            </View>
           </View>
-          <View>
+          <View style={styles.welcomeContainer}>
             <View style={styles.speechBubble}>
               <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
             </View>
-            <Avatar/>
+            <Avatar />
           </View>
           <View style={styles.checkItemsContainer}>
             <FlatList
@@ -107,17 +112,15 @@ const styles = StyleSheet.create({
   },
   speechBubble: {
     display: 'flex',
-    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    right: 20,
-    height: 100,
-    width: 130,
-    backgroundColor: '#FFFFFF',
+    height: 25,
+    backgroundColor: 'transparent',
     borderRadius: 20,
   },
   checkItemsContainer: {
     marginTop: 150,
+    alignSelf: 'auto',
     width: '100%',
     backgroundColor: 'transparent',
   },
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '50%',
+    width: '85%',
     backgroundColor: 'transparent',
   },
   welcomeText: {
