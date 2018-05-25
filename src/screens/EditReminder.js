@@ -13,11 +13,12 @@ export default class EditReminder extends React.Component {
     this.state = {
       user: this.props.navigation.state.params.user,
       type: this.props.navigation.state.params.type,
+      reminder: {},
     }
   }
   componentWillMount = () => {
     fetchReminder(this.state.user.id, this.state.type).then((response) => {
-      console.log(response)
+      this.setState({ reminder: response })
     })
   }
   render() {
@@ -52,7 +53,7 @@ export default class EditReminder extends React.Component {
             </View>
             <Text style={styles.timesText}>times:</Text>
             <View style={styles.scrollHeight}>
-              <SelectTime />
+              <SelectTime times={this.state.reminder.times} />
             </View>
           </View>
         </View>
