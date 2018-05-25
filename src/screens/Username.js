@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
 import { LinearGradient } from 'expo'
+import Back from './../components/Back'
 
 export default class Username extends Component {
   static navigationOptions = { header: null }
@@ -32,6 +33,9 @@ export default class Username extends Component {
           colors={['#420A75', '#5B1997']}
           style={styles.gradient}
         >
+          <View style={styles.backView}>
+            <Back style={styles.backButton} navigation={this.props.navigation} />
+          </View>
           <View style={styles.content}>
             <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
             <Text style={styles.nameText}>Create your <Text style={styles.bold}>username:</Text></Text>
@@ -58,8 +62,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  backView: {
+    alignItems: 'flex-start',
+    flex: 1,
+    justifyContent: 'flex-end',
+    width: '100%',
+  },
+  backButton: {
+    alignSelf: 'flex-end',
+  },
   content: {
     alignItems: 'center',
+    flex: 10,
     justifyContent: 'center',
   },
   cat: {
