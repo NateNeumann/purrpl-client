@@ -15,6 +15,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
+      reminders: [],
     }
   }
   componentDidMount = () => {
@@ -23,11 +24,34 @@ export default class Home extends React.Component {
       this.setState({ weather: response })
     })
     fetchDailyReminders(this.state.user.id).then((response) => {
-      console.log(response)
+      this.setState({ reminders: response.reminders })
     })
   }
   toggleMenu = () => {
     this.setState({ menuVisible: !this.state.menuVisible })
+  }
+  renderRemindersChecklist = () => {
+    console.log('here', this.state.reminders)
+    if (this.state.reminders) {
+      return (
+        <FlatList
+          data={this.state.reminders}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.checkContainer}>
+                <Checkbox
+                  time={item.time.label}
+                  reminder={item.message}
+                />
+              </View>
+            )
+          }
+          }
+        />
+      )
+    } else {
+      return null
+    }
   }
   render() {
     return (
@@ -55,24 +79,7 @@ export default class Home extends React.Component {
             />
           </View>
           <View style={styles.checkItemsContainer}>
-            <FlatList
-              data={[
-                { key: 'a', time: '8 AM', reminder: 'Apply sunscreen' },
-                { key: 'b', time: '9 AM', reminder: 'Drink water' },
-                { key: 'c', time: '11 AM', reminder: 'Take meds' },
-              ]}
-              renderItem={({ item }) => {
-                return (
-                  <View style={styles.checkContainer}>
-                    <Checkbox
-                      time={item.time}
-                      reminder={item.reminder}
-                    />
-                  </View>
-                )
-              }
-            }
-            />
+            {this.renderRemindersChecklist()}
           </View>
         </View>
       </View>
