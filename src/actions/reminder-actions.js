@@ -30,9 +30,29 @@ export function createReminder(reminder, history) { /* axios post */
   })
 }
 
-export function updateReminder(id, fields) { /* axios put */
+// export function updateReminder(id, fields) { /* axios put */
+//   return new Promise((resolve, reject) => {
+//     axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
+//       resolve(response.data)
+//     }).catch((error) => {
+//       reject(error)
+//     })
+//   })
+// }
+
+export function updateActive(id, active) {
   return new Promise((resolve, reject) => {
-    axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
+    axios.put(`${ROOT_URL}/reminders/active/${id}`, { active }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+export function updateTimes(id, times) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminders/times/${id}`, { times }).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)
@@ -42,7 +62,7 @@ export function updateReminder(id, fields) { /* axios put */
 
 export function fetchReminder(id, type) { /* axios get */
   return new Promise((resolve, reject) => {
-    axios.get(`${ROOT_URL}/reminders/${id}&${type}`).then((response) => {
+    axios.get(`${ROOT_URL}/reminder/${id}&${type}`).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)
