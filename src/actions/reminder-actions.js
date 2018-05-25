@@ -40,9 +40,9 @@ export function updateReminder(id, fields) { /* axios put */
   })
 }
 
-export function fetchReminder(id, reminder) { /* axios get */
+export function fetchReminder(id, type) { /* axios get */
   return new Promise((resolve, reject) => {
-    axios.get(`${ROOT_URL}/reminders/${id}&${reminder}`).then((response) => {
+    axios.get(`${ROOT_URL}/reminders/${id}&${type}`).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)
