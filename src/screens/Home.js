@@ -33,7 +33,7 @@ export default class Home extends React.Component {
     this.setState({ menuVisible: !this.state.menuVisible })
   }
   renderRemindersChecklist = () => {
-    if (this.state.reminders) {
+    if (this.state.reminders && this.state.reminders.length > 0) {
       return (
         <FlatList
           data={this.state.reminders}
@@ -51,7 +51,7 @@ export default class Home extends React.Component {
         />
       )
     } else {
-      return null
+      return <Text style={styles.reminderText}>No reminders</Text>
     }
   }
   render() {
@@ -160,7 +160,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   reminderText: {
-    fontFamily: 'raleway-regular',
+    color: '#777777',
+    fontSize: 20,
+    fontFamily: 'raleway-bold',
+    textAlign: 'center',
+    marginTop: 10,
   },
   bold: {
     fontFamily: 'raleway-bold',
