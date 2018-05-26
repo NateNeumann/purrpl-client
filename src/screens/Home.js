@@ -7,7 +7,7 @@ import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 
-const { width, height } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -27,6 +27,7 @@ export default class Home extends React.Component {
     })
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
+      console.log(response)
     })
   }
   toggleMenu = () => {
@@ -41,6 +42,8 @@ export default class Home extends React.Component {
             return (
               <View style={[styles.checkContainer, { marginLeft: width * -0.20, justifyContent: 'flex-start' }]}>
                 <Checkbox
+                  id={item.id}
+                  value={item.time.value}
                   time={item.time.label}
                   reminder={item.message}
                 />

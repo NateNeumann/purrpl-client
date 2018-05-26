@@ -69,3 +69,13 @@ export function fetchReminder(id, type) { /* axios get */
     })
   })
 }
+
+export function updateCompletion(id, date, hour, completion) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminder/completion/${id}`, { date, hour, completion }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
