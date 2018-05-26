@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderColor: '#000',
     borderWidth: 1,
-    zIndex: 2
+    zIndex: 2,
   },
   checkItemsContainer: {
     backgroundColor: 'transparent',
