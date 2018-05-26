@@ -42,6 +42,8 @@ export default class Home extends React.Component {
             return (
               <View style={[styles.checkContainer, { marginLeft: width * -0.20, justifyContent: 'flex-start' }]}>
                 <Checkbox
+                  user={this.state.user}
+                  item={item}
                   id={item.id}
                   value={item.time.value}
                   time={item.time.label}
