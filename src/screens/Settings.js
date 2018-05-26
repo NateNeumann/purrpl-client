@@ -46,7 +46,7 @@ export default class Settings extends React.Component {
         <View style={styles.whiteContainer} >
           <Text style={styles.discoverabilityText}>DISCOVERABILITY</Text>
           <View style={styles.dropdownSize}>
-            <Dropdown />
+            <Dropdown user={this.state.user} />
           </View>
         </View>
         <View style={styles.deleteContainer}>

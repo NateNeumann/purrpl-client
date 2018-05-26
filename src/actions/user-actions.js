@@ -52,3 +52,13 @@ export function toggleNotifications(id, active) {
     })
   })
 }
+
+export function updateVisibility(id, type) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/user/visible/${id}`, { type }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
