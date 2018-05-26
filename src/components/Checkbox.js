@@ -14,8 +14,11 @@ export default class Checkbox extends React.Component {
 
   componentWillMount = () => {
     fetchReminderTime(this.props.user.id, this.props.item.type, moment().format('MMM D, YYYY'), this.props.value).then((response) => {
+      if (response.completion === undefined) {
+        this.setState({ checked: false })
+      }
       this.setState({ checked: response.completion })
-      console.log(response.completion)
+      console.log(response)
     })
   }
 
