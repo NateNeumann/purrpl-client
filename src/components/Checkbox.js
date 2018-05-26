@@ -1,25 +1,31 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
+import moment from 'moment'
+import { updateCompletion, fetchReminderTime } from './../actions/reminder-actions'
 
 export default class Checkbox extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      checked: false,
+      checked: null,
     }
+  }
+
+  componentWillMount = () => {
+    fetchReminderTime(this.props.user.id, this.props.item.type, moment().format('MMM D, YYYY'), this.props.value).then((response) => {
+      if (response.completion === undefined) {
+        this.setState({ checked: false })
+      }
+      this.setState({ checked: response.completion })
+    })
   }
 
   handleCheck = () => {
     this.setState({ checked: !this.state.checked })
     const checked = !this.state.checked
 
-    if (checked) {
-      // run the passed in callback
-      // this.props.action()
-    } else {
-      // do something else
-    }
+    updateCompletion(this.props.id, moment().format('MMM D, YYYY'), this.props.value, checked)
   }
 
   renderCheck = () => {
@@ -36,20 +42,24 @@ export default class Checkbox extends React.Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <TouchableHighlight
-          underlayColor="transparent"
-          onPress={this.handleCheck}
-        >
-          <View style={styles.checkbox}>
-            {this.renderCheck()}
-          </View>
-        </TouchableHighlight>
-        <Text style={styles.time}>{this.props.time}  </Text>
-        <Text style={styles.reminder}>{this.props.reminder}</Text>
-      </View>
-    )
+    if (this.state.checked != null) {
+      return (
+        <View style={styles.container}>
+          <TouchableHighlight
+            underlayColor="transparent"
+            onPress={this.handleCheck}
+          >
+            <View style={styles.checkbox}>
+              {this.renderCheck()}
+            </View>
+          </TouchableHighlight>
+          <Text style={styles.time}>{this.props.time}  </Text>
+          <Text style={styles.reminder}>{this.props.reminder}</Text>
+        </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 

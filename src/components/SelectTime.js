@@ -1,33 +1,33 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import SelectMultiple from 'react-native-select-multiple'
-
+import { fetchReminder, updateTimes } from './../actions/reminder-actions'
 
 const times = [
-  { value: '12a', label: '12:00 am' },
-  { value: '1a', label: '1:00 am' },
-  { value: '2a', label: '2:00 am' },
-  { value: '3a', label: '3:00 am' },
-  { value: '4a', label: '4:00 am' },
-  { value: '5a', label: '5:00 am' },
-  { value: '6a', label: '6:00 am' },
-  { value: '7a', label: '7:00 am' },
-  { value: '8a', label: '8:00 am' },
-  { value: '9a', label: '9:00 am' },
-  { value: '10a', label: '10:00 am' },
-  { value: '11a', label: '11:00 am' },
-  { value: '12p', label: '12:00 pm' },
-  { value: '1p', label: '1:00 pm' },
-  { value: '2p', label: '2:00 pm' },
-  { value: '3p', label: '3:00 pm' },
-  { value: '4p', label: '4:00 pm' },
-  { value: '5p', label: '5:00 pm' },
-  { value: '6p', label: '6:00 pm' },
-  { value: '7p', label: '7:00 pm' },
-  { value: '8p', label: '8:00 pm' },
-  { value: '9p', label: '9:00 pm' },
-  { value: '10p', label: '10:00 pm' },
-  { value: '11p', label: '11:00 pm' },
+  { value: 0, label: '12:00 am' },
+  { value: 1, label: '1:00 am' },
+  { value: 2, label: '2:00 am' },
+  { value: 3, label: '3:00 am' },
+  { value: 4, label: '4:00 am' },
+  { value: 5, label: '5:00 am' },
+  { value: 6, label: '6:00 am' },
+  { value: 7, label: '7:00 am' },
+  { value: 8, label: '8:00 am' },
+  { value: 9, label: '9:00 am' },
+  { value: 10, label: '10:00 am' },
+  { value: 11, label: '11:00 am' },
+  { value: 12, label: '12:00 pm' },
+  { value: 13, label: '1:00 pm' },
+  { value: 14, label: '2:00 pm' },
+  { value: 15, label: '3:00 pm' },
+  { value: 16, label: '4:00 pm' },
+  { value: 17, label: '5:00 pm' },
+  { value: 18, label: '6:00 pm' },
+  { value: 19, label: '7:00 pm' },
+  { value: 20, label: '8:00 pm' },
+  { value: 21, label: '9:00 pm' },
+  { value: 22, label: '10:00 pm' },
+  { value: 23, label: '11:00 pm' },
 
 ]
 const renderLabel = (label, style) => {
@@ -41,11 +41,23 @@ const renderLabel = (label, style) => {
 }
 
 class SelectTime extends Component {
-  state = { selectedTimes: [] }
+  constructor(props) {
+    super(props)
 
+    this.state = {
+      selectedTimes: [],
+      user: this.props.user,
+    }
+  }
+  componentWillMount = () => {
+    fetchReminder(this.state.user.id, this.props.reminder.type).then((response) => {
+      this.setState({ selectedTimes: response.times })
+    })
+  }
   onSelectionsChange = (selectedTimes) => {
     // selectedTimes is array of { label, value }
     this.setState({ selectedTimes })
+    updateTimes(this.props.reminder.id, selectedTimes)
   }
 
   render() {

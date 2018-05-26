@@ -18,7 +18,6 @@ export default class ProgressTracking extends React.Component {
   }
   componentWillMount = () => {
     getFeelingToday(this.state.user.id).then((progress) => {
-      console.log(progress)
       this.setState({ progress })
     })
   }

@@ -2,7 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "name": "purrpl",
   "scripts": {
-    "test": "./node_modules/.bin/eslint src"
+    "test": "./node_modules/.bin/eslint src",
+    "dev": "exp ios && exp start" 
   },
   "rnpm": {
     "assets": [
