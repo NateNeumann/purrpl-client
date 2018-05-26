@@ -56,8 +56,6 @@ export default class Reminders extends React.Component {
                       style={styles.animal}
                       source={item.image}
                     />
-
-                    {item.image}
                     <Text style={styles.reminderText}>{item.text}</Text>
                   </View>
                 </View>
