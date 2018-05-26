@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-// const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
-const ROOT_URL = 'http://localhost:9090/api'
+const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
 
 // id is user id
 export function fetchReminders(id) { /* axios get */
