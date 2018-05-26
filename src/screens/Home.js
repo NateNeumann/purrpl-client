@@ -174,18 +174,11 @@ const styles = StyleSheet.create({
     width: '100%',
     right: 20,
     height: 100,
-    width: 130,
     backgroundColor: '#FFFFFF',
     borderRadius: 70,
     borderColor: '#000',
     borderWidth: 1,
     zIndex: 2,
-  },
-  checkItemsContainer: {
-    backgroundColor: 'transparent',
-    marginTop: 30,
-    height: 150,
-
   },
   checkContainer: {
     flexDirection: 'row',
