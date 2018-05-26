@@ -19,7 +19,6 @@ export default class SlideMenu extends React.Component {
     getRemainders(this.state.user.id, moment().format('MMM D, YYYY')).then((response) => {
       this.setState({ numerator: response.numerator })
       this.setState({ denominator: response.denominator })
-      console.log(response.numerator / response.denominator)
     })
   }
   render() {
@@ -101,7 +100,11 @@ export default class SlideMenu extends React.Component {
               </TouchableOpacity>
             </View>
             <TouchableOpacity
-              style={styles.logoutButton}
+              style={styles.optionButton}
+              onPress={() => {
+                this.props.toggleMenu()
+                navigate('Settings')
+              }}
             >
               <Text style={styles.logoutText}>LOGOUT</Text>
             </TouchableOpacity>

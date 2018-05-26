@@ -25,9 +25,7 @@ export default class EditReminder extends React.Component {
   }
   handleToggle = (status) => {
     // save to database
-    updateActive(this.state.reminder.id, status).then((response) => {
-      console.log(response)
-    })
+    updateActive(this.state.reminder.id, status)
     return !status
   }
   render() {

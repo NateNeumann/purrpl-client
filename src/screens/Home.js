@@ -27,7 +27,6 @@ export default class Home extends React.Component {
     })
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
-      console.log(response)
     })
   }
   toggleMenu = () => {
@@ -70,10 +69,10 @@ export default class Home extends React.Component {
         <View>
           <View style={[styles.welcomeContainer, { height: '25%' }]}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
+              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
           </View>
           <View style={{ justifyContent: 'flex-start', height: '75%' }}>
             <View style={{ height: '45%' }}>
@@ -82,7 +81,7 @@ export default class Home extends React.Component {
               </View>
               <Image
                 style={styles.animal}
-                source={require('./../assets/images/plant.png')}
+                source={require('./../assets/images/catinbox.png')}
               />
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
@@ -97,7 +96,7 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     height: '100%',
   },
   headerContainer: {
@@ -120,10 +119,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   animal: {
-    height: 200,
+    alignSelf: 'center',
+    resizeMode: 'contain',
     width: 200,
-    alignSelf: 'flex-start',
-    marginLeft: 10,
+    marginLeft: -120,
   },
   animalUpdate: {
     fontSize: 20,
@@ -138,15 +137,16 @@ const styles = StyleSheet.create({
     height: 100,
     width: 130,
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    zIndex: 2,
+    borderRadius: 70,
+    borderColor: '#000',
+    borderWidth: 1,
+    zIndex: 2
   },
-  checkItemContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
+  checkItemsContainer: {
     backgroundColor: 'transparent',
+    marginTop: 30,
+    height: 150,
+
   },
   checkContainer: {
     flexDirection: 'row',

@@ -3,8 +3,7 @@ import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './src/screens/Landing'
 import Name from './src/screens/Name'
-import Username from './src/screens/Username'
-import Password from './src/screens/Password'
+import CreateAccount from './src/screens/CreateAccount'
 import Login from './src/screens/Login'
 import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
@@ -15,6 +14,7 @@ import Settings from './src/screens/Settings'
 import Notification from './src/screens/Notification'
 import AddFriends from './src/screens/AddFriends'
 import ProgressTracking from './src/screens/ProgressTracking'
+import About from './src/screens/About'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -32,14 +32,9 @@ const RootStack = createStackNavigator({
       title: 'Name',
     },
   },
-  Username: {
-    screen: Username,
+  CreateAccount: {
+    screen: CreateAccount,
     navigationOptions: {
-    },
-  },
-  Password: {
-    screen: Password,
-    navigateOptions: {
     },
   },
   Login: {
@@ -55,6 +50,7 @@ const RootStack = createStackNavigator({
   Notification: { screen: Notification },
   AddFriends: { screen: AddFriends },
   ProgressTracking: { screen: ProgressTracking },
+  About: { screen: About },
 })
 
 class App extends React.Component {

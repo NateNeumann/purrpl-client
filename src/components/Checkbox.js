@@ -18,7 +18,6 @@ export default class Checkbox extends React.Component {
         this.setState({ checked: false })
       }
       this.setState({ checked: response.completion })
-      console.log(response)
     })
   }
 
@@ -26,9 +25,7 @@ export default class Checkbox extends React.Component {
     this.setState({ checked: !this.state.checked })
     const checked = !this.state.checked
 
-    updateCompletion(this.props.id, moment().format('MMM D, YYYY'), this.props.value, checked).then((response) => {
-      console.log(response)
-    })
+    updateCompletion(this.props.id, moment().format('MMM D, YYYY'), this.props.value, checked)
   }
 
   renderCheck = () => {

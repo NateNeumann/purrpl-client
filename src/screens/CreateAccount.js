@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { loginUser } from './../actions/user-actions'
+import { createUser } from './../actions/user-actions'
 import Back from './../components/Back'
 
 const DismissKeyboard = ({ children }) => (
@@ -11,7 +11,7 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-export default class Login extends Component {
+export default class CreateAccount extends Component {
   static navigationOptions = { header: null }
 
   constructor(props) {
@@ -20,6 +20,7 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      passwordConfirmed: '',
     }
   }
 
@@ -31,20 +32,36 @@ export default class Login extends Component {
     this.setState({ password: text })
   }
 
-  finalizeAccount = () => {
-    loginUser({ username: this.state.username, password: this.state.password }).then((response) => {
-      console.log(response);
-      this.props.navigation.navigate('Home', { user: response })
-    }).catch((error) => {
-      Alert.alert(
-        'Oops!',
-        'Error logging in 😿',
-        [
-          { text: 'Got it', onPress: () => console.log('Ok pressed') },
-        ],
-        { cancelable: false },
-      )
-    });
+  handleConfirmPassword = (text) => {
+    this.setState({ passwordConfirmed: text })
+  }
+
+  validateAccount = () => {
+    if (this.state.password !== this.state.passwordConfirmed) {
+      Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
+    } else if ((this.state.username === '') || (this.state.password === '') || (this.state.passwordConfirmed === '')) {
+      Alert.alert('Error 🐱', 'Please fill in all inputs!')
+    } else if (!(/^[a-zA-Z]+$/.test(this.state.username))) {
+      Alert.alert('Error 🐱', 'Only alphabetic characters allowed in the username!')
+    } else {
+      const user = {
+        name: this.props.navigation.state.params.name,
+        username: this.state.username,
+        password: this.state.password,
+      }
+      createUser(user).then((response) => {
+        this.props.navigation.navigate('Home', { user: response })
+      }).catch((error) => {
+        Alert.alert(
+          'Oh no!',
+          'Username is already taken. Try another! 🐱',
+          [
+            { text: 'Got it', onPress: () => console.log('Ok pressed') },
+          ],
+          { cancelable: false },
+        )
+      });
+    }
   }
 
   render() {
@@ -62,13 +79,15 @@ export default class Login extends Component {
               <KeyboardAwareScrollView>
                 <View style={styles.content}>
                   <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
-                  <Text style={styles.hiText}>Welcome back!</Text>
-                  <Text style={styles.nameText}><Text style={styles.bold}>Username:</Text></Text>
+                  <Text style={styles.hiText}>Hi there, {this.props.navigation.state.params.name}! 😸</Text>
+                  <Text style={styles.nameText}>Create <Text style={styles.bold}>username:</Text></Text>
                   <TextInput style={styles.input} autoCapitalize="none" onChangeText={this.handleUsername} value={this.state.username} />
-                  <Text style={styles.nameText}><Text style={styles.bold}>Password:</Text></Text>
+                  <Text style={styles.nameText}>Create <Text style={styles.bold}>password:</Text></Text>
                   <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handlePassword} value={this.state.password} />
-                  <TouchableOpacity style={styles.button} onPress={this.finalizeAccount} >
-                    <Text style={styles.buttonText}>{'Log In'.toUpperCase()}</Text>
+                  <Text style={styles.nameText}>Confirm <Text style={styles.bold}>password:</Text></Text>
+                  <TextInput style={styles.input} autoCapitalize="none" secureTextEntry onChangeText={this.handleConfirmPassword} value={this.state.passwordConfirmed} />
+                  <TouchableOpacity style={styles.button} onPress={this.validateAccount} >
+                    <Text style={styles.buttonText}>{'Submit'.toUpperCase()}</Text>
                   </TouchableOpacity>
                 </View>
               </KeyboardAwareScrollView>
@@ -109,12 +128,17 @@ const styles = StyleSheet.create({
   cat: {
     height: 115,
     width: 107,
-    marginTop: 20,
   },
   nameText: {
     color: 'white',
     fontFamily: 'raleway-medium',
-    fontSize: 24,
+    fontSize: 20,
+    marginTop: 20,
+  },
+  hiText: {
+    color: '#A87FFF',
+    fontFamily: 'josefin-sans-bold',
+    fontSize: 28,
     marginTop: 20,
   },
   bold: {
@@ -125,9 +149,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.3,
     color: 'white',
     fontFamily: 'raleway-medium',
-    fontSize: 22,
+    fontSize: 24,
     height: 40,
-    margin: 15,
+    margin: 10,
     textAlign: 'center',
     width: 275,
   },
@@ -143,12 +167,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: 24,
-  },
-  hiText: {
-    color: '#A87FFF',
-    fontFamily: 'josefin-sans-bold',
-    fontSize: 28,
-    marginTop: 20,
+    fontSize: 22,
   },
 });
