@@ -85,7 +85,9 @@ export default class Home extends React.Component {
               <View style={styles.speechBubble}>
                 <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
               </View>
-              <Avatar />
+              <View style={{ width: '100%', marginLeft: width * -0.15, alignItems: 'center' }}>
+                <Avatar />
+              </View>
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
               {this.renderRemindersChecklist()}

@@ -3,7 +3,7 @@
   "name": "purrpl",
   "scripts": {
     "test": "./node_modules/.bin/eslint src",
-    "dev": "exp ios && exp start" 
+    "dev": "exp ios && exp start"
   },
   "rnpm": {
     "assets": [
@@ -34,6 +34,7 @@
     "react-native-select-multiple": "^1.2.0",
     "react-native-svg": "^6.3.1",
     "react-native-svg-charts": "^5.0.0",
+    "react-native-svg-uri": "^1.2.3",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.1",
     "toggle-switch-react-native": "^0.2.0"
