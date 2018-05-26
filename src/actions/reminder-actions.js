@@ -98,3 +98,14 @@ export function updateCompletion(id, date, hour, completion) {
     })
   })
 }
+
+// id is user id
+export function getRemainders(id, date) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/remainders/${id}&${date}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
