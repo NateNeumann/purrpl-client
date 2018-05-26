@@ -33,7 +33,7 @@ export default class Friends extends React.Component {
 
   renderFriends = () => {
     const { navigate } = this.props.navigation
-    if (this.state.friends) {
+    if (this.state.friends && this.state.friends.length > 0) {
       return (
         <FlatList
           data={this.state.friends}
@@ -58,6 +58,30 @@ export default class Friends extends React.Component {
           }
           }
         />
+      )
+    } else if (this.state.friends && this.state.friends.length === 0) {
+      return (
+        <View>
+          <Image
+            style={{
+              alignSelf: 'center',
+              height: 40,
+              width: 40,
+              marginTop: 20,
+            }}
+            source={require('./../assets/images/catbutt.png')}
+          />
+          <Text
+            style={{
+              marginTop: 20,
+              textAlign: 'center',
+              fontFamily: 'raleway-semi-bold',
+              color: '#777777',
+            }}
+          >
+            Nothing to see here
+          </Text>
+        </View>
       )
     } else {
       return (
