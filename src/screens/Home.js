@@ -6,13 +6,13 @@ import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
+import Avatar from './../components/Avatar'
 
 const { width } = Dimensions.get('window')
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       menuVisible: false,
       weather: {},
@@ -72,6 +72,38 @@ export default class Home extends React.Component {
               <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
+            <View style={styles.row}>
+              <Image
+                source={require('./../assets/images/sun.png')}
+              />
+              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+            </View>
+          </View>
+          <View style={styles.welcomeContainer}>
+            <View style={styles.speechBubble}>
+              <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
+            </View>
+            <Avatar />
+          </View>
+          <View style={styles.checkItemsContainer}>
+            <FlatList
+              data={[
+                { key: 'a', time: '8 AM', reminder: 'Apply sunscreen' },
+                { key: 'b', time: '9 AM', reminder: 'Drink water' },
+                { key: 'c', time: '11 AM', reminder: 'Take meds' },
+              ]}
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.checkContainer}>
+                    <Checkbox
+                      time={item.time}
+                      reminder={item.reminder}
+                    />
+                  </View>
+                )
+              }
+            }
+            />
             <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
           </View>
           <View style={{ justifyContent: 'flex-start', height: '75%' }}>
@@ -130,9 +162,16 @@ const styles = StyleSheet.create({
   },
   speechBubble: {
     display: 'flex',
-    position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 25,
+    backgroundColor: 'transparent',
+    borderRadius: 20,
+  },
+  checkItemsContainer: {
+    marginTop: 150,
+    alignSelf: 'auto',
+    width: '100%',
     right: 20,
     height: 100,
     width: 130,
@@ -153,7 +192,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '50%',
+    width: '85%',
     backgroundColor: 'transparent',
   },
   welcomeText: {
