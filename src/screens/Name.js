@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
+import Back from './../components/Back'
+
+
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 export default class Name extends Component {
   static navigationOptions = { header: null }
@@ -11,8 +19,6 @@ export default class Name extends Component {
     this.state = {
       name: '',
     }
-
-    this.submitName = this.submitName.bind(this)
   }
 
   handleName = (text) => {
@@ -21,11 +27,11 @@ export default class Name extends Component {
     });
   }
 
-  submitName() {
+  submitName = () => {
     if (this.state.name !== '') {
-      this.props.navigation.navigate('Username', { name: this.state.name })
+      this.props.navigation.navigate('CreateAccount', { name: this.state.name })
     } else {
-      Alert.alert('Name Field Empty', 'Please enter a valid name.')
+      Alert.alert('Oh no!', 'Please enter a valid name 😺')
     }
   }
 
@@ -33,17 +39,22 @@ export default class Name extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#3B0170', '#6A1EB0']}
+          colors={['#420A75', '#5B1997']}
           style={styles.gradient}
         >
-          <View style={styles.content}>
-            <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
-            <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
-            <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
-            <TouchableOpacity style={styles.button} onPress={this.submitName}>
-              <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
-            </TouchableOpacity>
+          <View style={styles.backView}>
+            <Back style={styles.backButton} navigation={this.props.navigation} />
           </View>
+          <DismissKeyboard>
+            <View style={styles.content}>
+              <Image style={styles.cat} source={require('../assets/images/light_purple_cat.png')} />
+              <Text style={styles.nameText}>What&#39;s your <Text style={styles.bold}>name?</Text></Text>
+              <TextInput style={styles.input} onChangeText={this.handleName} value={this.state.name} />
+              <TouchableOpacity style={styles.button} onPress={this.submitName}>
+                <Image style={styles.arrow} source={require('../assets/images/purple_arrow.png')} />
+              </TouchableOpacity>
+            </View>
+          </DismissKeyboard>
         </LinearGradient>
       </View>
     );
@@ -62,13 +73,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  backView: {
+    alignItems: 'flex-start',
+    flex: 1,
+    justifyContent: 'flex-end',
+    width: '100%',
+  },
+  backButton: {
+    alignSelf: 'flex-end',
+  },
   content: {
     alignItems: 'center',
+    flex: 10,
     justifyContent: 'center',
   },
-  gorilla: {
-    height: 100,
-    width: 100,
+  cat: {
+    height: 115,
+    width: 107,
   },
   nameText: {
     color: 'white',
@@ -81,7 +102,7 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: 'white',
-    borderBottomWidth: 2,
+    borderBottomWidth: 1.3,
     color: 'white',
     fontFamily: 'raleway-medium',
     fontSize: 24,

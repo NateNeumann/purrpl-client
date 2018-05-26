@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Landing extends Component {
@@ -9,26 +9,36 @@ export default class Landing extends Component {
     return (
       <View style={styles.container}>
         <LinearGradient
-          colors={['#3B0170', '#6A1EB0']}
+          colors={['#9963F3', '#BE9FFF']}
           style={styles.gradient}
         >
           <View style={styles.landing}>
-            <Image style={styles.gorilla} source={require('../assets/images/gorilla.png')} />
-            <Text style={styles.title}>Purple Gorilla</Text>
-            <Text style={styles.subtitle}>Keeping track of your wellness</Text>
-            <TouchableOpacity style={styles.button} onPress={() => { navigate('Home') }} >
-              <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigate('Home', { user: { id: '5afe44ee30dd09960685afd5', name: 'Ijemma', username: 'ijemmao' } }) }} >
-              <Text style={styles.secondButtonText}>Log In</Text>
-            </TouchableOpacity>
+            <View style={{
+ alignItems: 'center', alignSelf: 'center', flex: 1.5, justifyContent: 'center',
+}}
+            >
+              <Text style={styles.title}>purrpl</Text>
+              <Text style={styles.subtitle}>Keeping track of your wellness</Text>
+              <TouchableOpacity style={styles.button} onPress={() => { navigate('Name') }} >
+                <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => { navigate('Login') }} >
+                <Text style={styles.secondButtonText}>{'Log In'.toUpperCase()}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{
+ alignItems: 'flex-end', alignSelf: 'flex-end', flex: 1, justifyContent: 'flex-end', width: '100%',
+}}
+            >
+              <Image style={styles.cat} source={require('../assets/images/purple_cat.png')} />
+            </View>
           </View>
         </LinearGradient>
       </View>
     );
   }
 }
-
+const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -43,17 +53,21 @@ const styles = StyleSheet.create({
   },
   landing: {
     alignItems: 'center',
-    justifyContent: 'center',
+    height: '100%',
+    justifyContent: 'flex-end',
+    width: '100%',
   },
-  gorilla: {
-    height: 240,
-    width: 240,
+  cat: {
+    alignSelf: 'flex-end',
+    height: height * 0.41,
+    width: width * 0.72,
   },
   title: {
     color: 'white',
-    fontFamily: 'raleway-semi-bold',
-    fontSize: 36,
+    fontFamily: 'josefin-sans-bold',
+    fontSize: 100,
     marginTop: 50,
+    textAlign: 'center',
   },
   subtitle: {
     color: 'white',
@@ -61,27 +75,31 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginLeft: 40,
     marginRight: 40,
-    marginTop: 70,
+    marginTop: 15,
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#A87FFF',
+    alignSelf: 'center',
+    backgroundColor: '#5B1997',
     borderRadius: 5,
-    marginTop: 50,
+    marginTop: 30,
     paddingBottom: 15,
-    paddingLeft: 40,
-    paddingRight: 40,
+    paddingLeft: 35,
+    paddingRight: 35,
     paddingTop: 15,
+    width: '80%',
   },
   buttonText: {
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: 24,
+    fontSize: 22,
+    textAlign: 'center',
   },
   secondButtonText: {
+    alignSelf: 'center',
     color: 'white',
-    fontFamily: 'raleway-semi-bold',
-    fontSize: 22,
-    marginTop: 20,
+    fontFamily: 'raleway-bold',
+    fontSize: 18,
+    marginTop: 15,
   },
 });

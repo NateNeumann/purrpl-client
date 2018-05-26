@@ -3,8 +3,8 @@ import { Font, AppLoading } from 'expo'
 import { createStackNavigator } from 'react-navigation'
 import Landing from './src/screens/Landing'
 import Name from './src/screens/Name'
-import Username from './src/screens/Username'
-import Password from './src/screens/Password'
+import CreateAccount from './src/screens/CreateAccount'
+import Login from './src/screens/Login'
 import TabBar from './src/components/TabBar'
 import Friends from './src/screens/Friends'
 import IndividualFriend from './src/screens/IndividualFriend'
@@ -13,6 +13,8 @@ import EditReminder from './src/screens/EditReminder'
 import Settings from './src/screens/Settings'
 import Notification from './src/screens/Notification'
 import AddFriends from './src/screens/AddFriends'
+import ProgressTracking from './src/screens/ProgressTracking'
+import About from './src/screens/About'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -27,25 +29,17 @@ const RootStack = createStackNavigator({
   Name: {
     screen: Name,
     navigationOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
+      title: 'Name',
     },
   },
-  Username: {
-    screen: Username,
+  CreateAccount: {
+    screen: CreateAccount,
     navigationOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
     },
   },
-  Password: {
-    screen: Password,
+  Login: {
+    screen: Login,
     navigateOptions: {
-      header: null,
-      headerLeft: null,
-      gesturesEnabled: false,
     },
   },
   Friends: { screen: Friends },
@@ -55,6 +49,8 @@ const RootStack = createStackNavigator({
   Settings: { screen: Settings },
   Notification: { screen: Notification },
   AddFriends: { screen: AddFriends },
+  ProgressTracking: { screen: ProgressTracking },
+  About: { screen: About },
 })
 
 class App extends React.Component {
@@ -69,6 +65,7 @@ class App extends React.Component {
       'raleway-medium': require('./src/assets/fonts/Raleway-Medium.ttf'),
       'raleway-regular': require('./src/assets/fonts/Raleway-Regular.ttf'),
       'raleway-semi-bold': require('./src/assets/fonts/Raleway-SemiBold.ttf'),
+      'josefin-sans-bold': require('./src/assets/fonts/JosefinSans-Bold.ttf'),
     });
     this.setState({ loading: false });
   }

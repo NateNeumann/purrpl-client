@@ -1,5 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Animated } from 'react-native'
+import moment from 'moment'
+import { Circle } from 'react-native-progress'
+import { getRemainders } from './../actions/reminder-actions'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -7,7 +10,16 @@ export default class SlideMenu extends React.Component {
 
     this.state = {
       bounceValue: new Animated.Value(-100),
+      user: this.props.user,
+      numerator: null,
+      denominator: null,
     }
+  }
+  componentWillMount = () => {
+    getRemainders(this.state.user.id, moment().format('MMM D, YYYY')).then((response) => {
+      this.setState({ numerator: response.numerator })
+      this.setState({ denominator: response.denominator })
+    })
   }
   render() {
     const { navigate } = this.props.navigation
@@ -22,23 +34,71 @@ export default class SlideMenu extends React.Component {
         tension: 2,
       },
     ).start();
-    return (
-      <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]}>
-        <TouchableOpacity
-          style={styles.exitButton}
-          onPress={this.props.toggleMenu}
-        >
-          <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
-        </TouchableOpacity>
-        <View style={styles.firstHalf}>
-          <Image
-            style={styles.userStatus}
-            source={require('./../assets/images/plantcircle.png')}
-          />
-          <Text style={styles.remindersCount}>16/32 Reminders</Text>
-        </View>
-        <View style={styles.secondHalf}>
-          <View style={{ width: '100%', alignItems: 'center' }}>
+    if (this.state.numerator !== null && this.state.denominator !== null) {
+      return (
+        <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]}>
+          <TouchableOpacity
+            style={styles.exitButton}
+            onPress={this.props.toggleMenu}
+          >
+            <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
+          </TouchableOpacity>
+          <View style={styles.firstHalf}>
+            <Circle
+              style={styles.progressCircle}
+              color="rgb(169, 222, 81)"
+              borderWidth={0}
+              size={135}
+              animated
+              animating={false}
+              thickness={7}
+              progress={this.state.numerator / this.state.denominator}
+            />
+            <Image
+              style={styles.userStatus}
+              source={require('./../assets/images/plantcircle.png')}
+            />
+            <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
+          </View>
+          <View style={styles.secondHalf}>
+            <View style={{ width: '100%', alignItems: 'center' }}>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => {
+                  this.props.toggleMenu()
+                  navigate('Landing')
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/profile.png')} />
+                  <Text style={styles.optionText}>PROFILE</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => {
+                  this.props.toggleMenu()
+                  navigate('ProgressTracking', { user: this.state.user })
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/progress.png')} />
+                  <Text style={styles.optionText}>PROGRESS</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionButton}
+                onPress={() => {
+                  this.props.toggleMenu()
+                  navigate('Settings')
+                }}
+              >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <Image style={{ height: 30, width: 30, marginRight: 10 }} source={require('./../assets/images/settings.png')} />
+                  <Text style={styles.optionText}>SETTINGS</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
             <TouchableOpacity
               style={styles.optionButton}
               onPress={() => {
@@ -46,44 +106,14 @@ export default class SlideMenu extends React.Component {
                 navigate('Landing')
               }}
             >
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/profile.png')} />
-                <Text style={styles.optionText}>PROFILE</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => {
-                this.props.toggleMenu()
-                navigate('Landing')
-              }}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/progress.png')} />
-                <Text style={styles.optionText}>PROGRESS</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionButton}
-              onPress={() => {
-                this.props.toggleMenu()
-                navigate('Landing')
-              }}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={{ height: 30, width: 30, marginRight: 10 }} source={require('./../assets/images/settings.png')} />
-                <Text style={styles.optionText}>SETTINGS</Text>
-              </View>
+              <Text style={styles.logoutText}>LOGOUT</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.logoutButton}
-          >
-            <Text style={styles.logoutText}>LOGOUT</Text>
-          </TouchableOpacity>
-        </View>
-      </Animated.View>
-    )
+        </Animated.View>
+      )
+    } else {
+      return null
+    }
   }
 }
 
@@ -103,9 +133,16 @@ const styles = StyleSheet.create({
     right: 15,
     zIndex: 2,
   },
+  progressCircle: {
+    position: 'absolute',
+    top: '19%',
+    height: 135,
+    width: 135,
+  },
   userStatus: {
     width: 120,
     height: 120,
+    marginBottom: '5%',
   },
   remindersCount: {
     color: '#053867',
@@ -116,13 +153,13 @@ const styles = StyleSheet.create({
   firstHalf: {
     justifyContent: 'flex-end',
     width: '100%',
-    height: '30%',
+    height: '35%',
     alignItems: 'center',
   },
   secondHalf: {
     justifyContent: 'space-around',
     width: '100%',
-    height: '70%',
+    height: '65%',
     alignItems: 'center',
   },
   optionButton: {

@@ -1,11 +1,14 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Dimensions } from 'react-native'
 import moment from 'moment'
+import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import Avatar from './../components/Avatar'
+
+const { width } = Dimensions.get('window')
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -14,6 +17,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
+      reminders: [],
     }
   }
   componentDidMount = () => {
@@ -21,22 +25,51 @@ export default class Home extends React.Component {
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
     })
+    fetchDailyReminders(this.state.user.id).then((response) => {
+      this.setState({ reminders: response })
+    })
   }
   toggleMenu = () => {
     this.setState({ menuVisible: !this.state.menuVisible })
   }
+  renderRemindersChecklist = () => {
+    if (this.state.reminders && this.state.reminders.length > 0) {
+      return (
+        <FlatList
+          data={this.state.reminders}
+          renderItem={({ item }) => {
+            return (
+              <View style={[styles.checkContainer, { marginLeft: width * -0.20, justifyContent: 'flex-start' }]}>
+                <Checkbox
+                  user={this.state.user}
+                  item={item}
+                  id={item.id}
+                  value={item.time.value}
+                  time={item.time.label}
+                  reminder={item.message}
+                />
+              </View>
+            )
+          }
+          }
+        />
+      )
+    } else {
+      return <Text style={styles.reminderText}>No reminders</Text>
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
+        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
         <View style={styles.headerContainer}>
           <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>
-          <View style={styles.welcomeContainer}>
+          <View style={[styles.welcomeContainer, { height: '25%' }]}>
             <View style={styles.row}>
-              <Text style={styles.welcomeText}>Hello, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
+              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
             <View style={styles.row}>
@@ -71,6 +104,21 @@ export default class Home extends React.Component {
               }
             }
             />
+            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
+          </View>
+          <View style={{ justifyContent: 'flex-start', height: '75%' }}>
+            <View style={{ height: '45%' }}>
+              <View style={styles.speechBubble}>
+                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
+              </View>
+              <Image
+                style={styles.animal}
+                source={require('./../assets/images/catinbox.png')}
+              />
+            </View>
+            <View style={{ marginBottom: '15%', height: '40%' }}>
+              {this.renderRemindersChecklist()}
+            </View>
           </View>
         </View>
       </View>
@@ -80,7 +128,7 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     height: '100%',
   },
   headerContainer: {
@@ -103,8 +151,10 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   animal: {
-    alignSelf: 'flex-start',
-    marginLeft: 10,
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    width: 200,
+    marginLeft: -120,
   },
   animalUpdate: {
     fontSize: 20,
@@ -122,7 +172,20 @@ const styles = StyleSheet.create({
     marginTop: 150,
     alignSelf: 'auto',
     width: '100%',
+    right: 20,
+    height: 100,
+    width: 130,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 70,
+    borderColor: '#000',
+    borderWidth: 1,
+    zIndex: 2,
+  },
+  checkItemsContainer: {
     backgroundColor: 'transparent',
+    marginTop: 30,
+    height: 150,
+
   },
   checkContainer: {
     flexDirection: 'row',
@@ -141,7 +204,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   reminderText: {
-    fontFamily: 'raleway-regular',
+    color: '#777777',
+    fontSize: 20,
+    fontFamily: 'raleway-bold',
+    textAlign: 'center',
+    marginTop: 10,
   },
   bold: {
     fontFamily: 'raleway-bold',

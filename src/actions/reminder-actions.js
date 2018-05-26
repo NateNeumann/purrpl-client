@@ -1,22 +1,30 @@
 import axios from 'axios'
 
-const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/'
+const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/api'
 
-// export const ActionTypes = {
-//   FETCH_REMINDERS: 'FETCH_REMINDERS',
-//   FETCH_REMINDER: 'FETCH_REMINDER',
-// }
-
-
-export function fetchReminders() { /* axios get */
-  axios.get(`${ROOT_URL}/reminders`).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
+// id is user id
+export function fetchReminders(id) { /* axios get */
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/${id}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
-export function createReminder(reminder, history) { /* axios post */
+// id is user id
+export function fetchDailyReminders(id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/daily/${id}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+export function createReminder(reminder) { /* axios post */
   const fields = {
     user: reminder.user,
     type: reminder.type,
@@ -24,30 +32,79 @@ export function createReminder(reminder, history) { /* axios post */
     times: reminder.times,
     toggle: reminder.toggle,
   }
-  // axios.post(`${ROOT_URL}/reminders`, fields, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-  axios.post(`${ROOT_URL}/reminders`, fields).then((response) => {
-    return true
-  }).catch((error) => {
-    console.log(error)
-    return false
+  return new Promise((resolve, reject) => {
+    axios.post(`${ROOT_URL}/reminders`, fields).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
-// need id??
-export function updateReminder(id, fields) { /* axios put */
-  axios.put(`${ROOT_URL}/reminders/${id}`, fields).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
-    return false
+// id is reminder id
+export function updateActive(id, active) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminders/active/${id}`, { active }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
 
-export function fetchReminder(id) { /* axios get */
-  axios.get(`${ROOT_URL}/posts/${id}`).then((response) => {
-    return response.data
-  }).catch((error) => {
-    console.log(error)
-    return false
+// id is reminder id
+export function updateTimes(id, times) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminders/times/${id}`, { times }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+// id is user id
+export function fetchReminder(id, type) { /* axios get */
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminder/${id}&${type}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+// id is user id
+export function fetchReminderTime(id, type, date, hour) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminder/date/${id}&${type}&${date}&${hour}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+// id is reminder id
+// date must in following format: May 25, 2018
+// hour is just an int: 0 - 23
+// completion is a boolean value
+export function updateCompletion(id, date, hour, completion) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/reminder/completion/${id}`, { date, hour, completion }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+// id is user id
+export function getRemainders(id, date) {
+  return new Promise((resolve, reject) => {
+    axios.get(`${ROOT_URL}/reminders/remainders/${id}&${date}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
   })
 }
