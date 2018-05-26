@@ -39,7 +39,7 @@ export default class Home extends React.Component {
           data={this.state.reminders}
           renderItem={({ item }) => {
             return (
-              <View style={[styles.checkContainer, { marginLeft: width * -0.20, justifyContent: 'flex-start' }]}>
+              <View style={[styles.checkContainer, { marginLeft: width * 0.3, justifyContent: 'flex-start' }]}>
                 <Checkbox
                   user={this.state.user}
                   item={item}
@@ -74,47 +74,18 @@ export default class Home extends React.Component {
             <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
             <View style={styles.row}>
               <Image
+                style={{ height: 20, width: 20, alignSelf: 'center' }}
                 source={require('./../assets/images/sun.png')}
               />
-              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} F</Text>
+              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
             </View>
-          </View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.speechBubble}>
-              <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
-            </View>
-            <Avatar />
-          </View>
-          <View style={styles.checkItemsContainer}>
-            <FlatList
-              data={[
-                { key: 'a', time: '8 AM', reminder: 'Apply sunscreen' },
-                { key: 'b', time: '9 AM', reminder: 'Drink water' },
-                { key: 'c', time: '11 AM', reminder: 'Take meds' },
-              ]}
-              renderItem={({ item }) => {
-                return (
-                  <View style={styles.checkContainer}>
-                    <Checkbox
-                      time={item.time}
-                      reminder={item.reminder}
-                    />
-                  </View>
-                )
-              }
-            }
-            />
-            <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
           </View>
           <View style={{ justifyContent: 'flex-start', height: '75%' }}>
-            <View style={{ height: '45%' }}>
+            <View style={{ marginBottom: '15%', height: '30%' }}>
               <View style={styles.speechBubble}>
                 <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
               </View>
-              <Image
-                style={styles.animal}
-                source={require('./../assets/images/catinbox.png')}
-              />
+              <Avatar />
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
               {this.renderRemindersChecklist()}
@@ -185,7 +156,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '85%',
+    width: '100%',
     backgroundColor: 'transparent',
   },
   welcomeText: {
