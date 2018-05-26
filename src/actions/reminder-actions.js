@@ -70,6 +70,9 @@ export function fetchReminder(id, type) { /* axios get */
   })
 }
 
+// date must in following format: May 25, 2018
+// hour is just an int: 0 - 23
+// completion is a boolean value
 export function updateCompletion(id, date, hour, completion) {
   return new Promise((resolve, reject) => {
     axios.put(`${ROOT_URL}/reminder/completion/${id}`, { date, hour, completion }).then((response) => {
