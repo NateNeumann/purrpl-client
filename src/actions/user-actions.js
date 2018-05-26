@@ -41,3 +41,23 @@ export function fetchSearchedUsers(id, searchTerm) {
     })
   })
 }
+
+export function toggleNotifications(id, active) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/user/notifications/${id}`, { active }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
+export function updateVisibility(id, type) {
+  return new Promise((resolve, reject) => {
+    axios.put(`${ROOT_URL}/user/visible/${id}`, { type }).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}

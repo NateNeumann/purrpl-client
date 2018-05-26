@@ -18,7 +18,7 @@ export default class SlideMenu extends React.Component {
   componentWillMount = () => {
     getRemainders(this.state.user.id, moment().format('MMM D, YYYY')).then((response) => {
       this.setState({ numerator: response.numerator })
-      this.setState({ denominator: response.denominator })
+      this.setState({ denominator: response.denominator ? response.denominator : 1 })
     })
   }
   render() {
@@ -90,7 +90,7 @@ export default class SlideMenu extends React.Component {
                 style={styles.optionButton}
                 onPress={() => {
                   this.props.toggleMenu()
-                  navigate('Settings')
+                  navigate('Settings', { user: this.state.user })
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>

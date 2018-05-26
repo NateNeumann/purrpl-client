@@ -2,19 +2,22 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
-import Dropdown from './../components/Dropdown';
+import Dropdown from './../components/Dropdown'
+import { toggleNotifications } from './../actions/user-actions'
 
 export default class Settings extends React.Component {
   static navigationOptions = { header: null };
   constructor(props) {
     super(props)
     this.state = {
-      checked: false,
+      user: this.props.navigation.state.params.user,
+      active: this.props.navigation.state.params.user.notifications.active,
     }
   }
-
-  handleCheckbox = () => {
-    this.setState({ checked: !this.state.checked })
+  handleToggle = (status) => {
+    // save to database
+    toggleNotifications(this.state.user.id, status)
+    return !status
   }
   render() {
     const { navigate } = this.props.navigation
@@ -31,19 +34,19 @@ export default class Settings extends React.Component {
         />
         <View style={styles.whiteContainer}>
           <ToggleSwitch
-            isOn={false}
+            isOn={this.state.active}
             onColor="#7FD1FF"
             offColor="#DBDDDE"
             size="large"
             label="PUSH NOTIFICATIONS"
             labelStyle={{ fontSize: 20, fontFamily: 'raleway-regular', color: '#053867' }}
-            onToggle={isOn => console.log('changed to : ', isOn)}
+            onToggle={this.handleToggle}
           />;
         </View>
         <View style={styles.whiteContainer} >
           <Text style={styles.discoverabilityText}>DISCOVERABILITY</Text>
           <View style={styles.dropdownSize}>
-            <Dropdown />
+            <Dropdown user={this.state.user} />
           </View>
         </View>
         <View style={styles.deleteContainer}>
