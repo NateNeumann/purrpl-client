@@ -42,3 +42,13 @@ export function fetchSearchedUsers(id, searchTerm) {
     })
   })
 }
+
+export function fetchNotifs(id) {
+  return new Promise((resolve, reject) => {
+    axios.post(`${ROOT_URL}/notifs/${id}`, id).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
