@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { loginUser } from './../actions/user-actions'
@@ -33,7 +33,12 @@ export default class Login extends Component {
 
   finalizeAccount = () => {
     loginUser({ username: this.state.username, password: this.state.password }).then((response) => {
-      console.log(response);
+      AsyncStorage.setItem('loggedIn', JSON.stringify(true))
+
+      console.log(JSON.stringify(response))
+
+      AsyncStorage.setItem('user', JSON.stringify(response))
+
       this.props.navigation.navigate('Home', { user: response })
     }).catch((error) => {
       Alert.alert(
