@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import { Circle } from 'react-native-progress'
+import * as Progress from 'react-native-progress';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import { fetchFriends } from './../actions/friends-actions'
@@ -33,7 +33,7 @@ export default class Friends extends React.Component {
 
   renderFriends = () => {
     const { navigate } = this.props.navigation
-    if (this.state.friends) {
+    if (this.state.friends && this.state.friends.length > 0) {
       return (
         <FlatList
           data={this.state.friends}
@@ -59,13 +59,54 @@ export default class Friends extends React.Component {
           }
         />
       )
+    } else if (this.state.friends && this.state.friends.length === 0) {
+      return (
+        <View>
+          <Image
+            style={{
+              alignSelf: 'center',
+              height: 40,
+              width: 40,
+              marginTop: 20,
+            }}
+            source={require('./../assets/images/catbutt.png')}
+          />
+          <Text
+            style={{
+              marginTop: 20,
+              textAlign: 'center',
+              fontFamily: 'raleway-semi-bold',
+              color: '#777777',
+            }}
+          >
+            Nothing to see here
+          </Text>
+        </View>
+      )
     } else {
       return (
-        <Circle
-          style={{ alignSelf: 'center', marginTop: 20 }}
-          size={50}
-          indeterminate
-        />
+        <View>
+          <Image
+            style={{
+              alignSelf: 'center',
+              marginTop: 60,
+              resizeMode: 'contain',
+              height: 50,
+            }}
+            source={require('./../assets/images/light_purple_cat.png')}
+          />
+          <Progress.Bar
+            style={{
+              alignSelf: 'center',
+              marginTop: 20,
+            }}
+            unfilledColor="#F1EAFF"
+            color="#5B1997"
+            borderColor="#F1EAFF"
+            size={50}
+            indeterminate
+          />
+        </View>
       )
     }
   }

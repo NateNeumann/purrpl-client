@@ -1,24 +1,26 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
-import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
-import Dropdown from './../components/Dropdown';
-import Dropdown2 from './../components/Dropdown2';
+import Dropdown from './../components/Dropdown'
+import { toggleNotifications } from './../actions/user-actions'
 
 export default class Settings extends React.Component {
   static navigationOptions = { header: null };
   constructor(props) {
     super(props)
     this.state = {
-      checked: false,
+      user: this.props.navigation.state.params.user,
+      active: this.props.navigation.state.params.user.notifications.active,
     }
   }
-
-  handleCheckbox = () => {
-    this.setState({ checked: !this.state.checked })
+  handleToggle = (status) => {
+    // save to database
+    toggleNotifications(this.state.user.id, status)
+    return !status
   }
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -26,37 +28,41 @@ export default class Settings extends React.Component {
           <Text style={styles.header}>SETTINGS</Text>
         </View>
         <Image style={{
- alignSelf: 'center', height: 160, width: 160, marginTop: 50, marginBottom: 50,
+ alignSelf: 'center', resizeMode: 'contain', height: 160, width: 160, marginTop: 50, marginBottom: 30,
 }}
-          source={require('./../assets/images/duck.png')}
+          source={require('./../assets/images/catbutt.png')}
         />
         <View style={styles.whiteContainer}>
           <ToggleSwitch
-            isOn={false}
+            isOn={this.state.active}
             onColor="#7FD1FF"
             offColor="#DBDDDE"
             size="large"
             label="PUSH NOTIFICATIONS"
             labelStyle={{ fontSize: 20, fontFamily: 'raleway-regular', color: '#053867' }}
-            onToggle={isOn => console.log('changed to : ', isOn)}
+            onToggle={this.handleToggle}
           />;
         </View>
         <View style={styles.whiteContainer} >
           <Text style={styles.discoverabilityText}>DISCOVERABILITY</Text>
           <View style={styles.dropdownSize}>
-            <Dropdown />
-          </View>
-        </View>
-        <View style={styles.whiteContainer} >
-          <Text style={styles.discoverabilityText}>AVATAR</Text>
-          <View style={styles.dropdown2Size}>
-            <Dropdown2 />
+            <Dropdown user={this.state.user} />
           </View>
         </View>
         <View style={styles.deleteContainer}>
-          <Button style={{ backgroundColor: '#D55E5E', borderColor: '#D55E5E' }} textStyle={{ fontSize: 18, color: '#FFF' }}>
-          DELETE ACCOUNT
-          </Button>
+          <TouchableOpacity
+            style={styles.aboutButton}
+            onPress={() => {
+            navigate('About')
+          }}
+          >
+            <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>ABOUT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.deleteButton}
+          >
+            <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>DELETE ACCOUNT</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -65,11 +71,11 @@ export default class Settings extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#F1EAFF',
     height: '100%',
   },
   headerContainer: {
-    backgroundColor: '#766992',
+    backgroundColor: '#5B1997',
     height: 80,
     flexDirection: 'row',
     alignItems: 'center',
@@ -80,6 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 20,
     marginLeft: 105,
+    fontFamily: 'raleway-bold',
   },
   dropdownSize: {
     width: 110,
@@ -120,6 +127,25 @@ const styles = StyleSheet.create({
   deleteContainer: {
     width: 200,
     alignSelf: 'center',
-    marginTop: 20,
+    marginTop: 40,
   },
+  aboutButton: {
+    alignSelf: 'center',
+    backgroundColor: '#5EC0D5',
+    borderRadius: 5,
+    paddingBottom: 15,
+    paddingTop: 15,
+    width: 220,
+    marginTop: -10,
+  },
+  deleteButton: {
+    alignSelf: 'center',
+    backgroundColor: '#D55E5E',
+    borderRadius: 5,
+    marginTop: 20,
+    paddingBottom: 15,
+    paddingTop: 15,
+    width: 220,
+  },
+
 })

@@ -3,47 +3,73 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
+import { fetchReminder, updateActive } from './../actions/reminder-actions'
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: this.props.navigation.state.params.user,
+      type: this.props.navigation.state.params.type,
+      reminder: {},
+      active: null,
+    }
+  }
+  componentDidMount = () => {
+    fetchReminder(this.state.user.id, this.state.type).then((response) => {
+      this.setState({ reminder: response })
+      this.setState({ active: response.active })
+    })
+  }
+  handleToggle = (status) => {
+    // save to database
+    updateActive(this.state.reminder.id, status)
+    return !status
+  }
   render() {
     const image = this.props.navigation.state.params.image
     const text = this.props.navigation.state.params.text
-    return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Back navigation={this.props.navigation} />
-          <Text style={styles.header}>REMINDER</Text>
-        </View>
-        <View>
-          <View style={styles.welcomeContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.animal}
-                source={image}
-              />
-              <Text style={styles.reminderText}>{text}</Text>
+    if (this.state.active != null && this.state.reminder) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Back navigation={this.props.navigation} />
+            <Text style={styles.header}>REMINDER</Text>
+          </View>
+          <View>
+            <View style={styles.welcomeContainer}>
+              <View style={styles.row}>
+                <Image
+                  style={styles.animal}
+                  source={image}
+                />
+                <Text style={styles.reminderText}>{text}</Text>
+              </View>
+            </View>
+            <View style={styles.optionsContainer}>
+              <Text style={styles.timesText}>active:</Text>
+              <View style={styles.activeContainer}>
+                <ToggleSwitch
+                  isOn={this.state.active}
+                  onColor="#A0D55E"
+                  offColor="#B58853"
+                  size="large"
+                  onToggle={this.handleToggle}
+                />
+              </View>
+              <Text style={styles.timesText}>times:</Text>
+              <View style={styles.scrollHeight}>
+                <SelectTime user={this.state.user} reminder={this.state.reminder} active={this.state.active} times={this.state.reminder.times} />
+              </View>
             </View>
           </View>
-          <View style={styles.optionsContainer}>
-            <Text style={styles.timesText}>active:</Text>
-            <View style={styles.activeContainer}>
-              <ToggleSwitch
-                isOn={false}
-                onColor="#A0D55E"
-                offColor="#B58853"
-                size="large"
-                onToggle={isOn => console.log('changed to : ', isOn)}
-              />;
-            </View>
-            <Text style={styles.timesText}>times:</Text>
-            <View style={styles.scrollHeight}>
-              <SelectTime />
-            </View>
-          </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 

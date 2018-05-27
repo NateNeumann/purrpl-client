@@ -15,6 +15,7 @@ export default class Back extends React.Component {
 
 const styles = StyleSheet.create({
   back: {
+    resizeMode: 'contain',
     width: 20,
     marginTop: 5,
     marginLeft: 20,
