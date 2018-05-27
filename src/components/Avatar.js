@@ -2,19 +2,26 @@ import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 
 export default class Avatar extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      waving: require('./../assets/images/cat/cat_waving.png'),
+  randomlyGenerateImage = () => {
+    console.log(this.props.avatar.status)
+    switch (this.props.avatar.status) {
+      case 'happy':
+        return require('./../assets/images/cat/happy/cat_belly.png')
+      case 'normal':
+        return require('./../assets/images/cat/normal/cat_sitting.png')
+      case 'sad':
+        return require('./../assets/images/cat/sad/cat_hissing.png')
+      default:
+        return require('./../assets/images/cat/normal/cat_sitting.png')
     }
   }
   render() {
+    console.log(this.props.avatar)
     return (
       <View style={{ justifyContent: 'center' }}>
         <Image
           style={styles.animal}
-          source={this.state.waving}
+          source={require('./../assets/images/cat/happy/cat_belly.png')}
         />
       </View>
     );

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, Dimensions } from 'react-nativ
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
+import getAvatar from './../actions/avatar-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
+      avatar: {},
       reminders: [],
     }
   }
@@ -27,6 +29,9 @@ export default class Home extends React.Component {
     })
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
+    })
+    getAvatar(this.state.user.id).then((response) => {
+      this.setState({ avatar: response })
     })
   }
   toggleMenu = () => {
@@ -83,10 +88,10 @@ export default class Home extends React.Component {
           <View style={{ justifyContent: 'flex-start', height: '75%' }}>
             <View style={{ marginBottom: '15%', height: '30%' }}>
               <View style={styles.speechBubble}>
-                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
+                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>{this.state.avatar.message}</Text>
               </View>
               <View style={{ width: '100%', marginLeft: width * -0.15, alignItems: 'center' }}>
-                <Avatar />
+                <Avatar avatar={this.state.avatar} />
               </View>
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
