@@ -24,6 +24,21 @@ export default class CreateAccount extends Component {
     }
   }
 
+  sendPushNotification(token = this.state.token, title, body) {
+    return fetch('https://exp.host/--/api/v2/push/send', {
+      body: JSON.stringify({
+        to: token,
+        title,
+        body,
+        data: { message: `${title} - ${body}` },
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    });
+  }
+
   handleUsername = (text) => {
     this.setState({ username: text })
   }
@@ -48,9 +63,13 @@ export default class CreateAccount extends Component {
         name: this.props.navigation.state.params.name,
         username: this.state.username,
         password: this.state.password,
+        notifToken: this.state.token,
       }
+
       createUser(user).then((response) => {
-        this.props.navigation.navigate('Home', { user: response })
+        console.log(this.props.navigation.state.params.token)
+        this.sendPushNotification(this.props.navigation.state.params.token, 'Congrats 🎉 ', 'Your account was successfully created!')
+        this.props.navigation.navigate('Home', { user: response, token: this.state.token })
       }).catch((error) => {
         Alert.alert(
           'Oh no!',

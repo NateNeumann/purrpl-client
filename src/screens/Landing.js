@@ -1,9 +1,59 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
-import { LinearGradient } from 'expo'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions, Alert } from 'react-native'
+import { LinearGradient, Permissions, Notifications } from 'expo'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      token: '',
+    }
+  }
+
+  componentDidMount() {
+    this.registerForPushNotificationsAsync();
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+  }
+
+  componentWillUnmount() {
+    this._notificationSubscription.remove()
+    this._notificationSubscription.remove()
+  }
+
+  _handleNotification = (notification) => {
+    console.log(notification)
+    Alert.alert('purrpl', notification.data.message)
+  };
+
+
+  async registerForPushNotificationsAsync() {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+
+    // only ask if permissions have not already been determined, because
+    // iOS won't necessarily prompt the user a second time.
+    if (existingStatus !== 'granted') {
+      // Android remote notification permissions are granted during the app
+      // install, so this will only ask on iOS
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+
+    // Stop here if the user did not grant permissions
+    if (finalStatus !== 'granted') {
+      return;
+    }
+
+    // Get the token that uniquely identifies this device
+    const token = await Notifications.getExpoPushTokenAsync();
+
+    this.setState({ token })
+
+    console.log(this.state.token);
+  }
+
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -19,10 +69,10 @@ export default class Landing extends Component {
             >
               <Text style={styles.title}>purrpl</Text>
               <Text style={styles.subtitle}>Keeping track of your wellness</Text>
-              <TouchableOpacity style={styles.button} onPress={() => { navigate('Name') }} >
+              <TouchableOpacity style={styles.button} onPress={() => { navigate('Name', { token: this.state.token }) }} >
                 <Text style={styles.buttonText}>{'Get Started'.toUpperCase()}</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { navigate('Login') }} >
+              <TouchableOpacity onPress={() => { navigate('Login', { token: this.state.token }) }} >
                 <Text style={styles.secondButtonText}>{'Log In'.toUpperCase()}</Text>
               </TouchableOpacity>
             </View>

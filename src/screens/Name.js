@@ -29,7 +29,7 @@ export default class Name extends Component {
 
   submitName = () => {
     if (this.state.name !== '') {
-      this.props.navigation.navigate('CreateAccount', { name: this.state.name })
+      this.props.navigation.navigate('CreateAccount', { name: this.state.name, token: this.props.navigation.state.params.token })
     } else {
       Alert.alert('Oh no!', 'Please enter a valid name 😺')
     }

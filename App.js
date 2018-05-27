@@ -56,7 +56,9 @@ const RootStack = createStackNavigator({
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true };
+    this.state = {
+      loading: true,
+    };
   }
 
   async componentWillMount() {
