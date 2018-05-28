@@ -1,9 +1,24 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
+
+  componentDidMount() {
+    const { navigate } = this.props.navigation
+
+    AsyncStorage.getItem('loggedIn', (err, value) => {
+      if (JSON.parse(value) !== null) {
+        if (JSON.parse(value)) {
+          AsyncStorage.getItem('user', (error, user) => {
+            navigate('Home', { user: JSON.parse(user) })
+          })
+        }
+      }
+    })
+  }
+
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -38,7 +53,7 @@ export default class Landing extends Component {
     );
   }
 }
-const { width, height } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -59,8 +74,8 @@ const styles = StyleSheet.create({
   },
   cat: {
     alignSelf: 'flex-end',
-    height: height * 0.41,
-    width: width * 0.72,
+    height: 305,
+    width: 300,
   },
   title: {
     color: 'white',

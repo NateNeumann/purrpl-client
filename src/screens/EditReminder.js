@@ -17,17 +17,20 @@ export default class EditReminder extends React.Component {
       active: null,
     }
   }
+
   componentDidMount = () => {
     fetchReminder(this.state.user.id, this.state.type).then((response) => {
       this.setState({ reminder: response })
       this.setState({ active: response.active })
     })
   }
+
   handleToggle = (status) => {
     // save to database
     updateActive(this.state.reminder.id, status)
     return !status
   }
+
   render() {
     const image = this.props.navigation.state.params.image
     const text = this.props.navigation.state.params.text

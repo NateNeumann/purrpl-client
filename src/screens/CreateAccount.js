@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { createUser } from './../actions/user-actions'
@@ -49,7 +49,11 @@ export default class CreateAccount extends Component {
         username: this.state.username,
         password: this.state.password,
       }
+
       createUser(user).then((response) => {
+        AsyncStorage.setItem('loggedIn', JSON.stringify(true));
+        AsyncStorage.setItem('user', JSON.stringify(response))
+
         this.props.navigation.navigate('Home', { user: response })
       }).catch((error) => {
         Alert.alert(

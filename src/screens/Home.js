@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Dimensions, DeviceEventEmitter } from 'react-native'
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
@@ -19,19 +19,33 @@ export default class Home extends React.Component {
       user: this.props.navigation.state.params.user,
       reminders: [],
     }
+
+    this.updateReminders = this.updateReminders.bind(this)
   }
+
   componentDidMount = () => {
+    DeviceEventEmitter.addListener('updatedReminders', (e) => {
+      this.updateReminders()
+    });
+
     // lat and long for Hanover
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
     })
+
+    this.updateReminders()
+  }
+
+  updateReminders() {
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
     })
   }
+
   toggleMenu = () => {
     this.setState({ menuVisible: !this.state.menuVisible })
   }
+
   renderRemindersChecklist = () => {
     if (this.state.reminders && this.state.reminders.length > 0) {
       return (
