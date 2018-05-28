@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
+import { addFeelingToday } from '../actions/progress-actions'
 
 // function ratingCompleted(rating) {
 //   console.log(`Rating is: ${rating}`)
@@ -15,11 +16,17 @@ export default class Profile extends React.Component {
     this.state = {
       user: this.props.navigation.state.params.user,
     }
+    this.ratingCompleted = this.ratingCompleted.bind(this)
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
+
+  ratingCompleted(rating) {
+    addFeelingToday(rating)
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -39,6 +46,7 @@ export default class Profile extends React.Component {
           reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
           defaultRating={0}
           size={30}
+          onFinishRating={this.ratingCompleted}
         />
         <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
         <ScrollView contentContainerStyle={styles.notifContainer}>
