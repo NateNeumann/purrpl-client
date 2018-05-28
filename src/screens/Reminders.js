@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   containerHeight: {
-    height: 560,
+    height: '100%',
   },
   animal: {
     alignSelf: 'flex-start',
