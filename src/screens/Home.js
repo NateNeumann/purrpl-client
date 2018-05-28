@@ -19,8 +19,6 @@ export default class Home extends React.Component {
       user: this.props.navigation.state.params.user,
       reminders: [],
     }
-
-    this.updateReminders = this.updateReminders.bind(this)
   }
 
   componentDidMount = () => {
@@ -36,7 +34,7 @@ export default class Home extends React.Component {
     this.updateReminders()
   }
 
-  updateReminders() {
+  updateReminders = () => {
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
     })
