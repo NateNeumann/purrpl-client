@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 
-function ratingCompleted(rating) {
-  console.log(`Rating is: ${rating}`)
-}
+// function ratingCompleted(rating) {
+//   console.log(`Rating is: ${rating}`)
+// }
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
