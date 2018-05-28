@@ -15,6 +15,7 @@ import Notification from './src/screens/Notification'
 import AddFriends from './src/screens/AddFriends'
 import ProgressTracking from './src/screens/ProgressTracking'
 import About from './src/screens/About'
+import Profile from './src/screens/Profile'
 
 const RootStack = createStackNavigator({
   Landing: { screen: Landing },
@@ -51,6 +52,7 @@ const RootStack = createStackNavigator({
   AddFriends: { screen: AddFriends },
   ProgressTracking: { screen: ProgressTracking },
   About: { screen: About },
+  Profile: { screen: Profile },
 })
 
 class App extends React.Component {
