@@ -1,9 +1,24 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
+
+  componentDidMount() {
+    const { navigate } = this.props.navigation
+
+    AsyncStorage.getItem('loggedIn', (err, value) => {
+      if (JSON.parse(value) !== null) {
+        if (JSON.parse(value)) {
+          AsyncStorage.getItem('user', (error, user) => {
+            navigate('Home', { user: JSON.parse(user) })
+          })
+        }
+      }
+    })
+  }
+
   render() {
     const { navigate } = this.props.navigation
     return (

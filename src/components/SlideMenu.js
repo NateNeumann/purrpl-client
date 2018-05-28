@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Animated } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage } from 'react-native'
 import moment from 'moment'
 import { Circle } from 'react-native-progress'
 import { getRemainders } from './../actions/reminder-actions'
@@ -102,6 +102,7 @@ export default class SlideMenu extends React.Component {
             <TouchableOpacity
               style={styles.optionButton}
               onPress={() => {
+                AsyncStorage.setItem('loggedIn', JSON.stringify(false))
                 this.props.toggleMenu()
                 navigate('Landing')
               }}
