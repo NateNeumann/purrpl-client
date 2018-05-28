@@ -35,8 +35,6 @@ export default class Login extends Component {
     loginUser({ username: this.state.username, password: this.state.password }).then((response) => {
       AsyncStorage.setItem('loggedIn', JSON.stringify(true))
 
-      console.log(JSON.stringify(response))
-
       AsyncStorage.setItem('user', JSON.stringify(response))
 
       this.props.navigation.navigate('Home', { user: response })

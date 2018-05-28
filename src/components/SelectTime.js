@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, DeviceEventEmitter } from 'react-native'
 import SelectMultiple from 'react-native-select-multiple'
 import { fetchReminder, updateTimes } from './../actions/reminder-actions'
 
@@ -58,6 +58,7 @@ class SelectTime extends Component {
     // selectedTimes is array of { label, value }
     this.setState({ selectedTimes })
     updateTimes(this.props.reminder.id, selectedTimes)
+    DeviceEventEmitter.emit('updatedReminders');
   }
 
   render() {

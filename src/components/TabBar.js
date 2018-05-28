@@ -52,8 +52,8 @@ const MainTabBar = createBottomTabNavigator({
 
 const styles = StyleSheet.create({
   icon: {
-    height: 45,
-    width: 45,
+    height: 40,
+    width: 40,
   },
 });
 
