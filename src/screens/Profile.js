@@ -21,10 +21,6 @@ export default class Profile extends React.Component {
     this.setState({ checked: !this.state.checked })
   }
   render() {
-    console.log(this.state.user)
-    if (this.state.user) {
-      
-    }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
