@@ -21,6 +21,7 @@ export default class SlideMenu extends React.Component {
       this.setState({ denominator: response.denominator ? response.denominator : 1 })
     })
   }
+
   render() {
     const { navigate } = this.props.navigation
     let toValue = -100

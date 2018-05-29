@@ -49,11 +49,20 @@ class SelectTime extends Component {
       user: this.props.user,
     }
   }
+
   componentWillMount = () => {
     fetchReminder(this.state.user.id, this.props.reminder.type).then((response) => {
       this.setState({ selectedTimes: response.times })
     })
   }
+
+  componentDidMount = () => {
+    DeviceEventEmitter.addListener('updatedActive', (e) => {
+      updateTimes(this.props.reminder.id, this.state.selectedTimes)
+      DeviceEventEmitter.emit('updatedReminders');
+    });
+  }
+
   onSelectionsChange = (selectedTimes) => {
     // selectedTimes is array of { label, value }
     this.setState({ selectedTimes })

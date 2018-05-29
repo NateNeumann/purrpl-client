@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, DeviceEventEmitter } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
@@ -28,6 +28,7 @@ export default class EditReminder extends React.Component {
   handleToggle = (status) => {
     // save to database
     updateActive(this.state.reminder.id, status)
+    DeviceEventEmitter.emit('updatedActive')
     return !status
   }
 
