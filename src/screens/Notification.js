@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
