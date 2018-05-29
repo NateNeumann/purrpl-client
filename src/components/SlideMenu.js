@@ -4,6 +4,7 @@ import moment from 'moment'
 import { Circle } from 'react-native-progress'
 import Avatar from './../components/Avatar'
 import { getRemainders } from './../actions/reminder-actions'
+import { scaleHeight } from './../assets/scaling'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -50,7 +51,7 @@ export default class SlideMenu extends React.Component {
               style={styles.progressCircle}
               color="rgb(169, 222, 81)"
               borderWidth={0}
-              size={135}
+              size={scaleHeight(135)}
               animated
               animating={false}
               thickness={7}
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
   },
   progressCircle: {
     position: 'absolute',
-    top: '19%',
+    top: scaleHeight(55.5),
     height: 135,
     width: 135,
   },
