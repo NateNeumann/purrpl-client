@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, DeviceEventEmitter } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
 import { fetchReminder, updateActive } from './../actions/reminder-actions'
@@ -79,7 +80,7 @@ export default class EditReminder extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     height: '100%',
   },
   headerContainer: {
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   checkboxContainer: {
-    backgroundColor: '#F4FCFF',
+    backgroundColor: '#FFF',
     borderColor: '#B2CBFB',
     borderWidth: 2,
     width: 20,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, DeviceEventEmitter } from 'react-native'
 import SelectMultiple from 'react-native-select-multiple'
+import { responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { fetchReminder, updateTimes } from './../actions/reminder-actions'
 
 const times = [
@@ -86,46 +87,20 @@ class SelectTime extends Component {
 }
 
 const styles = StyleSheet.create({
-  toggleContainer: {
-    marginLeft: 20,
-    marginTop: 18,
-    alignSelf: 'center',
-  },
-  optionsText: {
-    color: '#053867',
-    fontSize: 25,
-    marginTop: 20,
-    alignSelf: 'flex-start',
-  },
   textStyle: {
-    fontSize: 18,
-  },
-  timesText: {
-    color: '#053867',
-    fontSize: 25,
-    marginTop: 20,
-    marginLeft: 10,
-    alignSelf: 'flex-start',
+    fontSize: responsiveFontSize(2.5),
+    alignSelf: 'center',
+    fontFamily: 'raleway-medium',
   },
   activeContainer: {
     flexDirection: 'row',
   },
-  scrollHeight: {
-    height: 220,
-    width: 245,
-  },
-  welcomeContainer: {
-    flexDirection: 'row',
-    paddingTop: 20,
-    paddingRight: 20,
-    paddingLeft: 20,
-  },
   timesContainer: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingBottom: 20,
-    width: 260,
+    paddingBottom: responsiveWidth(5),
+    width: responsiveWidth(100),
   },
 })
 
