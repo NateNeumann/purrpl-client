@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, Dimensions, DeviceEventEmitter
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
+import getAvatar from './../actions/avatar-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
@@ -17,6 +18,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
+      avatar: null,
       reminders: [],
     }
   }
@@ -37,6 +39,9 @@ export default class Home extends React.Component {
   updateReminders = () => {
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
+    })
+    getAvatar(this.state.user.id).then((response) => {
+      this.setState({ avatar: response })
     })
   }
 
@@ -71,41 +76,45 @@ export default class Home extends React.Component {
     }
   }
   render() {
-    return (
-      <View style={styles.container}>
-        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
-        <View style={styles.headerContainer}>
-          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
-          <Text style={styles.header}>HOME</Text>
-        </View>
-        <View>
-          <View style={[styles.welcomeContainer, { height: '25%' }]}>
-            <View style={styles.row}>
-              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
-            </View>
-            <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-            <View style={styles.row}>
-              <Image
-                style={{ height: 20, width: 20, alignSelf: 'center' }}
-                source={require('./../assets/images/sun.png')}
-              />
-              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
-            </View>
+    if (this.state.avatar) {
+      return (
+        <View style={styles.container}>
+          {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
+          <View style={styles.headerContainer}>
+            <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+            <Text style={styles.header}>HOME</Text>
           </View>
-          <View style={{ justifyContent: 'flex-start', height: '75%' }}>
-            <View style={{ marginBottom: '15%', height: '30%' }}>
-              <View style={styles.speechBubble}>
-                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
+          <View>
+            <View style={[styles.welcomeContainer, { height: '25%' }]}>
+              <View style={styles.row}>
+                <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
               </View>
-              <Avatar />
+              <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
+              <View style={styles.row}>
+                <Image
+                  style={{ height: 20, width: 20, alignSelf: 'center' }}
+                  source={require('./../assets/images/sun.png')}
+                />
+                <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
+              </View>
             </View>
-            <View style={{ marginBottom: '15%', height: '40%' }}>
-              {this.renderRemindersChecklist()}
+            <View style={{ justifyContent: 'flex-start', height: '75%' }}>
+              <View style={{ marginBottom: '15%', height: '30%' }}>
+                <View style={styles.speechBubble}>
+                  <Text style={styles.animalUpdate}>{this.state.avatar.message}</Text>
+                </View>
+                <Avatar avatar={this.state.avatar} />
+              </View>
+              <View style={{ marginBottom: '15%', height: '40%' }}>
+                {this.renderRemindersChecklist()}
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 
@@ -141,15 +150,23 @@ const styles = StyleSheet.create({
   },
   animalUpdate: {
     fontSize: 20,
-    fontFamily: 'raleway-semi-bold',
+    fontFamily: 'raleway-regular',
+    position: 'absolute',
+    textAlign: 'center',
   },
   speechBubble: {
+    position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 25,
-    backgroundColor: 'transparent',
-    borderRadius: 20,
+    marginTop: -30,
+    right: 20,
+    height: 110,
+    width: 150,
+    padding: 10,
+    borderWidth: 3,
+    borderColor: '#053867',
+    borderRadius: 80,
   },
   checkItemsContainer: {
     marginTop: 150,
