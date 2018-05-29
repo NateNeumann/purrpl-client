@@ -2,11 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
-import { addFeelingToday } from '../actions/progress-actions'
-
-// function ratingCompleted(rating) {
-//   console.log(`Rating is: ${rating}`)
-// }
+import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -15,8 +11,23 @@ export default class Profile extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
+      // progress: null,
+      rating: null,
     }
     this.ratingCompleted = this.ratingCompleted.bind(this)
+  }
+
+  componentWillMount = () => {
+    getFeelingToday(this.state.user.id).then((progress) => {
+      const last = progress.feelingToday[progress.feelingToday.length - 1]
+      const today = new Date();
+      if (progress.date === today.getDate()) {
+        console.log(last)
+        this.setState({ rating: last })
+      } else {
+        this.setState({ rating: 0 })
+      }
+    })
   }
 
   handleCheckbox = () => {
@@ -24,55 +35,59 @@ export default class Profile extends React.Component {
   }
 
   ratingCompleted(rating) {
-    addFeelingToday(rating)
+    addFeelingToday(this.state.user.id, rating)
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Back navigation={this.props.navigation} />
-          <Text style={styles.header}>PROFILE</Text>
+    console.log(this.state.rating)
+    if (this.state.rating) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Back navigation={this.props.navigation} />
+            <Text style={styles.header}>PROFILE</Text>
+          </View>
+          <Image style={{
+   alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
+  }}
+            source={require('./../assets/images/sittingcat.png')}
+          />
+          <Text style={styles.nameText}>{this.state.user.name}</Text>
+          <Text style={styles.addedText}>How are you feeling today?</Text>
+          <AirbnbRating
+            count={5}
+            reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
+            defaultRating={this.state.rating}
+            size={30}
+            onFinishRating={this.ratingCompleted}
+          />
+          <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
+          <ScrollView contentContainerStyle={styles.notifContainer}>
+            <View style={styles.notifBlock}>
+              <Image style={styles.notifImage}
+                source={require('./../assets/images/sittingcat.png')}
+              />
+              <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+            </View>
+            <View style={styles.notifBlock}>
+              <Image style={styles.notifImage}
+                source={require('./../assets/images/sittingcat.png')}
+              />
+              <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+            </View>
+            <View style={styles.notifBlock}>
+              <Image style={styles.notifImage}
+                source={require('./../assets/images/sittingcat.png')}
+              />
+              <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+            </View>
+
+          </ScrollView>
         </View>
-        <Image style={{
- alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
-}}
-          source={require('./../assets/images/sittingcat.png')}
-        />
-        <Text style={styles.nameText}>{this.state.user.name}</Text>
-        <Text style={styles.addedText}>How are you feeling today?</Text>
-        <AirbnbRating
-          count={5}
-          reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
-          defaultRating={0}
-          size={30}
-          onFinishRating={this.ratingCompleted}
-        />
-        <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
-        <ScrollView contentContainerStyle={styles.notifContainer}>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
 
-        </ScrollView>
-      </View>
-
-    )
+      )
+    }
+    return null
   }
 }
 
