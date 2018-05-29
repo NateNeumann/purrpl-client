@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, Dimensions } from 'react-native'
+import getAvatar from './../actions/avatar-actions'
 
 const { height } = Dimensions.get('window')
 
@@ -8,14 +9,22 @@ export default class Avatar extends React.Component {
     super(props)
 
     this.state = {
+      user: this.props.user,
+      avatar: null,
       image: '',
     }
+    propsHeight = this.props.height
+    propsWidth = this.props.width
   }
   componentWillMount = () => {
-    this.randomlyGenerateImage()
+    getAvatar(this.state.user.id).then((response) => {
+      this.setState({ avatar: response })
+      this.props.handleSpeechBubble(this.state.avatar.message)
+      this.randomlyGenerateImage()
+    })
   }
   randomlyGenerateImage = () => {
-    switch (this.props.avatar.status) {
+    switch (this.state.avatar.status) {
       case 'happy':
         this.setState({ image: require('./../assets/images/cat/happy/cat_belly.png') })
         break
@@ -30,14 +39,18 @@ export default class Avatar extends React.Component {
     }
   }
   render() {
-    return (
-      <View style={{ justifyContent: 'center' }}>
-        <Image
-          style={styles.animal}
-          source={this.state.image}
-        />
-      </View>
-    );
+    if (this.state.avatar) {
+      return (
+        <View style={{ justifyContent: 'center' }}>
+          <Image
+            style={[styles.animal, { height: this.props.height, width: this.props.width }]}
+            source={this.state.image}
+          />
+        </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 
@@ -47,8 +60,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     top: height * 0.05,
     left: 40,
-    height: 150,
-    width: 150,
     resizeMode: 'contain',
   },
 })

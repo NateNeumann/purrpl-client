@@ -44,10 +44,7 @@ export default class Friends extends React.Component {
                 onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
               >
                 <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
+                <Avatar height={60} width={60} user={this.state.user} />
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                     <Text style={styles.userAt}>@{item.username}</Text>

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, FlatList, Image, Dimensions, DeviceEventEmitter
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
-import getAvatar from './../actions/avatar-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
@@ -18,7 +17,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
-      avatar: null,
+      speechBubble: '',
       reminders: [],
     }
   }
@@ -35,12 +34,13 @@ export default class Home extends React.Component {
     this.updateReminders()
   }
 
+  handleSpeechBubble = (text) => {
+    this.setState({ speechBubble: text })
+  }
+
   updateReminders = () => {
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
-    })
-    getAvatar(this.state.user.id).then((response) => {
-      this.setState({ avatar: response })
     })
   }
 
@@ -75,45 +75,41 @@ export default class Home extends React.Component {
     }
   }
   render() {
-    if (this.state.avatar) {
-      return (
-        <View style={styles.container}>
-          {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
-          <View style={styles.headerContainer}>
-            <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
-            <Text style={styles.header}>HOME</Text>
-          </View>
-          <View>
-            <View style={[styles.welcomeContainer, { height: '25%' }]}>
-              <View style={styles.row}>
-                <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
-              </View>
-              <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-              <View style={styles.row}>
-                <Image
-                  style={{ height: 20, width: 20, alignSelf: 'center' }}
-                  source={require('./../assets/images/sun.png')}
-                />
-                <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
-              </View>
+    return (
+      <View style={styles.container}>
+        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
+        <View style={styles.headerContainer}>
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+          <Text style={styles.header}>HOME</Text>
+        </View>
+        <View>
+          <View style={[styles.welcomeContainer, { height: '25%' }]}>
+            <View style={styles.row}>
+              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
             </View>
-            <View style={{ justifyContent: 'flex-start', height: '75%' }}>
-              <View style={{ marginBottom: '15%', height: '30%' }}>
-                <View style={styles.speechBubble}>
-                  <Text style={styles.animalUpdate}>{this.state.avatar.message}</Text>
-                </View>
-                <Avatar avatar={this.state.avatar} />
+            <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
+            <View style={styles.row}>
+              <Image
+                style={{ height: 20, width: 20, alignSelf: 'center' }}
+                source={require('./../assets/images/sun.png')}
+              />
+              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
+            </View>
+          </View>
+          <View style={{ justifyContent: 'flex-start', height: '75%' }}>
+            <View style={{ marginBottom: '15%', height: '30%' }}>
+              <View style={styles.speechBubble}>
+                <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
-              <View style={{ marginBottom: '15%', height: '40%' }}>
-                {this.renderRemindersChecklist()}
-              </View>
+              <Avatar height={150} width={150} avatar={this.state.avatar} user={this.state.user} handleSpeechBubble={this.handleSpeechBubble} />
+            </View>
+            <View style={{ marginBottom: '15%', height: '40%' }}>
+              {this.renderRemindersChecklist()}
             </View>
           </View>
         </View>
-      )
-    } else {
-      return null
-    }
+      </View>
+    )
   }
 }
 
