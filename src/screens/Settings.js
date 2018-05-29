@@ -3,16 +3,23 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
 import Dropdown from './../components/Dropdown'
-import { toggleNotifications } from './../actions/user-actions'
+import { toggleNotifications, fetchUser } from './../actions/user-actions'
 
 export default class Settings extends React.Component {
   static navigationOptions = { header: null };
   constructor(props) {
     super(props)
     this.state = {
-      user: this.props.navigation.state.params.user,
-      active: this.props.navigation.state.params.user.notifications.active,
+      userID: this.props.navigation.state.params.id,
+      user: null,
+      active: null,
     }
+  }
+  componentWillMount = () => {
+    fetchUser(this.state.userID).then((user) => {
+      this.setState({ user })
+      this.setState({ active: user.notifications.active })
+    })
   }
   handleToggle = (status) => {
     // save to database
@@ -21,51 +28,55 @@ export default class Settings extends React.Component {
   }
   render() {
     const { navigate } = this.props.navigation
-    return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Back navigation={this.props.navigation} />
-          <Text style={styles.header}>SETTINGS</Text>
-        </View>
-        <Image style={{
- alignSelf: 'center', resizeMode: 'contain', height: 160, width: 160, marginTop: 50, marginBottom: 30,
-}}
-          source={require('./../assets/images/catbutt.png')}
-        />
-        <View style={styles.whiteContainer}>
-          <ToggleSwitch
-            isOn={this.state.active}
-            onColor="#7FD1FF"
-            offColor="#DBDDDE"
-            size="large"
-            label="PUSH NOTIFICATIONS"
-            labelStyle={{ fontSize: 20, fontFamily: 'raleway-regular', color: '#053867' }}
-            onToggle={this.handleToggle}
-          />;
-        </View>
-        <View style={styles.whiteContainer} >
-          <Text style={styles.discoverabilityText}>DISCOVERABILITY</Text>
-          <View style={styles.dropdownSize}>
-            <Dropdown user={this.state.user} />
+    if (this.state.user && this.state.active !== null) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Back navigation={this.props.navigation} />
+            <Text style={styles.header}>SETTINGS</Text>
+          </View>
+          <Image style={{
+            alignSelf: 'center', resizeMode: 'contain', height: 160, width: 160, marginTop: 50, marginBottom: 30,
+          }}
+            source={require('./../assets/images/catbutt.png')}
+          />
+          <View style={styles.whiteContainer}>
+            <ToggleSwitch
+              isOn={this.state.active}
+              onColor="#7FD1FF"
+              offColor="#DBDDDE"
+              size="large"
+              label="PUSH NOTIFICATIONS"
+              labelStyle={{ fontSize: 20, fontFamily: 'raleway-regular', color: '#053867' }}
+              onToggle={this.handleToggle}
+            />;
+          </View>
+          <View style={styles.whiteContainer} >
+            <Text style={styles.discoverabilityText}>DISCOVERABILITY</Text>
+            <View style={styles.dropdownSize}>
+              <Dropdown user={this.state.user} />
+            </View>
+          </View>
+          <View style={styles.deleteContainer}>
+            <TouchableOpacity
+              style={styles.aboutButton}
+              onPress={() => {
+                navigate('About')
+              }}
+            >
+              <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>ABOUT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.deleteButton}
+            >
+              <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>DELETE ACCOUNT</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.deleteContainer}>
-          <TouchableOpacity
-            style={styles.aboutButton}
-            onPress={() => {
-            navigate('About')
-          }}
-          >
-            <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>ABOUT</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.deleteButton}
-          >
-            <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>DELETE ACCOUNT</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 
