@@ -67,6 +67,7 @@ export default class Friends extends React.Component {
               height: scaleHeight(40),
               width: scaleWidth(40),
               marginTop: scaleHeight(20),
+              resizeMode: 'contain',
             }}
             source={require('./../assets/images/catbutt.png')}
           />
