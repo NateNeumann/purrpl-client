@@ -17,7 +17,6 @@ export default class Settings extends React.Component {
   }
   componentWillMount = () => {
     fetchUser(this.state.userID).then((user) => {
-      console.log(user)
       this.setState({ user })
       this.setState({ active: user.notifications.active })
     })
