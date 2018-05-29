@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
+import LoadingScreen from './../components/LoadingScreen'
 import { getFormattedNotifications } from './../actions/user-actions'
 import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
 
@@ -93,7 +94,7 @@ export default class Profile extends React.Component {
         </View>
       )
     } else {
-      return null
+      return <LoadingScreen />
     }
   }
 }
