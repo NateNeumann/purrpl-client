@@ -1,8 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, Image, Dimensions } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import getAvatar from './../actions/avatar-actions'
-
-const { height } = Dimensions.get('window')
 
 export default class Avatar extends React.Component {
   constructor(props) {
@@ -11,7 +9,7 @@ export default class Avatar extends React.Component {
     this.state = {
       userId: this.props.id,
       avatar: null,
-      image: '',
+      image: null,
     }
   }
   componentWillMount = () => {
@@ -20,26 +18,23 @@ export default class Avatar extends React.Component {
       if (this.props.handleSpeechBubble) {
         this.props.handleSpeechBubble(this.state.avatar.message)
       }
-      this.randomlyGenerateImage()
+      this.setState({ image: this.randomlyGenerateImage() })
     })
   }
   randomlyGenerateImage = () => {
     switch (this.state.avatar.status) {
       case 'happy':
-        this.setState({ image: require('./../assets/images/cat/happy/cat_belly.png') })
-        break
+        return require('./../assets/images/cat/happy/cat_belly.png')
       case 'normal':
-        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
-        break
+        return require('./../assets/images/cat/normal/cat_sitting.png')
       case 'sad':
-        this.setState({ image: require('./../assets/images/cat/sad/cat_hissing.png') })
-        break
+        return require('./../assets/images/cat/sad/cat_hissing.png')
       default:
-        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
+        return require('./../assets/images/cat/normal/cat_sitting.png')
     }
   }
   render() {
-    if (this.state.avatar) {
+    if (this.state.avatar && this.state.image) {
       return (
         <View style={{ justifyContent: 'center' }}>
           <Image
