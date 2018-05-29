@@ -7,6 +7,7 @@ import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import Avatar from './../components/Avatar'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 const { width } = Dimensions.get('window')
 
@@ -51,6 +52,7 @@ export default class Home extends React.Component {
           data={this.state.reminders}
           renderItem={({ item }) => {
             return (
+              // Not sure why this is width * .3 and not just 30%? -Nate
               <View style={[styles.checkContainer, { marginLeft: width * 0.3, justifyContent: 'flex-start' }]}>
                 <Checkbox
                   user={this.state.user}
@@ -116,49 +118,49 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#7FD1FF',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
   header: {
     color: '#FFFFFF',
-    fontSize: 24,
+    fontSize: lesserScalar(24),
     fontFamily: 'raleway-bold',
-    marginTop: 20,
-    marginLeft: 120,
+    marginTop: scaleHeight(20),
+    marginLeft: scaleWidth(120),
   },
   welcomeContainer: {
     alignItems: 'flex-end',
-    marginTop: 5,
-    marginRight: 15,
-    padding: 15,
+    marginTop: scaleHeight(5),
+    marginRight: scaleWidth(15),
+    padding: lesserScalar(15),
   },
   animal: {
     alignSelf: 'center',
     resizeMode: 'contain',
-    width: 200,
-    marginLeft: -120,
+    width: scaleWidth(200),
+    marginLeft: scaleWidth(-120),
   },
   animalUpdate: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-semi-bold',
   },
   speechBubble: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 25,
+    height: scaleHeight(25),
     backgroundColor: 'transparent',
-    borderRadius: 20,
+    borderRadius: lesserScalar(20),
   },
   checkItemsContainer: {
-    marginTop: 150,
+    marginTop: scaleHeight(150),
     alignSelf: 'auto',
     width: '100%',
-    right: 20,
-    height: 100,
+    right: scaleWidth(20),
+    height: scaleHeight(100),
     backgroundColor: '#FFFFFF',
-    borderRadius: 70,
+    borderRadius: lesserScalar(70),
     borderColor: '#000',
     borderWidth: 1,
     zIndex: 2,
@@ -172,8 +174,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   welcomeText: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: lesserScalar(18),
+    marginBottom: scaleHeight(10),
     fontFamily: 'raleway-regular',
   },
   row: {
@@ -181,10 +183,10 @@ const styles = StyleSheet.create({
   },
   reminderText: {
     color: '#777777',
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-bold',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: scaleHeight(10),
   },
   bold: {
     fontFamily: 'raleway-bold',

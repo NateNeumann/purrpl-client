@@ -19,7 +19,7 @@ const scaleWidth = (itemWidth) => {
 }
 
 const lesserScalar = (measurement) => {
-  return ((heightScalar < widthScalar) ? heightScalar : widthScalar)
+  return ((heightScalar < widthScalar) ? (measurement * heightScalar) : (measurement * widthScalar))
 }
 
 export { scaleHeight, scaleWidth, lesserScalar }
