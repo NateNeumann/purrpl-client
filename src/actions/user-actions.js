@@ -82,3 +82,13 @@ export function getFormattedNotifications(id) {
     })
   })
 }
+
+export function deleteNotification(id, notificationId) {
+  return new Promise((resolve, reject) => {
+    axios.delete(`${ROOT_URL}/user/notifications/${id}&${notificationId}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}

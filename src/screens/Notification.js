@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
 import { acceptFriend } from './../actions/friends-actions'
+import { deleteNotification } from './../actions/user-actions'
 
 export default class Notification extends React.Component {
   static navigationOptions = { header: null };
@@ -34,7 +35,13 @@ export default class Notification extends React.Component {
         <Text style={styles.addedText}> added you</Text>
         <View style={styles.deleteContainer}>
           <Button
-            onPress={() => acceptFriend(this.state.user.id, this.state.item.senderId)}
+            onPress={() => {
+              acceptFriend(this.state.user.id, this.state.item.senderId).then((response) => {
+                deleteNotification(this.state.user.id, this.state.item.id).then((response1) => {
+                  this.props.navigation.pop()
+                })
+              })
+            }}
             style={{ backgroundColor: '#A0D55E', borderColor: '#A0D55E' }}
             textStyle={{
 fontSize: 20, color: '#FFF', fontWeight: 'bold', fontFamily: 'raleway-bold',

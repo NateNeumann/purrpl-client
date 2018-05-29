@@ -44,7 +44,6 @@ export function sendAction(id, username, action) {
 }
 
 export function acceptFriend(id, friendId) {
-  console.log(id, friendId, `${ROOT_URL}/friends/accept/${id}`)
   return new Promise((resolve, reject) => {
     axios.put(`${ROOT_URL}/friends/accept/${id}`, { friendId }).then((response) => {
       console.log(response.data)
