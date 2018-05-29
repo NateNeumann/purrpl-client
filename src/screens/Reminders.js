@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 24,
+    fontSize: responsiveFontSize(3),
     marginTop: responsiveHeight(3),
     marginLeft: responsiveWidth(21),
   },
