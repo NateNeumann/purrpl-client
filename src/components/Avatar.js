@@ -9,17 +9,17 @@ export default class Avatar extends React.Component {
     super(props)
 
     this.state = {
-      user: this.props.user,
+      userId: this.props.id,
       avatar: null,
       image: '',
     }
-    propsHeight = this.props.height
-    propsWidth = this.props.width
   }
   componentWillMount = () => {
-    getAvatar(this.state.user.id).then((response) => {
+    getAvatar(this.state.userId).then((response) => {
       this.setState({ avatar: response })
-      this.props.handleSpeechBubble(this.state.avatar.message)
+      if (this.props.handleSpeechBubble) {
+        this.props.handleSpeechBubble(this.state.avatar.message)
+      }
       this.randomlyGenerateImage()
     })
   }
@@ -56,10 +56,6 @@ export default class Avatar extends React.Component {
 
 const styles = StyleSheet.create({
   animal: {
-    position: 'absolute',
-    alignSelf: 'flex-start',
-    top: height * 0.05,
-    left: 40,
     resizeMode: 'contain',
   },
 })
