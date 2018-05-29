@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { LinearGradient } from 'expo'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Back from './../components/Back'
 
 
@@ -88,14 +89,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cat: {
-    height: 115,
-    width: 107,
+    resizeMode: 'contain',
+    height: responsiveHeight(32),
+    width: responsiveWidth(32),
+    marginTop: responsiveHeight(-10),
   },
   nameText: {
     color: 'white',
     fontFamily: 'raleway-medium',
-    fontSize: 24,
-    marginTop: 60,
+    fontSize: responsiveFontSize(3),
   },
   bold: {
     fontFamily: 'raleway-bold',
@@ -103,17 +105,17 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'white',
     borderBottomWidth: 1.3,
-    color: 'white',
+    color: '#A87FFF',
     fontFamily: 'raleway-medium',
-    fontSize: 24,
-    height: 40,
-    margin: 20,
+    fontSize: responsiveFontSize(2.7),
+    height: responsiveHeight(5),
+    margin: responsiveWidth(3.5),
     textAlign: 'center',
-    width: 275,
+    width: responsiveWidth(80),
   },
   arrow: {
-    height: 60,
-    marginTop: 30,
-    width: 60,
+    height: responsiveHeight(9),
+    marginTop: responsiveHeight(4.5),
+    width: responsiveHeight(9),
   },
 });
