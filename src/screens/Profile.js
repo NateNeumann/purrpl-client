@@ -48,7 +48,7 @@ export default class Profile extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
-    if (this.state.rating) {
+    // if (this.state.rating) {
       return (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
@@ -62,13 +62,13 @@ export default class Profile extends React.Component {
           />
           <Text style={styles.nameText}>{this.state.user.name}</Text>
           <Text style={styles.addedText}>How are you feeling today?</Text>
-          <AirbnbRating
+          {/* <AirbnbRating
             count={5}
             reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
             defaultRating={this.state.rating}
             size={30}
             onFinishRating={this.ratingCompleted}
-          />
+          /> */}
           <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
           <FlatList
             style={styles.notifContainer}
@@ -90,9 +90,9 @@ export default class Profile extends React.Component {
           />
         </View>
       )
-    } else {
-      return null
-    }
+    // } else {
+    //   return null
+    // }
   }
 }
 
