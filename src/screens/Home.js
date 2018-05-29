@@ -89,11 +89,9 @@ export default class Home extends React.Component {
             <View style={{ justifyContent: 'flex-start', height: '75%' }}>
               <View style={{ marginBottom: '15%', height: '30%' }}>
                 <View style={styles.speechBubble}>
-                  <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>{this.state.avatar.message}</Text>
+                  <Text style={styles.animalUpdate}>{this.state.avatar.message}</Text>
                 </View>
-                <View style={{ width: '100%', marginLeft: width * -0.15, alignItems: 'center' }}>
-                  <Avatar avatar={this.state.avatar} />
-                </View>
+                <Avatar avatar={this.state.avatar} />
               </View>
               <View style={{ marginBottom: '15%', height: '40%' }}>
                 {this.renderRemindersChecklist()}
@@ -140,15 +138,23 @@ const styles = StyleSheet.create({
   },
   animalUpdate: {
     fontSize: 20,
-    fontFamily: 'raleway-semi-bold',
+    fontFamily: 'raleway-regular',
+    position: 'absolute',
+    textAlign: 'center',
   },
   speechBubble: {
+    position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 25,
-    backgroundColor: 'transparent',
-    borderRadius: 20,
+    marginTop: -30,
+    right: 20,
+    height: 110,
+    width: 150,
+    padding: 10,
+    borderWidth: 3,
+    borderColor: '#053867',
+    borderRadius: 80,
   },
   checkItemsContainer: {
     marginTop: 150,

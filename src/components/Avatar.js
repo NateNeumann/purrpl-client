@@ -1,5 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, Dimensions } from 'react-native'
+
+const { height } = Dimensions.get('window')
 
 export default class Avatar extends React.Component {
   constructor(props) {
@@ -42,8 +44,10 @@ export default class Avatar extends React.Component {
 
 const styles = StyleSheet.create({
   animal: {
+    position: 'absolute',
     alignSelf: 'flex-start',
-    marginLeft: 10,
+    top: height * 0.05,
+    left: 40,
     height: 150,
     width: 150,
     resizeMode: 'contain',
