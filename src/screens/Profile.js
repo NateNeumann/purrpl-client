@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
+import Avatar from './../components/Avatar'
 import { getFormattedNotifications } from './../actions/user-actions'
 import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
 
@@ -78,9 +79,9 @@ export default class Profile extends React.Component {
                   onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
                 >
                   <View style={styles.notifBlock}>
-                    <Image style={styles.notifImage}
-                      source={require('./../assets/images/sittingcat.png')}
-                    />
+                    <View style={{ marginLeft: '-21%' }}>
+                      <Avatar height={40} width={40} id={item.id} />
+                    </View>
                     <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
                   </View>
                 </TouchableOpacity>
@@ -181,10 +182,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'raleway-regular',
     marginLeft: '-18%',
-  },
-  notifImage: {
-    resizeMode: 'contain',
-    height: '75%',
-    marginLeft: '-21%',
   },
 })

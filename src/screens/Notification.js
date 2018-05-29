@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
+import Avatar from './../components/Avatar'
 import { acceptFriend } from './../actions/friends-actions'
 import { deleteNotification } from './../actions/user-actions'
 
@@ -26,11 +27,9 @@ export default class Notification extends React.Component {
           <Back navigation={this.props.navigation} />
           <Text style={styles.header}>NOTIFICATION</Text>
         </View>
-        <Image style={{
- alignSelf: 'center', height: 160, width: 160, marginTop: 50, marginBottom: 50,
-}}
-          source={require('./../assets/images/plantcircle.png')}
-        />
+        <View style={{ marginTop: 50, marginBottom: 50, alignItems: 'center' }}>
+          <Avatar height={160} width={160} id={this.state.item.id} />
+        </View>
         <Text style={styles.nameText}>{this.state.item.senderUsername}</Text>
         <Text style={styles.addedText}> added you</Text>
         <View style={styles.deleteContainer}>
