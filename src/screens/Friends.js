@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import * as Progress from 'react-native-progress';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
+import Avatar from './../components/Avatar'
 import { fetchFriends } from './../actions/friends-actions'
 import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
@@ -45,10 +46,7 @@ export default class Friends extends React.Component {
                 onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
               >
                 <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
+                  <Avatar height={60} width={60} id={item.id} />
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                     <Text style={styles.userAt}>@{item.username}</Text>

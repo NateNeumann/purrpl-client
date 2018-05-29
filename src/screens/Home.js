@@ -18,6 +18,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
+      speechBubble: '',
       reminders: [],
     }
   }
@@ -31,8 +32,11 @@ export default class Home extends React.Component {
     getWeather(43.7005122, -72.2839756).then((response) => {
       this.setState({ weather: response })
     })
-
     this.updateReminders()
+  }
+
+  handleSpeechBubble = (text) => {
+    this.setState({ speechBubble: text })
   }
 
   updateReminders = () => {
@@ -75,7 +79,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
+        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
         <View style={styles.headerContainer}>
           <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>HOME</Text>
@@ -97,9 +101,11 @@ export default class Home extends React.Component {
           <View style={{ justifyContent: 'flex-start', height: '75%' }}>
             <View style={{ marginBottom: '15%', height: '30%' }}>
               <View style={styles.speechBubble}>
-                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>I&#39;m thirsty</Text>
+                <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
-              <Avatar />
+              <View style={{ position: 'absolute', left: width * 0.05 }}>
+                <Avatar height={150} width={150} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
+              </View>
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
               {this.renderRemindersChecklist()}
@@ -143,15 +149,26 @@ const styles = StyleSheet.create({
   },
   animalUpdate: {
     fontSize: lesserScalar(20),
-    fontFamily: 'raleway-semi-bold',
+    fontFamily: 'raleway-regular',
+    position: 'absolute',
+    textAlign: 'center',
   },
   speechBubble: {
+    position: 'absolute',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     height: scaleHeight(25),
     backgroundColor: 'transparent',
     borderRadius: lesserScalar(20),
+    marginTop: scaleHeight(-30),
+    right: scaleWidth(20),
+    height: scaleHeight(110),
+    width: scaleWidth(150),
+    padding: lesserScalar(10),
+    borderWidth: 3,
+    borderColor: '#053867',
+    borderRadius: lesserScalar(80),
   },
   checkItemsContainer: {
     marginTop: scaleHeight(150),
