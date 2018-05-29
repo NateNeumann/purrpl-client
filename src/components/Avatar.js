@@ -18,7 +18,6 @@ export default class Avatar extends React.Component {
         this.setState({ image: require('./../assets/images/cat/happy/cat_belly.png') })
         break
       case 'normal':
-        console.log('this doesnt make sense')
         this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
         break
       case 'sad':
