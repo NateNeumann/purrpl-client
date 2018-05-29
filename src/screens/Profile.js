@@ -24,7 +24,6 @@ export default class Profile extends React.Component {
       const last = progress.feelingToday[progress.feelingToday.length - 1]
       const today = new Date();
       if (progress.date === today.getDate()) {
-        console.log(last)
         this.setState({ rating: last })
       } else {
         this.setState({ rating: 0 })
@@ -33,9 +32,12 @@ export default class Profile extends React.Component {
   }
   componentWillMount = () => {
     getFormattedNotifications(this.state.user.id).then((response) => {
-      console.log(response)
       this.setState({ notifications: response })
     })
+  }
+
+  generateKey = () => {
+    return `_${Math.random().toString(36).substr(2, 9)}`
   }
 
   handleCheckbox = () => {
@@ -48,7 +50,7 @@ export default class Profile extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
-    // if (this.state.rating) {
+    if (this.state.notifications && this.state.rating) {
       return (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
@@ -62,24 +64,24 @@ export default class Profile extends React.Component {
           />
           <Text style={styles.nameText}>{this.state.user.name}</Text>
           <Text style={styles.addedText}>How are you feeling today?</Text>
-          {/* <AirbnbRating
+          <AirbnbRating
             count={5}
             reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
             defaultRating={this.state.rating}
             size={30}
             onFinishRating={this.ratingCompleted}
-          /> */}
+          />
           <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
           <FlatList
             style={styles.notifContainer}
-            data={this.state.notifications}
+            data={this.state.notifications.map((item) => { return Object.assign(item, { key: this.generateKey() }) })}
             renderItem={({ item, separators }) => {
               return (
                 <TouchableOpacity
                   onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
                 >
                   <View style={styles.notifBlock}>
-                    <View style={{ marginLeft: '-21%' }}>
+                    <View style={{ marginLeft: 40 }}>
                       <Avatar height={40} width={40} id={item.id} />
                     </View>
                     <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
@@ -90,9 +92,9 @@ export default class Profile extends React.Component {
           />
         </View>
       )
-    // } else {
-    //   return null
-    // }
+    } else {
+      return null
+    }
   }
 }
 
@@ -167,11 +169,9 @@ const styles = StyleSheet.create({
   },
   notifBlock: {
     width: '100%',
-    maxWidth: '100%',
-    minWidth: '100%',
+    height: 60,
     padding: '5%',
     backgroundColor: '#D5F2FF',
-    alignSelf: 'center',
     borderRadius: 10,
     marginTop: '4%',
     flexDirection: 'row',
@@ -179,8 +179,7 @@ const styles = StyleSheet.create({
   },
   notifText: {
     color: '#053867',
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'raleway-regular',
-    marginLeft: '-18%',
   },
 })
