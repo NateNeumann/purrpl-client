@@ -25,8 +25,8 @@ export default class AddFriends extends React.Component {
       })
     }
   }
-  handleActionPress = (fn, userId, friendUsername) => {
-    fn(userId, friendUsername).then((response) => {
+  handleActionPress = (fn, userId, friendUsername, action) => {
+    fn(userId, friendUsername, action).then((response) => {
       const newUsersResults = this.state.searchedUsers.map((user) => {
         if (user.id === response.id) {
           return response
@@ -39,13 +39,13 @@ export default class AddFriends extends React.Component {
   renderActionButton = (item) => {
     if (item.isFriend) {
       return (
-        <TouchableOpacity onPress={() => this.handleActionPress(deleteFriend, this.state.user.id, item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(deleteFriend, this.state.user.id, item.username, '')}>
           <Image style={styles.actionIcon} source={require('./../assets/images/check.png')} />
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, this.state.user.id, item.username)}>
+        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, this.state.user.id, item.username, 'friend')}>
           <Image style={styles.actionIcon} source={require('./../assets/images/plus.png')} />
         </TouchableOpacity>
       )

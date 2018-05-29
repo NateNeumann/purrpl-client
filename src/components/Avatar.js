@@ -30,7 +30,6 @@ export default class Avatar extends React.Component {
     }
   }
   render() {
-    console.log(this.props.avatar)
     return (
       <View style={{ justifyContent: 'center' }}>
         <Image

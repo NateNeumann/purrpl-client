@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
+import { acceptFriend } from './../actions/friends-actions'
 
 export default class Notification extends React.Component {
   static navigationOptions = { header: null };
@@ -9,6 +10,8 @@ export default class Notification extends React.Component {
     super(props)
     this.state = {
       checked: false,
+      user: this.props.navigation.state.params.user,
+      item: this.props.navigation.state.params.item,
     }
   }
 
@@ -27,12 +30,14 @@ export default class Notification extends React.Component {
 }}
           source={require('./../assets/images/plantcircle.png')}
         />
-        <Text style={styles.nameText}>SOFIA STANESCU-BELLU</Text>
+        <Text style={styles.nameText}>{this.state.item.senderUsername}</Text>
         <Text style={styles.addedText}> added you</Text>
         <View style={styles.deleteContainer}>
-          <Button style={{ backgroundColor: '#A0D55E', borderColor: '#A0D55E' }}
+          <Button
+            onPress={() => acceptFriend(this.state.user.id, this.state.item.senderId)}
+            style={{ backgroundColor: '#A0D55E', borderColor: '#A0D55E' }}
             textStyle={{
- fontSize: 20, color: '#FFF', fontWeight: 'bold', fontFamily: 'raleway-bold',
+fontSize: 20, color: '#FFF', fontWeight: 'bold', fontFamily: 'raleway-bold',
 }}
           >
             ACCEPT

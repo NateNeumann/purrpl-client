@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
+import { getFormattedNotifications } from './../actions/user-actions'
 
 // function ratingCompleted(rating) {
 //   console.log(`Rating is: ${rating}`)
@@ -14,13 +15,21 @@ export default class Profile extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
+      notifications: null,
     }
+  }
+  componentWillMount = () => {
+    getFormattedNotifications(this.state.user.id).then((response) => {
+      console.log(response)
+      this.setState({ notifications: response })
+    })
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
   render() {
+    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -43,15 +52,19 @@ export default class Profile extends React.Component {
         <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
         <FlatList
           style={styles.notifContainer}
-          data={this.state.user.notifications.notifs}
+          data={this.state.notifications}
           renderItem={({ item, separators }) => {
             return (
-              <View style={styles.notifBlock}>
-                <Image style={styles.notifImage}
-                  source={require('./../assets/images/sittingcat.png')}
-                />
-                <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>{item.action}</Text></Text>
-              </View>
+              <TouchableOpacity
+                onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => {}}
+              >
+                <View style={styles.notifBlock}>
+                  <Image style={styles.notifImage}
+                    source={require('./../assets/images/sittingcat.png')}
+                  />
+                  <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
+                </View>
+              </TouchableOpacity>
             );
           }}
         />
