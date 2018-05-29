@@ -1,9 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
-import { getFormattedNotifications } from './../actions/user-actions'
-import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -12,86 +10,57 @@ export default class Profile extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
-      notifications: null,
-      rating: null,
     }
-    this.ratingCompleted = this.ratingCompleted.bind(this)
-  }
-
-  componentWillMount = () => {
-    getFeelingToday(this.state.user.id).then((progress) => {
-      const last = progress.feelingToday[progress.feelingToday.length - 1]
-      const today = new Date();
-      if (progress.date === today.getDate()) {
-        console.log(last)
-        this.setState({ rating: last })
-      } else {
-        this.setState({ rating: 0 })
-      }
-    })
-  }
-  componentWillMount = () => {
-    getFormattedNotifications(this.state.user.id).then((response) => {
-      console.log(response)
-      this.setState({ notifications: response })
-    })
   }
 
   handleCheckbox = () => {
     this.setState({ checked: !this.state.checked })
   }
-
-  ratingCompleted(rating) {
-    addFeelingToday(this.state.user.id, rating)
-  }
-
   render() {
-    const { navigate } = this.props.navigation
-    if (this.state.rating) {
-      return (
-        <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <Back navigation={this.props.navigation} />
-            <Text style={styles.header}>PROFILE</Text>
-          </View>
-          <Image style={{
-            alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
-          }}
-            source={require('./../assets/images/sittingcat.png')}
-          />
-          <Text style={styles.nameText}>{this.state.user.name}</Text>
-          <Text style={styles.addedText}>How are you feeling today?</Text>
-          <AirbnbRating
-            count={5}
-            reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
-            defaultRating={this.state.rating}
-            size={30}
-            onFinishRating={this.ratingCompleted}
-          />
-          <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
-          <FlatList
-            style={styles.notifContainer}
-            data={this.state.notifications}
-            renderItem={({ item, separators }) => {
-              return (
-                <TouchableOpacity
-                  onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
-                >
-                  <View style={styles.notifBlock}>
-                    <Image style={styles.notifImage}
-                      source={require('./../assets/images/sittingcat.png')}
-                    />
-                    <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+    return (
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Back navigation={this.props.navigation} />
+          <Text style={styles.header}>PROFILE</Text>
         </View>
-      )
-    } else {
-      return null
-    }
+        <Image style={{
+ alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
+}}
+          source={require('./../assets/images/sittingcat.png')}
+        />
+        <Text style={styles.nameText}>{this.state.user.name}</Text>
+        <Text style={styles.addedText}>How are you feeling today?</Text>
+        <AirbnbRating
+          count={5}
+          reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
+          defaultRating={0}
+          size={30}
+        />
+        <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
+        <ScrollView contentContainerStyle={styles.notifContainer}>
+          <View style={styles.notifBlock}>
+            <Image style={styles.notifImage}
+              source={require('./../assets/images/sittingcat.png')}
+            />
+            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+          </View>
+          <View style={styles.notifBlock}>
+            <Image style={styles.notifImage}
+              source={require('./../assets/images/sittingcat.png')}
+            />
+            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+          </View>
+          <View style={styles.notifBlock}>
+            <Image style={styles.notifImage}
+              source={require('./../assets/images/sittingcat.png')}
+            />
+            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
+          </View>
+
+        </ScrollView>
+      </View>
+
+    )
   }
 }
 
@@ -184,7 +153,8 @@ const styles = StyleSheet.create({
   },
   notifImage: {
     resizeMode: 'contain',
-    height: '75%',
+    height: '100%',
     marginLeft: '-21%',
+    marginTop: '-1%',
   },
 })
