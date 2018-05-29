@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage } from 'react-native'
 import moment from 'moment'
-import Avatar from './../components/Avatar'
 import { Circle } from 'react-native-progress'
+import Avatar from './../components/Avatar'
 import { getRemainders } from './../actions/reminder-actions'
 
 export default class SlideMenu extends React.Component {
