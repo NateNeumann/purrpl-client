@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
+import { fetchUser } from './../actions/user-actions'
 
 export default class Landing extends Component {
   static navigationOptions = { header: null }
@@ -12,7 +13,11 @@ export default class Landing extends Component {
       if (JSON.parse(value) !== null) {
         if (JSON.parse(value)) {
           AsyncStorage.getItem('user', (error, user) => {
-            navigate('Home', { user: JSON.parse(user) })
+            fetchUser(JSON.parse(user).id).then((response) => {
+              if (response) {
+                navigate('Home', { user: JSON.parse(user) })
+              }
+            })
           })
         }
       }
