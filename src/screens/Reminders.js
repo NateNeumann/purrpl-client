@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 
@@ -30,14 +31,14 @@ export default class Reminders extends React.Component {
           <Text style={styles.header}>REMINDERS</Text>
         </View>
         <View style={styles.containerHeight}>
-          <View style={styles.welcomeContainer}>
+          <View style={styles.remindersContainer}>
             <FlatList
               data={[
-            { key: 'water', image: require('./../assets/images/drink.png'), text: 'drink a glass of water' },
-            { key: 'sunscreen', image: require('./../assets/images/sunscreen.png'), text: 'apply sunscreen' },
-            { key: 'food', image: require('./../assets/images/food.png'), text: 'eat meals' },
-            { key: 'medicine', image: require('./../assets/images/meds.png'), text: 'take your medication' },
-            { key: 'sleep', image: require('./../assets/images/bed.png'), text: 'go to sleep' },
+            { key: 'water', image: require('./../assets/images/reminders/water.png'), text: 'drink a glass of water' },
+            { key: 'sunscreen', image: require('./../assets/images/reminders/sunscreen.png'), text: 'apply sunscreen' },
+            { key: 'food', image: require('./../assets/images/reminders/food.png'), text: 'eat meals' },
+            { key: 'medicine', image: require('./../assets/images/reminders/meds.png'), text: 'take your medication' },
+            { key: 'sleep', image: require('./../assets/images/reminders/sleep.png'), text: 'go to sleep' },
 
           ]}
               renderItem={({ item }) => {
@@ -50,10 +51,10 @@ export default class Reminders extends React.Component {
                   type: item.key,
                 })}
               >
-                <View style={styles.welcomeContainer}>
+                <View style={styles.eachContainer}>
                   <View style={styles.row}>
                     <Image
-                      style={styles.animal}
+                      style={styles.reminderImage}
                       source={item.image}
                     />
                     <Text style={styles.reminderText}>{item.text}</Text>
@@ -74,12 +75,12 @@ export default class Reminders extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: 'white',
     height: '100%',
   },
   headerContainer: {
     backgroundColor: '#FFC47F',
-    height: 80,
+    height: responsiveHeight(11),
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -87,63 +88,31 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 24,
-    marginTop: 20,
-    marginLeft: 90,
+    marginTop: responsiveHeight(3),
+    marginLeft: responsiveWidth(21),
   },
-  welcomeContainer: {
+  eachContainer: {
     flexDirection: 'row',
-    padding: 20,
+    padding: responsiveHeight(3),
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  containerHeight: {
-    height: '100%',
-  },
-  animal: {
-    alignSelf: 'flex-start',
-    marginRight: 10,
-  },
-  animalUpdate: {
-    fontSize: 20,
-    fontFamily: 'raleway-semi-bold',
-  },
-  speechBubble: {
-    display: 'flex',
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 10,
-    height: 120,
-    width: 130,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-  },
-  checkItemContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    backgroundColor: 'transparent',
-  },
-  checkContainer: {
+  remindersContainer: {
     flexDirection: 'row',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '50%',
-    backgroundColor: 'transparent',
+    paddingLeft: responsiveHeight(2),
+    paddingRight: responsiveHeight(2),
   },
-  checkboxContainer: {
-    backgroundColor: '#F4FCFF',
-    borderColor: '#B2CBFB',
-    borderWidth: 2,
-    width: 20,
-    height: 20,
+  containerHeight: {
+    height: '90%',
+  },
+  reminderImage: {
+    alignSelf: 'flex-start',
+    marginRight: responsiveHeight(3),
   },
   reminderText: {
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.7),
     fontFamily: 'raleway-regular',
-    marginTop: 20,
+    marginTop: responsiveHeight(3),
   },
   row: {
     flexDirection: 'row',
