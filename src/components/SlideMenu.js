@@ -101,7 +101,7 @@ export default class SlideMenu extends React.Component {
                 style={styles.optionButton}
                 onPress={() => {
                   this.props.toggleMenu()
-                  navigate('Settings', { user: this.state.user })
+                  navigate('Settings', { id: this.state.user.id })
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
