@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 
@@ -21,6 +21,10 @@ export default class Profile extends React.Component {
     this.setState({ checked: !this.state.checked })
   }
   render() {
+    console.log(this.state.user)
+    if (this.state.user) {
+      
+    }
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -41,27 +45,20 @@ export default class Profile extends React.Component {
           size={30}
         />
         <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
-        <ScrollView contentContainerStyle={styles.notifContainer}>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-
-        </ScrollView>
+        <FlatList
+          style={styles.notifContainer}
+          data={this.state.user.notifications.notifs}
+          renderItem={({ item, separators }) => {
+            return (
+              <View style={styles.notifBlock}>
+                <Image style={styles.notifImage}
+                  source={require('./../assets/images/sittingcat.png')}
+                />
+                <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>{item.action}</Text></Text>
+              </View>
+            );
+          }}
+        />
       </View>
 
     )
@@ -157,8 +154,7 @@ const styles = StyleSheet.create({
   },
   notifImage: {
     resizeMode: 'contain',
-    height: '100%',
+    height: '75%',
     marginLeft: '-21%',
-    marginTop: '-1%',
   },
 })
