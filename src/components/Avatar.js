@@ -2,17 +2,30 @@ import React from 'react'
 import { StyleSheet, View, Image } from 'react-native'
 
 export default class Avatar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      image: '',
+    }
+  }
+  componentWillMount = () => {
+    this.randomlyGenerateImage()
+  }
   randomlyGenerateImage = () => {
-    console.log(this.props.avatar.status)
     switch (this.props.avatar.status) {
       case 'happy':
-        return require('./../assets/images/cat/happy/cat_belly.png')
+        this.setState({ image: require('./../assets/images/cat/happy/cat_belly.png') })
+        break
       case 'normal':
-        return require('./../assets/images/cat/normal/cat_sitting.png')
+        console.log('this doesnt make sense')
+        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
+        break
       case 'sad':
-        return require('./../assets/images/cat/sad/cat_hissing.png')
+        this.setState({ image: require('./../assets/images/cat/sad/cat_hissing.png') })
+        break
       default:
-        return require('./../assets/images/cat/normal/cat_sitting.png')
+        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
     }
   }
   render() {
@@ -21,7 +34,7 @@ export default class Avatar extends React.Component {
       <View style={{ justifyContent: 'center' }}>
         <Image
           style={styles.animal}
-          source={require('./../assets/images/cat/happy/cat_belly.png')}
+          source={this.state.image}
         />
       </View>
     );

@@ -18,7 +18,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
-      avatar: {},
+      avatar: null,
       reminders: [],
     }
   }
@@ -64,43 +64,47 @@ export default class Home extends React.Component {
     }
   }
   render() {
-    return (
-      <View style={styles.container}>
-        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null }
-        <View style={styles.headerContainer}>
-          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
-          <Text style={styles.header}>HOME</Text>
-        </View>
-        <View>
-          <View style={[styles.welcomeContainer, { height: '25%' }]}>
-            <View style={styles.row}>
-              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
-            </View>
-            <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-            <View style={styles.row}>
-              <Image
-                style={{ height: 20, width: 20, alignSelf: 'center' }}
-                source={require('./../assets/images/sun.png')}
-              />
-              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
-            </View>
+    if (this.state.avatar) {
+      return (
+        <View style={styles.container}>
+          {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
+          <View style={styles.headerContainer}>
+            <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+            <Text style={styles.header}>HOME</Text>
           </View>
-          <View style={{ justifyContent: 'flex-start', height: '75%' }}>
-            <View style={{ marginBottom: '15%', height: '30%' }}>
-              <View style={styles.speechBubble}>
-                <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>{this.state.avatar.message}</Text>
+          <View>
+            <View style={[styles.welcomeContainer, { height: '25%' }]}>
+              <View style={styles.row}>
+                <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
               </View>
-              <View style={{ width: '100%', marginLeft: width * -0.15, alignItems: 'center' }}>
-                <Avatar avatar={this.state.avatar} />
+              <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
+              <View style={styles.row}>
+                <Image
+                  style={{ height: 20, width: 20, alignSelf: 'center' }}
+                  source={require('./../assets/images/sun.png')}
+                />
+                <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
               </View>
             </View>
-            <View style={{ marginBottom: '15%', height: '40%' }}>
-              {this.renderRemindersChecklist()}
+            <View style={{ justifyContent: 'flex-start', height: '75%' }}>
+              <View style={{ marginBottom: '15%', height: '30%' }}>
+                <View style={styles.speechBubble}>
+                  <Text style={[styles.animalUpdate, { textAlign: 'right' }]}>{this.state.avatar.message}</Text>
+                </View>
+                <View style={{ width: '100%', marginLeft: width * -0.15, alignItems: 'center' }}>
+                  <Avatar avatar={this.state.avatar} />
+                </View>
+              </View>
+              <View style={{ marginBottom: '15%', height: '40%' }}>
+                {this.renderRemindersChecklist()}
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 
