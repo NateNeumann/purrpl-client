@@ -43,7 +43,12 @@ export default class Friends extends React.Component {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
+                onPress={() => navigate('IndividualFriend', {
+                  id: item.id,
+                  name: item.name,
+                  username: item.username,
+                  user: this.state.user,
+                })}
               >
                 <View style={styles.friendContainer}>
                   <Avatar height={60} width={60} id={item.id} />
