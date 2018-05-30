@@ -36,16 +36,18 @@ const styles = StyleSheet.create({
   actionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: scaleHeight(2),
+    borderColor: '#053867',
   },
   icon: {
-    height: scaleHeight(35),
-    width: scaleWidth(35),
+    height: scaleHeight(45),
+    width: scaleWidth(45),
     resizeMode: 'contain',
   },
   iconContainer: {
     height: scaleHeight(70),
     width: scaleWidth(70),
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFF',
     borderRadius: scaleHeight(40),
     marginRight: scaleWidth(20),
     alignItems: 'center',
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'raleway-semi-bold',
-    fontSize: lesserScalar(26),
+    fontSize: lesserScalar(23),
     color: '#053867',
   },
 })

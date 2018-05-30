@@ -37,7 +37,7 @@ export default class Avatar extends React.Component {
       case 'sad':
         return require('./../assets/images/cat/sad/cat_hissing.png')
       default:
-        return require('./../assets/images/cat/normal/cat_sitting.png')
+        return require('./../assets/images/cat/normal/cat_in_box.png')
     }
   }
   render() {

@@ -35,27 +35,27 @@ export default class IndividualFriend extends React.Component {
         </View>
         <View>
           <View style={{ alignItems: 'center', margin: scaleHeight(10) }}>
-            <Avatar height={scaleHeight(220)} width={scaleWidth(220)} id={id} />
+            <Avatar height={scaleHeight(200)} width={scaleWidth(200)} id={id} />
           </View>
           <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
             <Text style={styles.bold}>{name.toUpperCase()}</Text>
           </View>
           <FriendAction
-            image={require('./../assets/images/heart.png')}
+            image={require('./../assets/images/encourage.png')}
             label="encourage"
             id={this.state.user.id}
             username={username}
             content={encourage}
           />
           <FriendAction
-            image={require('./../assets/images/high-five.png')}
+            image={require('./../assets/images/affirm.png')}
             label="affirm"
             id={this.state.user.id}
             username={username}
             content={affirm}
           />
           <FriendAction
-            image={require('./../assets/images/smile.png')}
+            image={require('./../assets/images/concern.png')}
             label="concern"
             id={this.state.user.id}
             username={username}
@@ -144,9 +144,10 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontFamily: 'raleway-bold',
-    fontSize: lesserScalar(20),
+    fontSize: lesserScalar(25),
     paddingLeft: scaleWidth(20),
     marginTop: scaleHeight(20),
     color: '#053867',
+    marginBottom: scaleWidth(25),
   },
 })
