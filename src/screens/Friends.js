@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, DeviceEventEmitter} from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, DeviceEventEmitter } from 'react-native'
 import * as Progress from 'react-native-progress'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
