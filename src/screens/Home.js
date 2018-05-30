@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, FlatList, Image, Dimensions, DeviceEventEmitter
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
-import getAvatar from './../actions/avatar-actions'
 import Checkbox from './../components/Checkbox'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
 import Avatar from './../components/Avatar'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 const { width } = Dimensions.get('window')
 
@@ -18,7 +18,7 @@ export default class Home extends React.Component {
       menuVisible: false,
       weather: {},
       user: this.props.navigation.state.params.user,
-      avatar: null,
+      speechBubble: '',
       reminders: [],
     }
   }
@@ -35,12 +35,13 @@ export default class Home extends React.Component {
     this.updateReminders()
   }
 
+  handleSpeechBubble = (text) => {
+    this.setState({ speechBubble: text })
+  }
+
   updateReminders = () => {
     fetchDailyReminders(this.state.user.id).then((response) => {
       this.setState({ reminders: response })
-    })
-    getAvatar(this.state.user.id).then((response) => {
-      this.setState({ avatar: response })
     })
   }
 
@@ -55,6 +56,7 @@ export default class Home extends React.Component {
           data={this.state.reminders}
           renderItem={({ item }) => {
             return (
+              // Not sure why this is width * .3 and not just 30%? -Nate
               <View style={[styles.checkContainer, { marginLeft: width * 0.3, justifyContent: 'flex-start' }]}>
                 <Checkbox
                   user={this.state.user}
@@ -75,45 +77,43 @@ export default class Home extends React.Component {
     }
   }
   render() {
-    if (this.state.avatar) {
-      return (
-        <View style={styles.container}>
-          {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
-          <View style={styles.headerContainer}>
-            <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
-            <Text style={styles.header}>HOME</Text>
+    return (
+      <View style={styles.container}>
+        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
+        <View style={styles.headerContainer}>
+          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+          <Text style={styles.header}>HOME</Text>
+        </View>
+        <View>
+          <View style={[styles.welcomeContainer, { height: '25%' }]}>
+            <View style={styles.row}>
+              <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
+            </View>
+            <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
+            <View style={styles.row}>
+              <Image
+                style={{ height: 20, width: 20, alignSelf: 'center' }}
+                source={require('./../assets/images/sun.png')}
+              />
+              <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
+            </View>
           </View>
-          <View>
-            <View style={[styles.welcomeContainer, { height: '25%' }]}>
-              <View style={styles.row}>
-                <Text style={styles.welcomeText}>HELLO, </Text><Text style={[styles.bold, { fontSize: 18 }]}>{this.state.user.name.toUpperCase()}!</Text>
+          <View style={{ justifyContent: 'flex-start', height: '75%' }}>
+            <View style={{ marginBottom: '15%', height: '30%' }}>
+              <View style={styles.speechBubble}>
+                <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
-              <Text style={styles.welcomeText}>{moment().format('ddd, MMM D')}</Text>
-              <View style={styles.row}>
-                <Image
-                  style={{ height: 20, width: 20, alignSelf: 'center' }}
-                  source={require('./../assets/images/sun.png')}
-                />
-                <Text style={styles.welcomeText}>{Math.round(this.state.weather.temp)} °F</Text>
+              <View style={{ position: 'absolute', left: width * 0.05 }}>
+                <Avatar height={150} width={150} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
               </View>
             </View>
-            <View style={{ justifyContent: 'flex-start', height: '75%' }}>
-              <View style={{ marginBottom: '15%', height: '30%' }}>
-                <View style={styles.speechBubble}>
-                  <Text style={styles.animalUpdate}>{this.state.avatar.message}</Text>
-                </View>
-                <Avatar avatar={this.state.avatar} />
-              </View>
-              <View style={{ marginBottom: '15%', height: '40%' }}>
-                {this.renderRemindersChecklist()}
-              </View>
+            <View style={{ marginBottom: '15%', height: '40%' }}>
+              {this.renderRemindersChecklist()}
             </View>
           </View>
         </View>
-      )
-    } else {
-      return null
-    }
+      </View>
+    )
   }
 }
 
@@ -124,31 +124,31 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#7FD1FF',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
   header: {
     color: '#FFFFFF',
-    fontSize: 24,
+    fontSize: lesserScalar(24),
     fontFamily: 'raleway-bold',
-    marginTop: 20,
-    marginLeft: 120,
+    marginTop: scaleHeight(20),
+    marginLeft: scaleWidth(120),
   },
   welcomeContainer: {
     alignItems: 'flex-end',
-    marginTop: 5,
-    marginRight: 15,
-    padding: 15,
+    marginTop: scaleHeight(5),
+    marginRight: scaleWidth(15),
+    padding: lesserScalar(15),
   },
   animal: {
     alignSelf: 'center',
     resizeMode: 'contain',
-    width: 200,
-    marginLeft: -120,
+    width: scaleWidth(200),
+    marginLeft: scaleWidth(-120),
   },
   animalUpdate: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-regular',
     position: 'absolute',
     textAlign: 'center',
@@ -158,23 +158,23 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -30,
-    right: 20,
-    height: 110,
-    width: 150,
-    padding: 10,
+    marginTop: scaleHeight(-30),
+    right: scaleWidth(20),
+    height: scaleHeight(110),
+    width: scaleWidth(150),
+    padding: lesserScalar(10),
     borderWidth: 3,
     borderColor: '#053867',
-    borderRadius: 80,
+    borderRadius: lesserScalar(80),
   },
   checkItemsContainer: {
-    marginTop: 150,
+    marginTop: scaleHeight(150),
     alignSelf: 'auto',
     width: '100%',
-    right: 20,
-    height: 100,
+    right: scaleWidth(20),
+    height: scaleHeight(100),
     backgroundColor: '#FFFFFF',
-    borderRadius: 70,
+    borderRadius: lesserScalar(70),
     borderColor: '#000',
     borderWidth: 1,
     zIndex: 2,
@@ -188,8 +188,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   welcomeText: {
-    fontSize: 18,
-    marginBottom: 10,
+    fontSize: lesserScalar(18),
+    marginBottom: scaleHeight(10),
     fontFamily: 'raleway-regular',
   },
   row: {
@@ -197,10 +197,10 @@ const styles = StyleSheet.create({
   },
   reminderText: {
     color: '#777777',
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-bold',
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: scaleHeight(10),
   },
   bold: {
     fontFamily: 'raleway-bold',

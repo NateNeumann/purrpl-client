@@ -1,9 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import * as Progress from 'react-native-progress';
+import * as Progress from 'react-native-progress'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
+import Avatar from './../components/Avatar'
 import { fetchFriends } from './../actions/friends-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class Friends extends React.Component {
   static navigationOptions = { header: null };
@@ -41,13 +43,15 @@ export default class Friends extends React.Component {
           renderItem={({ item }) => {
             return (
               <TouchableOpacity
-                onPress={() => navigate('IndividualFriend', { name: item.name, username: item.username, user: this.state.user })}
+                onPress={() => navigate('IndividualFriend', {
+                  id: item.id,
+                  name: item.name,
+                  username: item.username,
+                  user: this.state.user,
+                })}
               >
                 <View style={styles.friendContainer}>
-                  <Image
-                    style={styles.animal}
-                    source={require('./../assets/images/plantcircle.png')}
-                  />
+                  <Avatar height={60} width={60} id={item.id} />
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                     <Text style={styles.userAt}>@{item.username}</Text>
@@ -65,15 +69,16 @@ export default class Friends extends React.Component {
           <Image
             style={{
               alignSelf: 'center',
-              height: 40,
-              width: 40,
-              marginTop: 20,
+              height: scaleHeight(40),
+              width: scaleWidth(40),
+              marginTop: scaleHeight(20),
+              resizeMode: 'contain',
             }}
             source={require('./../assets/images/catbutt.png')}
           />
           <Text
             style={{
-              marginTop: 20,
+              marginTop: scaleHeight(20),
               textAlign: 'center',
               fontFamily: 'raleway-semi-bold',
               color: '#777777',
@@ -89,21 +94,21 @@ export default class Friends extends React.Component {
           <Image
             style={{
               alignSelf: 'center',
-              marginTop: 60,
+              marginTop: scaleHeight(60),
               resizeMode: 'contain',
-              height: 50,
+              height: scaleHeight(50),
             }}
             source={require('./../assets/images/light_purple_cat.png')}
           />
           <Progress.Bar
             style={{
               alignSelf: 'center',
-              marginTop: 20,
+              marginTop: scaleHeight(20),
             }}
             unfilledColor="#F1EAFF"
             color="#5B1997"
             borderColor="#F1EAFF"
-            size={50}
+            size={lesserScalar(50)}
             indeterminate
           />
         </View>
@@ -119,13 +124,13 @@ export default class Friends extends React.Component {
         <View style={styles.headerContainer}>
           <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>FRIENDS</Text>
-          <TouchableOpacity style={{ position: 'absolute', right: 10 }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
+          <TouchableOpacity style={{ position: 'absolute', right: scaleWidth(10) }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
             <Image
               style={{
-                height: 25,
-                width: 25,
-                marginTop: 5,
-                marginRight: 10,
+                height: scaleHeight(25),
+                width: scaleWidth(25),
+                marginTop: scaleHeight(5),
+                marginRight: scaleWidth(10),
               }}
               source={require('./../assets/images/white-plus.png')}
             />
@@ -146,20 +151,20 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#EF8E8E',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
   header: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: 20,
-    marginLeft: 105,
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(20),
+    marginLeft: scaleWidth(105),
   },
   friendContainer: {
     flexDirection: 'row',
-    padding: 20,
+    padding: lesserScalar(20),
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
@@ -167,7 +172,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   animalUpdate: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-semi-bold',
   },
   speechBubble: {
@@ -175,11 +180,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    right: 10,
-    height: 120,
-    width: 130,
+    right: scaleWidth(10),
+    height: scaleHeight(120),
+    width: scaleWidth(130),
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    borderRadius: lesserScalar(20),
   },
   checkItemContainer: {
     flexDirection: 'column',
@@ -200,14 +205,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4FCFF',
     borderColor: '#B2CBFB',
     borderWidth: 2,
-    width: 20,
-    height: 20,
+    width: scaleWidth(20),
+    height: scaleHeight(20),
   },
   nameText: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-regular',
-    marginTop: 20,
-    width: 177,
+    marginTop: scaleHeight(20),
+    width: scaleWidth(177),
     color: '#053867',
   },
   row: {
@@ -215,14 +220,14 @@ const styles = StyleSheet.create({
   },
   userAt: {
     fontFamily: 'raleway-semi-bold',
-    paddingLeft: 20,
+    paddingLeft: scaleWidth(20),
     color: '#333333',
   },
   bold: {
     fontFamily: 'raleway-bold',
-    fontSize: 20,
-    paddingLeft: 20,
-    marginTop: 20,
+    fontSize: lesserScalar(20),
+    paddingLeft: scaleWidth(20),
+    marginTop: scaleHeight(20),
     color: '#053867',
   },
 })

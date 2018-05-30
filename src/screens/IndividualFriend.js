@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import moment from 'moment'
 import Back from './../components/Back'
+import Avatar from './../components/Avatar'
 import FriendAction from './../components/FriendAction'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class IndividualFriend extends React.Component {
   static navigationOptions = { header: null };
@@ -21,9 +23,11 @@ export default class IndividualFriend extends React.Component {
   render() {
     const name = this.props.navigation.state.params.name
     const username = this.props.navigation.state.params.username
+    const id = this.props.navigation.state.params.id
     const encourage = { senderId: this.state.user.id, action: 'encourage', time: moment() }
     const affirm = { senderId: this.state.user.id, action: 'affirm', time: moment() }
     const concern = { senderId: this.state.user.id, action: 'concern', time: moment() }
+    console.log(this.props.id)
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
@@ -31,7 +35,9 @@ export default class IndividualFriend extends React.Component {
           <Text style={styles.header}>FRIEND</Text>
         </View>
         <View>
-          <Image style={{ alignSelf: 'center', height: 260, width: 260 }} source={require('./../assets/images/plant.png')} />
+          <View style={{ alignItems: 'center', margin: scaleHeight(10) }}>
+            <Avatar height={scaleHeight(220)} width={scaleWidth(220)} id={id} />
+          </View>
           <View style={{ alignSelf: 'center', flexDirection: 'row' }}>
             <Text style={styles.bold}>{name.toUpperCase()}</Text>
           </View>
@@ -69,20 +75,20 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#EF8E8E',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
   header: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: 20,
-    marginLeft: 105,
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(20),
+    marginLeft: scaleWidth(105),
   },
   friendContainer: {
     flexDirection: 'row',
-    padding: 20,
+    padding: lesserScalar(20),
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
@@ -90,7 +96,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   animalUpdate: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-semi-bold',
   },
   speechBubble: {
@@ -98,11 +104,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    right: 10,
-    height: 120,
-    width: 130,
+    right: scaleWidth(10),
+    height: scaleHeight(120),
+    width: scaleWidth(130),
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    borderRadius: lesserScalar(20),
   },
   checkItemContainer: {
     flexDirection: 'column',
@@ -123,14 +129,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4FCFF',
     borderColor: '#B2CBFB',
     borderWidth: 2,
-    width: 20,
-    height: 20,
+    width: lesserScalar(20),
+    height: lesserScalar(20),
   },
   nameText: {
-    fontSize: 20,
+    fontSize: lesserScalar(20),
     fontFamily: 'raleway-regular',
-    marginTop: 20,
-    width: 177,
+    marginTop: scaleHeight(20),
+    width: scaleWidth(177),
     color: '#053867',
   },
   row: {
@@ -138,9 +144,9 @@ const styles = StyleSheet.create({
   },
   bold: {
     fontFamily: 'raleway-bold',
-    fontSize: 20,
-    paddingLeft: 20,
-    marginTop: 20,
+    fontSize: lesserScalar(20),
+    paddingLeft: scaleWidth(20),
+    marginTop: scaleHeight(20),
     color: '#053867',
   },
 })

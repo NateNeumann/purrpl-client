@@ -25,7 +25,7 @@ export default class Reminders extends React.Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        {this.state.menuVisible ? <SlideMenu visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
+        {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
         <View style={styles.headerContainer}>
           <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
           <Text style={styles.header}>REMINDERS</Text>

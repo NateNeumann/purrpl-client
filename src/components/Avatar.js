@@ -1,54 +1,56 @@
 import React from 'react'
-import { StyleSheet, View, Image, Dimensions } from 'react-native'
-
-const { height } = Dimensions.get('window')
+import { StyleSheet, View, Image } from 'react-native'
+import getAvatar from './../actions/avatar-actions'
 
 export default class Avatar extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      image: '',
+      userId: this.props.id,
+      avatar: null,
+      image: null,
     }
   }
   componentWillMount = () => {
-    this.randomlyGenerateImage()
+    getAvatar(this.state.userId).then((response) => {
+      this.setState({ avatar: response })
+      if (this.props.handleSpeechBubble) {
+        this.props.handleSpeechBubble(this.state.avatar.message)
+      }
+      this.setState({ image: this.randomlyGenerateImage() })
+    })
   }
   randomlyGenerateImage = () => {
-    switch (this.props.avatar.status) {
+    switch (this.state.avatar.status) {
       case 'happy':
-        this.setState({ image: require('./../assets/images/cat/happy/cat_belly.png') })
-        break
+        return require('./../assets/images/cat/happy/cat_belly.png')
       case 'normal':
-        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
-        break
+        return require('./../assets/images/cat/normal/cat_sitting.png')
       case 'sad':
-        this.setState({ image: require('./../assets/images/cat/sad/cat_hissing.png') })
-        break
+        return require('./../assets/images/cat/sad/cat_hissing.png')
       default:
-        this.setState({ image: require('./../assets/images/cat/normal/cat_sitting.png') })
+        return require('./../assets/images/cat/normal/cat_sitting.png')
     }
   }
   render() {
-    return (
-      <View style={{ justifyContent: 'center' }}>
-        <Image
-          style={styles.animal}
-          source={this.state.image}
-        />
-      </View>
-    );
+    if (this.state.avatar && this.state.image) {
+      return (
+        <View style={{ justifyContent: 'center' }}>
+          <Image
+            style={[styles.animal, { height: this.props.height, width: this.props.width }]}
+            source={this.state.image}
+          />
+        </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 
 const styles = StyleSheet.create({
   animal: {
-    position: 'absolute',
-    alignSelf: 'flex-start',
-    top: height * 0.05,
-    left: 40,
-    height: 150,
-    width: 150,
     resizeMode: 'contain',
   },
 })

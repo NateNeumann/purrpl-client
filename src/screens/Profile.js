@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
+import Avatar from './../components/Avatar'
+import LoadingScreen from './../components/LoadingScreen'
+import { getFormattedNotifications } from './../actions/user-actions'
+import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -11,56 +15,74 @@ export default class Profile extends React.Component {
     this.state = {
       user: this.props.navigation.state.params.user,
     }
+    this.ratingCompleted = this.ratingCompleted.bind(this)
   }
 
-  handleCheckbox = () => {
-    this.setState({ checked: !this.state.checked })
+  componentWillMount = () => {
+    getFeelingToday(this.state.user.id).then((progress) => {
+      const last = progress.feelingToday.length > 1 ? progress.feelingToday[progress.feelingToday.length - 1] : 0
+      const today = new Date();
+      if (progress.date === today.getDate()) {
+        this.setState({ rating: last })
+      } else {
+        this.setState({ rating: 0 })
+      }
+    })
+    getFormattedNotifications(this.state.user.id).then((response) => {
+      this.setState({ notifications: response })
+    })
+  }
+
+  generateKey = () => {
+    return `_${Math.random().toString(36).substr(2, 9)}`
   }
   render() {
-    return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Back navigation={this.props.navigation} />
-          <Text style={styles.header}>PROFILE</Text>
+    const { navigate } = this.props.navigation
+    if (this.state.notifications && this.state.rating != null) {
+      return (
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Back navigation={this.props.navigation} />
+            <Text style={styles.header}>PROFILE</Text>
+          </View>
+          <Image style={{
+            alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
+          }}
+            source={require('./../assets/images/sittingcat.png')}
+          />
+          <Text style={styles.nameText}>{this.state.user.name}</Text>
+          <Text style={styles.addedText}>How are you feeling today?</Text>
+          <AirbnbRating
+            count={5}
+            reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
+            defaultRating={this.state.rating}
+            size={30}
+            onFinishRating={this.ratingCompleted}
+          />
+          <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
+          <FlatList
+            style={styles.notifContainer}
+            data={this.state.notifications.map((item) => { return Object.assign(item, { key: this.generateKey() }) })}
+            renderItem={({ item, separators }) => {
+              return (
+                <TouchableOpacity
+                  onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
+                >
+                  <View style={styles.notifBlock}>
+                    <View style={{ marginLeft: 40 }}>
+                      <Avatar height={40} width={40} id={item.id} />
+                    </View>
+                    <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+          />
         </View>
-        <Image style={{
- alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
-}}
-          source={require('./../assets/images/sittingcat.png')}
-        />
-        <Text style={styles.nameText}>{this.state.user.name}</Text>
-        <Text style={styles.addedText}>How are you feeling today?</Text>
-        <AirbnbRating
-          count={5}
-          reviews={['Bad 😿', 'Not great 😾', 'Eh, fine 🐱', 'Grr-eat 😺', 'Purr-fect! 😸']}
-          defaultRating={0}
-          size={30}
-        />
-        <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
-        <ScrollView contentContainerStyle={styles.notifContainer}>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-          <View style={styles.notifBlock}>
-            <Image style={styles.notifImage}
-              source={require('./../assets/images/sittingcat.png')}
-            />
-            <Text style={styles.notifText}><Text style={styles.bold}>SOFIA STANESCU-BELLU</Text>{'\n'}is sending <Text style={styles.bold}>concern</Text></Text>
-          </View>
-
-        </ScrollView>
-      </View>
-
-    )
+      )
+    } else {
+      return <LoadingScreen />
+    }
   }
 }
 
@@ -135,11 +157,9 @@ const styles = StyleSheet.create({
   },
   notifBlock: {
     width: '100%',
-    maxWidth: '100%',
-    minWidth: '100%',
+    height: 60,
     padding: '5%',
     backgroundColor: '#D5F2FF',
-    alignSelf: 'center',
     borderRadius: 10,
     marginTop: '4%',
     flexDirection: 'row',
@@ -147,7 +167,7 @@ const styles = StyleSheet.create({
   },
   notifText: {
     color: '#053867',
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'raleway-regular',
     marginLeft: '-18%',
   },

@@ -2,7 +2,9 @@ import React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage } from 'react-native'
 import moment from 'moment'
 import { Circle } from 'react-native-progress'
+import Avatar from './../components/Avatar'
 import { getRemainders } from './../actions/reminder-actions'
+import { scaleHeight } from './../assets/scaling'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -49,16 +51,24 @@ export default class SlideMenu extends React.Component {
               style={styles.progressCircle}
               color="rgb(169, 222, 81)"
               borderWidth={0}
-              size={135}
+              size={scaleHeight(135)}
               animated
               animating={false}
               thickness={7}
               progress={this.state.numerator / this.state.denominator}
             />
-            <Image
-              style={styles.userStatus}
-              source={require('./../assets/images/plantcircle.png')}
-            />
+            <View
+              style={{
+                backgroundColor: 'white',
+                borderRadius: 60,
+                height: 120,
+                width: 120,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Avatar height={100} width={100} id={this.state.user.id} />
+            </View>
             <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
           </View>
           <View style={styles.secondHalf}>
@@ -91,7 +101,7 @@ export default class SlideMenu extends React.Component {
                 style={styles.optionButton}
                 onPress={() => {
                   this.props.toggleMenu()
-                  navigate('Settings', { user: this.state.user })
+                  navigate('Settings', { id: this.state.user.id })
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -137,7 +147,7 @@ const styles = StyleSheet.create({
   },
   progressCircle: {
     position: 'absolute',
-    top: '19%',
+    top: scaleHeight(55.5),
     height: 135,
     width: 135,
   },

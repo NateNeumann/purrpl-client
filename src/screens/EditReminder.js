@@ -4,6 +4,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
+import LoadingScreen from './../components/LoadingScreen'
 import { fetchReminder, updateActive } from './../actions/reminder-actions'
 
 export default class EditReminder extends React.Component {
@@ -73,7 +74,7 @@ export default class EditReminder extends React.Component {
         </View>
       )
     } else {
-      return null
+      return <LoadingScreen />
     }
   }
 }
