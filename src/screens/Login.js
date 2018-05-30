@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'white',
     borderBottomWidth: responsiveWidth(0.3),
-    color: '#A87FFF',
+    color: 'white',
     fontFamily: 'raleway-medium',
     fontSize: responsiveFontSize(2.7),
     height: responsiveHeight(5),
@@ -138,12 +138,12 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#A87FFF',
-    borderRadius: responsiveWidth(10),
-    marginTop: responsiveHeight(4),
-    paddingBottom: responsiveHeight(3),
-    paddingLeft: responsiveWidth(7),
-    paddingRight: responsiveWidth(7),
-    paddingTop: responsiveHeight(3),
+    borderRadius: responsiveHeight(0.8),
+    marginTop: responsiveHeight(2.5),
+    paddingBottom: responsiveHeight(2),
+    paddingLeft: responsiveWidth(15),
+    paddingRight: responsiveWidth(15),
+    paddingTop: responsiveHeight(2),
   },
   buttonText: {
     color: 'white',

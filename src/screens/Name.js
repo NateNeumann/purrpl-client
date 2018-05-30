@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     height: responsiveHeight(32),
     width: responsiveWidth(32),
-    marginTop: responsiveHeight(-10),
+    marginTop: responsiveHeight(-20),
   },
   nameText: {
     color: 'white',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   input: {
     borderColor: 'white',
     borderBottomWidth: 1.3,
-    color: '#A87FFF',
+    color: 'white',
     fontFamily: 'raleway-medium',
     fontSize: responsiveFontSize(2.7),
     height: responsiveHeight(5),
