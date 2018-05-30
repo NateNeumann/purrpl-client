@@ -4,6 +4,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
 import Dropdown from './../components/Dropdown'
 import { toggleNotifications, fetchUser } from './../actions/user-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class Settings extends React.Component {
   static navigationOptions = { header: null };
@@ -94,10 +95,10 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: 20,
-    marginLeft: 105,
-    fontFamily: 'raleway-bold',
+    fontFamily: 'Avenir Next',
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(90),
   },
   dropdownSize: {
     width: 110,

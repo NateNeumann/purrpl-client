@@ -88,8 +88,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(3),
-    marginTop: responsiveHeight(3),
+    marginTop: responsiveHeight(2),
     marginLeft: responsiveWidth(21),
+    fontFamily: 'Avenir Next',
   },
   eachContainer: {
     flexDirection: 'row',

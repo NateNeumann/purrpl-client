@@ -130,10 +130,11 @@ const styles = StyleSheet.create({
   },
   header: {
     color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
     fontSize: lesserScalar(24),
-    fontFamily: 'raleway-bold',
-    marginTop: scaleHeight(20),
-    marginLeft: scaleWidth(120),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(105),
   },
   welcomeContainer: {
     alignItems: 'flex-end',

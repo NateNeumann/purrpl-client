@@ -4,7 +4,7 @@ import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
-import { scaleHeight, scaleWidth } from './../assets/scaling'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class AddFriends extends React.Component {
   static navigationOptions = { header: null }
@@ -130,9 +130,10 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: 20,
-    marginLeft: 105,
+    fontFamily: 'Avenir Next',
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(105),
   },
   searchBarContainer: {
     flexDirection: 'row',

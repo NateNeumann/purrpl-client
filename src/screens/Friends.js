@@ -170,8 +170,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: lesserScalar(24),
-    marginTop: scaleHeight(20),
-    marginLeft: scaleWidth(105),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(90),
+    fontFamily: 'Avenir Next',
   },
   friendContainer: {
     flexDirection: 'row',

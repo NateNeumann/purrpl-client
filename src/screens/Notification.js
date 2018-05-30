@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 20,
     marginLeft: 70,
+    fontFamily: 'Avenir Next',
   },
   nameText: {
     color: '#053867',

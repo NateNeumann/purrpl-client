@@ -4,6 +4,7 @@ import { XAxis, YAxis, AreaChart, Grid } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
 import Back from './../components/Back'
 import { getFeelingToday } from './../actions/progress-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class ProgressTracking extends React.Component {
   static navigationOptions = { header: null };
@@ -113,10 +114,11 @@ const styles = StyleSheet.create({
   },
   header: {
     color: '#FFFFFF',
-    fontSize: 24,
-    fontFamily: 'raleway-bold',
-    marginTop: 20,
-    marginLeft: 25,
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(35),
   },
   summary: {
     fontSize: 24,

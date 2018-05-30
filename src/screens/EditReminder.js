@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: responsiveFontSize(3),
-    marginTop: responsiveHeight(3),
-    marginLeft: responsiveWidth(21),
+    marginTop: responsiveHeight(2),
+    marginLeft: responsiveWidth(24),
+    fontFamily: 'Avenir Next',
   },
   toggleContainer: {
     marginLeft: responsiveWidth(5),

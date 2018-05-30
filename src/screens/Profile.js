@@ -5,8 +5,8 @@ import Back from './../components/Back'
 import Avatar from './../components/Avatar'
 import LoadingScreen from './../components/LoadingScreen'
 import { getFormattedNotifications } from './../actions/user-actions'
-import { getFeelingToday } from '../actions/progress-actions'
-import { scaleHeight, scaleWidth } from './../assets/scaling'
+import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -16,7 +16,6 @@ export default class Profile extends React.Component {
     this.state = {
       user: this.props.navigation.state.params.user,
     }
-    this.ratingCompleted = this.ratingCompleted.bind(this)
   }
 
   componentWillMount = () => {
@@ -37,6 +36,11 @@ export default class Profile extends React.Component {
   generateKey = () => {
     return `_${Math.random().toString(36).substr(2, 9)}`
   }
+
+  ratingCompleted = (rating) => {
+    addFeelingToday(this.state.user.id, rating)
+  }
+
   render() {
     const { navigate } = this.props.navigation
     if (this.state.notifications && this.state.rating != null) {
@@ -101,10 +105,10 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: '5%',
-    marginLeft: '26%',
     fontFamily: 'Avenir Next',
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(105),
   },
   nameText: {
     color: '#053867',
