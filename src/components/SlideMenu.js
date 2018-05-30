@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage, PanResponder } from 'react-native'
 import moment from 'moment'
 import { Circle } from 'react-native-progress'
 import Avatar from './../components/Avatar'
@@ -22,6 +22,50 @@ export default class SlideMenu extends React.Component {
       this.setState({ numerator: response.numerator })
       this.setState({ denominator: response.denominator ? response.denominator : 1 })
     })
+
+    this._panResponder = PanResponder.create({
+      // Ask to be the responder:
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+
+      onPanResponderGrant: (evt, gestureState) => {
+        // The gesture has started. Show visual feedback so the user knows
+        // what is happening!
+
+        // gestureState.d{x,y} will be set to zero now
+        console.log('start')
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        // The most recent move distance is gestureState.move{X,Y}
+
+        // The accumulated gesture distance since becoming responder is
+        // gestureState.d{x,y}
+        console.log('move')
+      },
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderRelease: (evt, gestureState) => {
+        // The user has released all touches while this view is the
+        // responder. This typically means a gesture has succeeded
+        console.log('release')
+        if (gestureState.dx < 0) {
+          console.log('swiping back')
+          let toValue = -100
+          this.props.toggleMenu()
+          if (this.props.visible) {
+            toValue = 0
+          }
+          Animated.spring(
+            this.state.bounceValue,
+            {
+              toValue,
+              tension: 2,
+            },
+          ).start();
+        }
+      },
+    });
   }
 
   render() {
@@ -39,7 +83,7 @@ export default class SlideMenu extends React.Component {
     ).start();
     if (this.state.numerator !== null && this.state.denominator !== null) {
       return (
-        <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]}>
+        <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]} {...this._panResponder.panHandlers}>
           <TouchableOpacity
             style={styles.exitButton}
             onPress={this.props.toggleMenu}
