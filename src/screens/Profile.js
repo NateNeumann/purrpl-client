@@ -60,8 +60,17 @@ export default class Profile extends React.Component {
                 onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
               >
                 <View style={styles.notifBlock}>
-                  <View style={{ marginLeft: 40 }}>
-                    <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
+                  <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: scaleHeight(55),
+                    width: scaleWidth(55),
+                    borderRadius: scaleHeight(27),
+                    backgroundColor: '#F1EAFF',
+                    marginLeft: scaleWidth(-30),
+                  }}
+                  >
+                    <Avatar height={scaleHeight(35)} width={scaleWidth(35)} id={item.senderId} />
                   </View>
                   <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
                 </View>
@@ -177,13 +186,14 @@ const styles = StyleSheet.create({
   },
   notifBlock: {
     width: '100%',
-    height: 60,
+    height: scaleHeight(80),
     padding: '5%',
     backgroundColor: '#D5F2FF',
     borderRadius: 10,
     marginTop: '4%',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'flex-start',
   },
   notifText: {
     color: '#053867',
