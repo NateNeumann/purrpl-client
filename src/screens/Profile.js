@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
 import LoadingScreen from './../components/LoadingScreen'
 import { getFormattedNotifications } from './../actions/user-actions'
-import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
+import { getFeelingToday } from '../actions/progress-actions'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
