@@ -15,6 +15,7 @@ export default class Profile extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
+      notifications: null,
     }
   }
 
@@ -35,7 +36,6 @@ export default class Profile extends React.Component {
     })
     getFormattedNotifications(this.state.user.id).then((response) => {
       this.setState({ notifications: response })
-      console.log(response)
     })
   }
 
@@ -47,8 +47,35 @@ export default class Profile extends React.Component {
     addFeelingToday(this.state.user.id, rating)
   }
 
-  render() {
+  renderNotifications = () => {
     const { navigate } = this.props.navigation
+    if (this.state.notifications && this.state.notifications.length) {
+      return (
+        <FlatList
+          style={styles.notifContainer}
+          data={this.state.notifications.map((item) => { return Object.assign(item, { key: this.generateKey() }) })}
+          renderItem={({ item, separators }) => {
+            return (
+              <TouchableOpacity
+                onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
+              >
+                <View style={styles.notifBlock}>
+                  <View style={{ marginLeft: 40 }}>
+                    <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
+                  </View>
+                  <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      )
+    } else {
+      return <Text style={styles.reminderText}>No notifications</Text>
+    }
+  }
+
+  render() {
     if (this.state.notifications && this.state.rating != null) {
       return (
         <View style={styles.container}>
@@ -69,24 +96,7 @@ export default class Profile extends React.Component {
             onFinishRating={this.ratingCompleted}
           />
           <Text style={styles.notifTitle}>NOTIFICATIONS</Text>
-          <FlatList
-            style={styles.notifContainer}
-            data={this.state.notifications.map((item) => { return Object.assign(item, { key: this.generateKey() }) })}
-            renderItem={({ item, separators }) => {
-              return (
-                <TouchableOpacity
-                  onPress={item.action === 'friend' ? () => navigate('Notification', { user: this.state.user, item }) : () => { }}
-                >
-                  <View style={styles.notifBlock}>
-                    <View style={{ marginLeft: 40 }}>
-                      <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
-                    </View>
-                    <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-          />
+          {this.renderNotifications()}
         </View>
       )
     } else {
@@ -196,5 +206,12 @@ const styles = StyleSheet.create({
     margin: scaleHeight(20),
     borderRadius: scaleHeight(80),
     backgroundColor: '#F1EAFF',
+  },
+  reminderText: {
+    color: '#777777',
+    fontSize: lesserScalar(20),
+    fontFamily: 'raleway-bold',
+    textAlign: 'center',
+    marginTop: scaleHeight(10),
   },
 })
