@@ -22,8 +22,13 @@ export default class Profile extends React.Component {
     getFeelingToday(this.state.user.id).then((progress) => {
       const last = progress.feelingToday.length > 0 ? progress.feelingToday[progress.feelingToday.length - 1] : 0
       const today = new Date();
-      if (progress.date === today.getDate()) {
-        this.setState({ rating: last })
+      if (progress.date) {
+        const old = new Date(progress.date)
+        if (old.getDate() === today.getDate()) {
+          this.setState({ rating: last })
+        } else {
+          this.setState({ rating: 0 })
+        }
       } else {
         this.setState({ rating: 0 })
       }
