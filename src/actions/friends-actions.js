@@ -15,7 +15,7 @@ export function fetchFriends(id) {
 
 export function addFriend(id, username, action) {
   return new Promise((resolve, reject) => {
-    axios.put(`${ROOT_URL}/friends/${id}`, { username, action }).then((response) => {
+    axios.put(`${ROOT_URL}/friends/${id}`, { username, action: { action } }).then((response) => {
       resolve(response.data)
     }).catch((error) => {
       reject(error)

@@ -42,8 +42,8 @@ export default class CreateAccount extends Component {
       Alert.alert('Passwords Don\'t Match', 'Please make sure your passwords match.')
     } else if ((this.state.username === '') || (this.state.password === '') || (this.state.passwordConfirmed === '')) {
       Alert.alert('Error 🐱', 'Please fill in all inputs!')
-    } else if (!(/^[a-zA-Z]+$/.test(this.state.username))) {
-      Alert.alert('Error 🐱', 'Only alphabetic characters allowed in the username!')
+    } else if (!(/^[a-zA-Z0-9_-]*$/.test(this.state.username))) {
+      Alert.alert('Error 🐱', 'Only alphanumeric characters allowed in the username!')
     } else {
       const user = {
         name: this.props.navigation.state.params.name,
