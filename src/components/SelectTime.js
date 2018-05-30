@@ -73,7 +73,7 @@ class SelectTime extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <SelectMultiple
           items={times}
           renderLabel={renderLabel}
@@ -87,6 +87,11 @@ class SelectTime extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#FFE7CC',
+    borderRadius: 20,
+    padding: '5%',
+  },
   textStyle: {
     fontSize: responsiveFontSize(2.5),
     alignSelf: 'center',
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   timesContainer: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'transparent',
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
     paddingBottom: responsiveWidth(5),

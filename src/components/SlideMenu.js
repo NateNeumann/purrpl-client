@@ -78,7 +78,7 @@ export default class SlideMenu extends React.Component {
           </TouchableOpacity>
           <View style={styles.firstHalf}>
             <View style={{
-              justifyContent: 'center', alignItems: 'center', top: scaleHeight(30), height: 165, width: 165,
+              justifyContent: 'center', alignItems: 'center', top: scaleWidth(35), height: 165, width: 165,
             }}
             >
               <Circle
@@ -86,19 +86,19 @@ export default class SlideMenu extends React.Component {
                 color="rgb(169, 222, 81)"
                 unfilledColor="rgb(196, 196, 196)"
                 borderWidth={0}
-                size={scaleHeight(165)}
+                size={scaleWidth(165)}
                 animated
                 animating={false}
                 thickness={7}
                 progress={this.state.numerator / this.state.denominator}
               />
-              <View height={scaleHeight(130)}
+              <View height={scaleWidth(130)}
                 width={scaleWidth(130)}
                 style={{
- backgroundColor: 'white', borderRadius: 65, alignItems: 'center', justifyContent: 'center',
+ backgroundColor: 'white', borderRadius: 90, alignItems: 'center', justifyContent: 'center',
 }}
               >
-                <Avatar height={scaleHeight(110)} width={scaleWidth(110)} id={this.state.user.id} />
+                <Avatar height={scaleWidth(110)} width={scaleWidth(110)} id={this.state.user.id} />
               </View>
             </View>
             <View>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   exitButton: {
     position: 'absolute',
-    top: 10,
+    top: 20,
     right: 15,
     zIndex: 2,
   },
@@ -201,6 +201,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '35%',
     alignItems: 'center',
+    paddingTop: scaleHeight(30),
   },
   secondHalf: {
     justifyContent: 'space-around',

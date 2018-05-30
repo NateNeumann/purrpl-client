@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, Dimensions, DeviceEventEmitter } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, DeviceEventEmitter } from 'react-native'
 import moment from 'moment'
 import { fetchDailyReminders } from './../actions/reminder-actions'
 import getWeather from './../actions/weather-actions'
@@ -9,7 +9,6 @@ import SlideMenu from './../components/SlideMenu'
 import Avatar from './../components/Avatar'
 import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
-const { width } = Dimensions.get('window')
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -56,8 +55,7 @@ export default class Home extends React.Component {
           data={this.state.reminders}
           renderItem={({ item }) => {
             return (
-              // Not sure why this is width * .3 and not just 30%? -Nate
-              <View style={[styles.checkContainer, { marginLeft: width * 0.3, justifyContent: 'flex-start' }]}>
+              <View style={[styles.checkContainer, { marginLeft: '10%', justifyContent: 'flex-start' }]}>
                 <Checkbox
                   user={this.state.user}
                   item={item}
@@ -103,11 +101,11 @@ export default class Home extends React.Component {
               <View style={styles.speechBubble}>
                 <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
-              <View style={{ position: 'absolute', left: scaleWidth(10), bottom: scaleHeight(5) }}>
-                <Avatar height={scaleHeight(200)} width={scaleWidth(200)} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
+              <View style={{ position: 'absolute', left: scaleWidth(80), top: scaleWidth(-30) }}>
+                <Avatar height={scaleWidth(220)} width={scaleWidth(220)} zIndex={-1} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
               </View>
             </View>
-            <View style={{ marginBottom: '15%', height: '40%' }}>
+            <View style={styles.notifContainer}>
               {this.renderRemindersChecklist()}
             </View>
           </View>
@@ -118,6 +116,13 @@ export default class Home extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  notifContainer: {
+    padding: scaleWidth(10),
+    height: scaleHeight(150),
+    backgroundColor: '#D5F2FF',
+    borderRadius: 20,
+    margin: scaleWidth(20),
+  },
   container: {
     backgroundColor: '#FFF',
     height: '100%',
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir Next',
     fontSize: lesserScalar(24),
     marginTop: scaleHeight(15),
-    marginLeft: scaleWidth(105),
+    marginLeft: scaleWidth(100),
   },
   welcomeContainer: {
     alignItems: 'flex-end',
@@ -149,7 +154,7 @@ const styles = StyleSheet.create({
     marginLeft: scaleWidth(-120),
   },
   animalUpdate: {
-    fontSize: lesserScalar(20),
+    fontSize: lesserScalar(18),
     fontFamily: 'raleway-regular',
     position: 'absolute',
     textAlign: 'center',
@@ -159,13 +164,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: scaleHeight(-30),
-    right: scaleWidth(20),
-    height: scaleHeight(110),
+    marginTop: scaleHeight(-130),
+    left: scaleWidth(30),
+    height: scaleHeight(100),
     width: scaleWidth(150),
     padding: lesserScalar(10),
-    borderWidth: 3,
-    borderColor: '#053867',
+    borderWidth: 1,
+    borderColor: '#A87FFF',
     borderRadius: lesserScalar(80),
   },
   checkItemsContainer: {

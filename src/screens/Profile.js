@@ -71,13 +71,13 @@ export default class Profile extends React.Component {
                     alignItems: 'center',
                     justifyContent: 'center',
                     height: scaleHeight(55),
-                    width: scaleWidth(55),
+                    width: scaleHeight(55),
                     borderRadius: scaleHeight(27),
                     backgroundColor: '#F1EAFF',
-                    marginLeft: scaleWidth(-30),
+                    marginLeft: scaleWidth(-10),
                   }}
                   >
-                    <Avatar height={scaleHeight(35)} width={scaleWidth(35)} id={item.senderId} />
+                    <Avatar height={scaleHeight(35)} width={scaleHeight(35)} id={item.senderId} />
                   </View>
                   <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
                 </View>
@@ -100,7 +100,7 @@ export default class Profile extends React.Component {
             <Text style={styles.header}>PROFILE</Text>
           </View>
           <View style={styles.profileContainer}>
-            <Avatar height={scaleHeight(110)} width={scaleWidth(110)} id={this.state.user.id} />
+            <Avatar height={scaleHeight(110)} width={scaleHeight(110)} id={this.state.user.id} />
           </View>
           <Text style={styles.nameText}>{this.state.user.name}</Text>
           <Text style={styles.addedText}>How are you feeling today?</Text>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   nameText: {
     color: '#053867',
-    fontSize: 24,
+    fontSize: 30,
     alignSelf: 'center',
     fontWeight: 'bold',
     fontFamily: 'raleway-bold',
@@ -206,7 +206,8 @@ const styles = StyleSheet.create({
     color: '#053867',
     fontSize: 16,
     fontFamily: 'raleway-regular',
-    marginLeft: '-18%',
+    marginLeft: '0%',
+    width: scaleWidth(200),
   },
   notifImage: {
     resizeMode: 'contain',
@@ -218,7 +219,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    width: scaleWidth(160),
+    width: scaleHeight(160),
     height: scaleHeight(160),
     margin: scaleHeight(20),
     borderRadius: scaleHeight(80),
