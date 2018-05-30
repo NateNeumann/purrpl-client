@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/api'
-// const ROOT_URL = 'http://localhost:9090/api'
+// const ROOT_URL = 'https://project-api-black-mirror.herokuapp.com/api'
+const ROOT_URL = 'http://localhost:9090/api'
 
 export function fetchFriends(id) {
   return new Promise((resolve, reject) => {
@@ -16,6 +16,9 @@ export function fetchFriends(id) {
 export function addFriend(id, username, action) {
   return new Promise((resolve, reject) => {
     axios.put(`${ROOT_URL}/friends/${id}`, { username, action: { action } }).then((response) => {
+      if (response.status === 208) {
+        resolve(response.status)
+      }
       resolve(response.data)
     }).catch((error) => {
       reject(error)
