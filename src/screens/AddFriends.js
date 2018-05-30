@@ -97,6 +97,8 @@ export default class AddFriends extends React.Component {
         </View>
         <View style={styles.searchBarContainer}>
           <TextInput
+            style={styles.searchBar}
+            selectionColor="#053867"
             autoCapitalize="none"
             placeholder="Search for Friends"
             onChangeText={text => this.handleSearch(text)}
@@ -118,12 +120,12 @@ export default class AddFriends extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
   headerContainer: {
     backgroundColor: '#EF8E8E',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir Next',
     fontSize: lesserScalar(24),
     marginTop: scaleHeight(15),
-    marginLeft: scaleWidth(105),
+    marginLeft: scaleWidth(65),
   },
   searchBarContainer: {
     flexDirection: 'row',
@@ -143,23 +145,23 @@ const styles = StyleSheet.create({
   searchBar: {
     alignSelf: 'center',
     width: '80%',
-    fontSize: 22,
+    fontSize: lesserScalar(22),
     color: '#053867',
-    marginTop: 20,
-    paddingBottom: 5,
+    marginTop: scaleHeight(20),
+    paddingBottom: scaleHeight(5),
     borderBottomWidth: 2,
     borderBottomColor: '#053867',
   },
   searchIcon: {
-    height: 30,
-    width: 30,
-    marginTop: 20,
-    marginLeft: 10,
+    height: scaleHeight(30),
+    width: scaleWidth(30),
+    marginTop: scaleHeight(20),
+    marginLeft: scaleWidth(10),
   },
   actionIcon: {
-    height: 40,
-    width: 40,
-    marginRight: 15,
+    height: scaleHeight(40),
+    width: scaleWidth(40),
+    marginRight: scaleWidth(15),
   },
   friendContainer: {
     flexDirection: 'row',
