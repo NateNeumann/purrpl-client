@@ -6,6 +6,7 @@ import Avatar from './../components/Avatar'
 import LoadingScreen from './../components/LoadingScreen'
 import { getFormattedNotifications } from './../actions/user-actions'
 import { getFeelingToday } from '../actions/progress-actions'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -70,7 +71,7 @@ export default class Profile extends React.Component {
                 >
                   <View style={styles.notifBlock}>
                     <View style={{ marginLeft: 40 }}>
-                      <Avatar height={40} width={40} id={item.id} />
+                      <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
                     </View>
                     <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
                   </View>
@@ -103,6 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: '5%',
     marginLeft: '26%',
+    fontFamily: 'Avenir Next',
   },
   nameText: {
     color: '#053867',

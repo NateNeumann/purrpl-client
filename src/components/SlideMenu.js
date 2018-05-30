@@ -4,7 +4,7 @@ import moment from 'moment'
 import { Circle } from 'react-native-progress'
 import Avatar from './../components/Avatar'
 import { getRemainders } from './../actions/reminder-actions'
-import { scaleHeight } from './../assets/scaling'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class SlideMenu extends React.Component {
   constructor(props) {
@@ -67,7 +67,7 @@ export default class SlideMenu extends React.Component {
                 justifyContent: 'center',
               }}
             >
-              <Avatar height={100} width={100} id={this.state.user.id} />
+              <Avatar height={scaleHeight(100)} width={scaleWidth(100)} id={this.state.user.id} />
             </View>
             <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
           </View>

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 20,
     marginLeft: 105,
-    fontFamily: 'raleway-bold',
+    fontFamily: 'Avenir Next',
   },
   whiteContainer: {
     flexDirection: 'row',

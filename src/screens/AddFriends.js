@@ -4,6 +4,7 @@ import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class AddFriends extends React.Component {
   static navigationOptions = { header: null }
@@ -69,7 +70,7 @@ export default class AddFriends extends React.Component {
                   }}
                 >
                   <View style={styles.friendContainer}>
-                    <Avatar height={40} width={40} id={item.id} />
+                    <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
                     <View style={{ alignItems: 'flex-start' }}>
                       <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                       <Text style={styles.userAt}>@{item.username}</Text>
