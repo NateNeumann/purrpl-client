@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, DeviceEventEmitter } from 'react-native'
 import getAvatar from './../actions/avatar-actions'
 
 export default class Avatar extends React.Component {
@@ -13,6 +13,13 @@ export default class Avatar extends React.Component {
     }
   }
   componentWillMount = () => {
+    DeviceEventEmitter.addListener('updateAvatar', (e) => {
+      this.updateAvatar()
+    })
+    this.updateAvatar()
+  }
+
+  updateAvatar = () => {
     getAvatar(this.state.userId).then((response) => {
       this.setState({ avatar: response })
       if (this.props.handleSpeechBubble) {

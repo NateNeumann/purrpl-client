@@ -60,7 +60,7 @@ class SelectTime extends Component {
   componentDidMount = () => {
     DeviceEventEmitter.addListener('updatedActive', (e) => {
       updateTimes(this.props.reminder.id, this.state.selectedTimes)
-      DeviceEventEmitter.emit('updatedReminders');
+      DeviceEventEmitter.emit('updatedReminders')
     });
   }
 
@@ -68,7 +68,7 @@ class SelectTime extends Component {
     // selectedTimes is array of { label, value }
     this.setState({ selectedTimes })
     updateTimes(this.props.reminder.id, selectedTimes)
-    DeviceEventEmitter.emit('updatedReminders');
+    DeviceEventEmitter.emit('updatedReminders')
   }
 
   render() {
