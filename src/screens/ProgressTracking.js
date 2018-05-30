@@ -54,7 +54,7 @@ export default class ProgressTracking extends React.Component {
     }
     const contentInset = { top: 20, bottom: 20 }
     return (
-      <View style={{ height: '100%' }}>
+      <View style={{ height: '100%', backgroundColor: '#FFFFFF' }}>
         <View style={styles.headerContainer}>
           <Back navigation={this.props.navigation} />
           <Text style={styles.header}>PROGRESS TRACKER</Text>
