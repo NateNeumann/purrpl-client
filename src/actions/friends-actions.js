@@ -16,6 +16,9 @@ export function fetchFriends(id) {
 export function addFriend(id, username, action) {
   return new Promise((resolve, reject) => {
     axios.put(`${ROOT_URL}/friends/${id}`, { username, action: { action } }).then((response) => {
+      if (response.status === 208) {
+        resolve(response.status)
+      }
       resolve(response.data)
     }).catch((error) => {
       reject(error)

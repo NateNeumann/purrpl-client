@@ -24,6 +24,7 @@ export default class Home extends React.Component {
   }
 
   componentDidMount = () => {
+    console.log(this.state.user)
     DeviceEventEmitter.addListener('updatedReminders', (e) => {
       this.updateReminders()
     });
