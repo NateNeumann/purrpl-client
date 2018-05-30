@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
 import Dropdown from './../components/Dropdown'
+import LoadingScreen from './../components/LoadingScreen'
 import { toggleNotifications, fetchUser } from './../actions/user-actions'
 import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
@@ -76,7 +77,7 @@ export default class Settings extends React.Component {
         </View>
       )
     } else {
-      return null
+      return <LoadingScreen />
     }
   }
 }
