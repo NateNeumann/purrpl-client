@@ -55,6 +55,8 @@ const RootStack = createStackNavigator({
   Profile: { screen: Profile },
 })
 
+console.disableYellowBox = true
+
 class App extends React.Component {
   constructor(props) {
     super(props);
