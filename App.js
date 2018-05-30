@@ -68,6 +68,7 @@ class App extends React.Component {
       'raleway-regular': require('./src/assets/fonts/Raleway-Regular.ttf'),
       'raleway-semi-bold': require('./src/assets/fonts/Raleway-SemiBold.ttf'),
       'josefin-sans-bold': require('./src/assets/fonts/JosefinSans-Bold.ttf'),
+      'Avenir Next': require('./src/assets/fonts/AvenirNext-Regular.ttf'),
     });
     this.setState({ loading: false });
   }
