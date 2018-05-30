@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Image, Animated, AsyncStorage, PanResponder } from 'react-native'
 import moment from 'moment'
 import { Circle } from 'react-native-progress'
 import Avatar from './../components/Avatar'
@@ -22,10 +22,23 @@ export default class SlideMenu extends React.Component {
       this.setState({ numerator: response.numerator })
       this.setState({ denominator: response.denominator ? response.denominator : 1 })
     })
-  }
 
-  render() {
-    const { navigate } = this.props.navigation
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (evt, gestureState) => false,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        return gestureState.dx < -5
+      },
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
+      onPanResponderTerminationRequest: (evt, gestureState) => false,
+      onPanResponderRelease: (evt, gestureState) => {
+        if (gestureState.dx < 0) {
+          this.swipeOut()
+        }
+      },
+    })
+  }
+  componentDidUpdate = () => {
     let toValue = -100
     if (this.props.visible) {
       toValue = 0
@@ -37,19 +50,37 @@ export default class SlideMenu extends React.Component {
         tension: 2,
       },
     ).start();
+  }
+
+  swipeOut = () => {
+    const toValue = -300
+    Animated.spring(
+      this.state.bounceValue,
+      {
+        toValue,
+        tension: 3,
+      },
+    ).start(() => {
+      this.props.toggleMenu()
+    })
+  }
+
+  render() {
+    const { navigate } = this.props.navigation
     if (this.state.numerator !== null && this.state.denominator !== null) {
       return (
-        <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]}>
+        <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]} {...this._panResponder.panHandlers}>
           <TouchableOpacity
             style={styles.exitButton}
-            onPress={this.props.toggleMenu}
+            onPress={this.swipeOut}
           >
-            <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
+            <Image style={{ height: scaleHeight(50), width: scaleHeight(50) }} source={require('./../assets/images/x.png')} />
           </TouchableOpacity>
           <View style={styles.firstHalf}>
             <Circle
               style={styles.progressCircle}
               color="rgb(169, 222, 81)"
+              unfilledColor="rgb(196, 196, 196)"
               borderWidth={0}
               size={scaleHeight(135)}
               animated
