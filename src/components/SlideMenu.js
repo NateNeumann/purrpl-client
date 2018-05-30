@@ -24,11 +24,13 @@ export default class SlideMenu extends React.Component {
     })
 
     this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onStartShouldSetPanResponder: (evt, gestureState) => false,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        return gestureState.dx < -5
+      },
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
+      onPanResponderTerminationRequest: (evt, gestureState) => false,
       onPanResponderRelease: (evt, gestureState) => {
         if (gestureState.dx < 0) {
           const toValue = -300
