@@ -204,9 +204,10 @@ const styles = StyleSheet.create({
   },
   notifText: {
     color: '#053867',
-    fontSize: 16,
+    fontSize: 17,
     fontFamily: 'raleway-regular',
     marginLeft: '0%',
+    marginTop: scaleHeight(5),
     width: scaleWidth(200),
   },
   notifImage: {

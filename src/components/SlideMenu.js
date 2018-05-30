@@ -123,7 +123,7 @@ export default class SlideMenu extends React.Component {
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/profile.png')} />
+                  <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/prof.png')} />
                   <Text style={styles.optionText}>PROFILE</Text>
                 </View>
               </TouchableOpacity>
@@ -147,7 +147,7 @@ export default class SlideMenu extends React.Component {
                 }}
               >
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image style={{ height: 30, width: 30, marginRight: 10 }} source={require('./../assets/images/settings.png')} />
+                  <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/set.png')} />
                   <Text style={styles.optionText}>SETTINGS</Text>
                 </View>
               </TouchableOpacity>
@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: 'raleway-semi-bold',
     color: '#B0A3B9',
+    marginLeft: scaleWidth(10),
   },
   logoutButton: {
     width: '80%',
