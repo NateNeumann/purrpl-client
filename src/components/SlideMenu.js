@@ -80,6 +80,7 @@ export default class SlideMenu extends React.Component {
             <Circle
               style={styles.progressCircle}
               color="rgb(169, 222, 81)"
+              unfilledColor="rgb(196, 196, 196)"
               borderWidth={0}
               size={scaleHeight(135)}
               animated
