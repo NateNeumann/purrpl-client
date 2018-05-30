@@ -77,30 +77,33 @@ export default class SlideMenu extends React.Component {
             <Image style={{ height: scaleHeight(50), width: scaleHeight(50) }} source={require('./../assets/images/x.png')} />
           </TouchableOpacity>
           <View style={styles.firstHalf}>
-            <Circle
-              style={styles.progressCircle}
-              color="rgb(169, 222, 81)"
-              unfilledColor="rgb(196, 196, 196)"
-              borderWidth={0}
-              size={scaleHeight(135)}
-              animated
-              animating={false}
-              thickness={7}
-              progress={this.state.numerator / this.state.denominator}
-            />
-            <View
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 60,
-                height: 120,
-                width: 120,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+            <View style={{
+              justifyContent: 'center', alignItems: 'center', top: scaleHeight(30), height: 165, width: 165,
+            }}
             >
-              <Avatar height={scaleHeight(100)} width={scaleWidth(100)} id={this.state.user.id} />
+              <Circle
+                style={styles.progressCircle}
+                color="rgb(169, 222, 81)"
+                unfilledColor="rgb(196, 196, 196)"
+                borderWidth={0}
+                size={scaleHeight(165)}
+                animated
+                animating={false}
+                thickness={7}
+                progress={this.state.numerator / this.state.denominator}
+              />
+              <View height={scaleHeight(130)}
+                width={scaleWidth(130)}
+                style={{
+ backgroundColor: 'white', borderRadius: 65, alignItems: 'center', justifyContent: 'center',
+}}
+              >
+                <Avatar height={scaleHeight(110)} width={scaleWidth(110)} id={this.state.user.id} />
+              </View>
             </View>
-            <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
+            <View>
+              <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
+            </View>
           </View>
           <View style={styles.secondHalf}>
             <View style={{ width: '100%', alignItems: 'center' }}>
@@ -177,10 +180,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   progressCircle: {
+    alignSelf: 'center',
+    height: 165,
     position: 'absolute',
-    top: scaleHeight(55.5),
-    height: 135,
-    width: 135,
+    width: 165,
   },
   userStatus: {
     width: 120,
@@ -191,10 +194,10 @@ const styles = StyleSheet.create({
     color: '#053867',
     fontSize: 20,
     fontFamily: 'raleway-semi-bold',
-    marginTop: 10,
+    marginTop: 40,
   },
   firstHalf: {
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     width: '100%',
     height: '35%',
     alignItems: 'center',
@@ -220,7 +223,7 @@ const styles = StyleSheet.create({
   logoutButton: {
     width: '80%',
     height: 50,
-    backgroundColor: '#B0A3B9',
+    backgroundColor: '#8D77A1',
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
