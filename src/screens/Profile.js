@@ -37,6 +37,7 @@ export default class Profile extends React.Component {
     DeviceEventEmitter.addListener('updateNotifications', (e) => {
       this.updateNotifications()
     })
+    this.updateNotifications()
   }
 
   updateNotifications = () => {

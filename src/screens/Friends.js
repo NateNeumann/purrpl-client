@@ -23,6 +23,7 @@ export default class Friends extends React.Component {
     DeviceEventEmitter.addListener('updateFriends', (e) => {
       this.updateFriends()
     })
+    this.updateFriends()
   }
 
   updateFriends = () => {
