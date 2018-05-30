@@ -103,8 +103,8 @@ export default class Home extends React.Component {
               <View style={styles.speechBubble}>
                 <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
-              <View style={{ position: 'absolute', left: width * 0.05 }}>
-                <Avatar height={scaleHeight(150)} width={scaleWidth(150)} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
+              <View style={{ position: 'absolute', left: scaleWidth(10), bottom: scaleHeight(5) }}>
+                <Avatar height={scaleHeight(200)} width={scaleWidth(200)} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
               </View>
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
