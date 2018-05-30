@@ -6,6 +6,7 @@ import Avatar from './../components/Avatar'
 import LoadingScreen from './../components/LoadingScreen'
 import { getFormattedNotifications } from './../actions/user-actions'
 import { getFeelingToday, addFeelingToday } from '../actions/progress-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class Profile extends React.Component {
   static navigationOptions = { header: null };
@@ -14,10 +15,7 @@ export default class Profile extends React.Component {
 
     this.state = {
       user: this.props.navigation.state.params.user,
-      notifications: null,
-      rating: null,
     }
-    this.ratingCompleted = this.ratingCompleted.bind(this)
   }
 
   componentWillMount = () => {
@@ -39,7 +37,7 @@ export default class Profile extends React.Component {
     return `_${Math.random().toString(36).substr(2, 9)}`
   }
 
-  ratingCompleted(rating) {
+  ratingCompleted = (rating) => {
     addFeelingToday(this.state.user.id, rating)
   }
 
@@ -77,7 +75,7 @@ export default class Profile extends React.Component {
                 >
                   <View style={styles.notifBlock}>
                     <View style={{ marginLeft: 40 }}>
-                      <Avatar height={40} width={40} id={item.id} />
+                      <Avatar height={scaleHeight(40)} width={scaleWidth(40)} id={item.id} />
                     </View>
                     <Text style={styles.notifText}><Text style={styles.bold}>{item.message}</Text></Text>
                   </View>
@@ -107,9 +105,10 @@ const styles = StyleSheet.create({
   header: {
     color: '#FFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: '5%',
-    marginLeft: '26%',
+    fontFamily: 'Avenir Next',
+    fontSize: lesserScalar(24),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(105),
   },
   nameText: {
     color: '#053867',
@@ -176,5 +175,12 @@ const styles = StyleSheet.create({
     color: '#053867',
     fontSize: 16,
     fontFamily: 'raleway-regular',
+    marginLeft: '-18%',
+  },
+  notifImage: {
+    resizeMode: 'contain',
+    height: '100%',
+    marginLeft: '-21%',
+    marginTop: '-1%',
   },
 })

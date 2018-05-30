@@ -104,7 +104,7 @@ export default class Home extends React.Component {
                 <Text style={styles.animalUpdate}>{this.state.speechBubble}</Text>
               </View>
               <View style={{ position: 'absolute', left: width * 0.05 }}>
-                <Avatar height={150} width={150} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
+                <Avatar height={scaleHeight(150)} width={scaleWidth(150)} avatar={this.state.avatar} id={this.state.user.id} handleSpeechBubble={this.handleSpeechBubble} />
               </View>
             </View>
             <View style={{ marginBottom: '15%', height: '40%' }}>
@@ -130,10 +130,11 @@ const styles = StyleSheet.create({
   },
   header: {
     color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontFamily: 'Avenir Next',
     fontSize: lesserScalar(24),
-    fontFamily: 'raleway-bold',
-    marginTop: scaleHeight(20),
-    marginLeft: scaleWidth(120),
+    marginTop: scaleHeight(15),
+    marginLeft: scaleWidth(105),
   },
   welcomeContainer: {
     alignItems: 'flex-end',

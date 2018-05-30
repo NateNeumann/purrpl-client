@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, Alert, Keyboard, TouchableWithoutFeedback, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { loginUser } from './../actions/user-actions'
 import Back from './../components/Back'
@@ -110,48 +111,49 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cat: {
-    height: 115,
-    width: 107,
-    marginTop: 20,
+    resizeMode: 'contain',
+    height: responsiveHeight(32),
+    width: responsiveWidth(32),
+    marginTop: responsiveHeight(-3.5),
   },
   nameText: {
     color: 'white',
     fontFamily: 'raleway-medium',
-    fontSize: 24,
-    marginTop: 20,
+    fontSize: responsiveFontSize(3),
+    marginTop: responsiveHeight(2),
   },
   bold: {
     fontFamily: 'raleway-bold',
   },
   input: {
     borderColor: 'white',
-    borderBottomWidth: 1.3,
-    color: 'white',
+    borderBottomWidth: responsiveWidth(0.3),
+    color: '#A87FFF',
     fontFamily: 'raleway-medium',
-    fontSize: 22,
-    height: 40,
-    margin: 15,
+    fontSize: responsiveFontSize(2.7),
+    height: responsiveHeight(5),
+    margin: responsiveWidth(3.5),
     textAlign: 'center',
-    width: 275,
+    width: responsiveWidth(80),
   },
   button: {
     backgroundColor: '#A87FFF',
-    borderRadius: 70,
-    marginTop: 30,
-    paddingBottom: 15,
-    paddingLeft: 40,
-    paddingRight: 40,
-    paddingTop: 15,
+    borderRadius: responsiveWidth(10),
+    marginTop: responsiveHeight(4),
+    paddingBottom: responsiveHeight(3),
+    paddingLeft: responsiveWidth(7),
+    paddingRight: responsiveWidth(7),
+    paddingTop: responsiveHeight(3),
   },
   buttonText: {
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: 24,
+    fontSize: responsiveFontSize(2.7),
   },
   hiText: {
     color: '#A87FFF',
     fontFamily: 'josefin-sans-bold',
-    fontSize: 28,
-    marginTop: 20,
+    fontSize: responsiveFontSize(4),
+    marginTop: responsiveHeight(-2),
   },
 });

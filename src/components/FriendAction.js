@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import { sendAction } from './../actions/friends-actions'
+import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class FriendAction extends React.Component {
   render() {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     alignItems: 'flex-start',
-    marginBottom: 20,
+    marginBottom: scaleHeight(20),
     width: '60%',
   },
   actionContainer: {
@@ -37,21 +38,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icon: {
-    height: 35,
-    width: 35,
+    height: scaleHeight(35),
+    width: scaleWidth(35),
+    resizeMode: 'contain',
   },
   iconContainer: {
-    height: 70,
-    width: 70,
+    height: scaleHeight(70),
+    width: scaleWidth(70),
     backgroundColor: '#FFFFFF',
-    borderRadius: 40,
-    marginRight: 20,
+    borderRadius: scaleHeight(40),
+    marginRight: scaleWidth(20),
     alignItems: 'center',
     justifyContent: 'center',
   },
   text: {
     fontFamily: 'raleway-semi-bold',
-    fontSize: 26,
+    fontSize: lesserScalar(26),
     color: '#053867',
   },
 })

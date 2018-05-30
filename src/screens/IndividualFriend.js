@@ -70,7 +70,7 @@ export default class IndividualFriend extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
   headerContainer: {
@@ -83,8 +83,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: lesserScalar(24),
-    marginTop: scaleHeight(20),
+    marginTop: scaleHeight(15),
     marginLeft: scaleWidth(105),
+    fontFamily: 'Avenir Next',
   },
   friendContainer: {
     flexDirection: 'row',

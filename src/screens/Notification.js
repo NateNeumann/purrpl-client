@@ -5,6 +5,7 @@ import Back from './../components/Back'
 import Avatar from './../components/Avatar'
 import { acceptFriend } from './../actions/friends-actions'
 import { deleteNotification } from './../actions/user-actions'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class Notification extends React.Component {
   static navigationOptions = { header: null };
@@ -28,7 +29,7 @@ export default class Notification extends React.Component {
           <Text style={styles.header}>NOTIFICATION</Text>
         </View>
         <View style={{ marginTop: 50, marginBottom: 50, alignItems: 'center' }}>
-          <Avatar height={160} width={160} id={this.state.item.id} />
+          <Avatar height={scaleHeight(160)} width={scaleWidth(160)} id={this.state.item.id} />
         </View>
         <Text style={styles.nameText}>{this.state.item.senderUsername}</Text>
         <Text style={styles.addedText}> added you</Text>
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginTop: 20,
     marginLeft: 70,
+    fontFamily: 'Avenir Next',
   },
   nameText: {
     color: '#053867',

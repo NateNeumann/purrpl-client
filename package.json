@@ -33,6 +33,7 @@
     "react-native-multiple-select-list": "^1.0.4",
     "react-native-progress": "^3.4.0",
     "react-native-ratings": "^5.3.0",
+    "react-native-responsive-dimensions": "^1.0.2",
     "react-native-select-multiple": "^1.2.0",
     "react-native-svg": "^6.3.1",
     "react-native-svg-charts": "^5.0.0",

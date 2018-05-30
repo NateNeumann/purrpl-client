@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, TouchableOpacity, AsyncStorage } from 'react-native'
 import { LinearGradient } from 'expo'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import { fetchUser } from './../actions/user-actions'
 
 export default class Landing extends Component {
@@ -79,47 +80,49 @@ const styles = StyleSheet.create({
   },
   cat: {
     alignSelf: 'flex-end',
-    height: 305,
-    width: 300,
+    resizeMode: 'contain',
+    height: '110%',
+    width: '110%',
+    marginRight: '-18%',
   },
   title: {
     color: 'white',
     fontFamily: 'josefin-sans-bold',
-    fontSize: 100,
-    marginTop: 50,
+    fontSize: responsiveFontSize(13),
+    marginTop: responsiveHeight(8),
     textAlign: 'center',
   },
   subtitle: {
     color: 'white',
     fontFamily: 'raleway-regular',
-    fontSize: 24,
-    marginLeft: 40,
-    marginRight: 40,
-    marginTop: 15,
+    fontSize: responsiveFontSize(3),
+    marginLeft: responsiveWidth(20),
+    marginRight: responsiveWidth(20),
+    marginTop: responsiveHeight(2),
     textAlign: 'center',
   },
   button: {
     alignSelf: 'center',
     backgroundColor: '#5B1997',
-    borderRadius: 5,
-    marginTop: 30,
-    paddingBottom: 15,
-    paddingLeft: 35,
-    paddingRight: 35,
-    paddingTop: 15,
+    borderRadius: responsiveHeight(0.8),
+    marginTop: responsiveHeight(4),
+    paddingBottom: responsiveHeight(2.2),
+    paddingLeft: responsiveHeight(6),
+    paddingRight: responsiveHeight(6),
+    paddingTop: responsiveHeight(2.2),
     width: '80%',
   },
   buttonText: {
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: 22,
+    fontSize: responsiveFontSize(2.8),
     textAlign: 'center',
   },
   secondButtonText: {
     alignSelf: 'center',
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: 18,
-    marginTop: 15,
+    fontSize: responsiveFontSize(2.5),
+    marginTop: responsiveHeight(1.5),
   },
 });

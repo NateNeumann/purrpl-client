@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, DeviceEventEmitter } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
+import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
 import LoadingScreen from './../components/LoadingScreen'
@@ -80,47 +81,49 @@ export default class EditReminder extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFF',
     height: '100%',
   },
   headerContainer: {
     backgroundColor: '#FFC47F',
-    height: 80,
+    height: responsiveHeight(11),
     flexDirection: 'row',
     alignItems: 'center',
   },
   header: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 24,
-    marginTop: 20,
-    marginLeft: 90,
+    fontSize: responsiveFontSize(3),
+    marginTop: responsiveHeight(2),
+    marginLeft: responsiveWidth(24),
+    fontFamily: 'Avenir Next',
   },
   toggleContainer: {
-    marginLeft: 20,
-    marginTop: 18,
+    marginLeft: responsiveWidth(5),
+    marginTop: responsiveWidth(7),
     alignSelf: 'center',
   },
   optionsText: {
     color: '#053867',
-    fontSize: 25,
-    marginTop: 20,
+    fontSize: responsiveFontSize(3),
+    marginTop: responsiveWidth(5),
     alignSelf: 'flex-start',
   },
   timesText: {
-    color: '#053867',
-    fontSize: 25,
-    marginTop: 20,
-    marginLeft: 10,
+    color: '#575757',
+    fontSize: responsiveFontSize(3.5),
+    marginTop: responsiveWidth(5),
+    marginLeft: responsiveWidth(2),
+    fontFamily: 'raleway-regular',
     alignSelf: 'flex-start',
   },
   activeContainer: {
     flexDirection: 'row',
   },
   scrollHeight: {
-    height: 220,
-    width: 245,
-    marginTop: 30,
+    height: responsiveHeight(40),
+    width: responsiveWidth(70),
+    marginTop: responsiveWidth(5),
   },
   welcomeContainer: {
     flexDirection: 'row',
@@ -149,43 +152,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'raleway-semi-bold',
   },
-  speechBubble: {
-    display: 'flex',
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 10,
-    height: 120,
-    width: 130,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-  },
-  checkItemContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    backgroundColor: 'transparent',
-  },
-  checkContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '50%',
-    backgroundColor: 'transparent',
-  },
-  checkboxContainer: {
-    backgroundColor: '#F4FCFF',
-    borderColor: '#B2CBFB',
-    borderWidth: 2,
-    width: 20,
-    height: 20,
-  },
   reminderText: {
     fontSize: 20,
     fontFamily: 'raleway-regular',
     marginTop: 20,
+    color: '#575757',
   },
   row: {
     flexDirection: 'row',
