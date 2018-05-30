@@ -66,7 +66,7 @@ export default class SlideMenu extends React.Component {
             style={styles.exitButton}
             onPress={this.props.toggleMenu}
           >
-            <Image style={{ height: 40, width: 40 }} source={require('./../assets/images/x.png')} />
+            <Image style={{ height: scaleHeight(50), width: scaleHeight(50) }} source={require('./../assets/images/x.png')} />
           </TouchableOpacity>
           <View style={styles.firstHalf}>
             <Circle
