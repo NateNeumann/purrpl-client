@@ -39,6 +39,7 @@ export default class Notification extends React.Component {
               acceptFriend(this.state.user.id, this.state.item.senderId).then((response) => {
                 deleteNotification(this.state.user.id, this.state.item.id).then((response1) => {
                   DeviceEventEmitter.emit('updateNotifications')
+                  DeviceEventEmitter.emit('updateFriends')
                   this.props.navigation.pop()
                 })
               })
