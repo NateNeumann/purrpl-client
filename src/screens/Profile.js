@@ -21,9 +21,7 @@ export default class Profile extends React.Component {
   }
 
   componentWillMount = () => {
-    // console.log('one')
     getFeelingToday(this.state.user.id).then((progress) => {
-      // console.log('two')
       const last = progress.feelingToday.length > 1 ? progress.feelingToday[progress.feelingToday.length - 1] : 0
       const today = new Date();
       if (progress.date === today.getDate()) {
@@ -46,7 +44,6 @@ export default class Profile extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const { navigate } = this.props.navigation
     if (this.state.notifications && this.state.rating != null) {
       return (
