@@ -38,6 +38,19 @@ export default class SlideMenu extends React.Component {
       },
     })
   }
+  componentDidUpdate = () => {
+    let toValue = -100
+    if (this.props.visible) {
+      toValue = 0
+    }
+    Animated.spring(
+      this.state.bounceValue,
+      {
+        toValue,
+        tension: 2,
+      },
+    ).start();
+  }
 
   swipeOut = () => {
     const toValue = -300
@@ -54,17 +67,6 @@ export default class SlideMenu extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation
-    let toValue = -100
-    if (this.props.visible) {
-      toValue = 0
-    }
-    Animated.spring(
-      this.state.bounceValue,
-      {
-        toValue,
-        tension: 2,
-      },
-    ).start();
     if (this.state.numerator !== null && this.state.denominator !== null) {
       return (
         <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]} {...this._panResponder.panHandlers}>

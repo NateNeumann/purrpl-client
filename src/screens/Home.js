@@ -46,7 +46,6 @@ export default class Home extends React.Component {
   }
 
   toggleMenu = () => {
-    console.log(!this.state.menuVisible)
     this.setState({ menuVisible: !this.state.menuVisible })
   }
 

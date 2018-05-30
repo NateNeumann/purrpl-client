@@ -27,7 +27,6 @@ export default class IndividualFriend extends React.Component {
     const encourage = { senderId: this.state.user.id, action: 'encourage', time: moment() }
     const affirm = { senderId: this.state.user.id, action: 'affirm', time: moment() }
     const concern = { senderId: this.state.user.id, action: 'concern', time: moment() }
-    console.log(this.props.id)
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
