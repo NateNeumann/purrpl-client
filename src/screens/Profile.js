@@ -35,6 +35,7 @@ export default class Profile extends React.Component {
     })
     getFormattedNotifications(this.state.user.id).then((response) => {
       this.setState({ notifications: response })
+      console.log(response)
     })
   }
 
