@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
 
   componentWillMount = () => {
     getFeelingToday(this.state.user.id).then((progress) => {
-      const last = progress.feelingToday[progress.feelingToday.length - 1]
+      const last = progress.feelingToday.length > 1 ? progress.feelingToday[progress.feelingToday.length - 1] : 0
       const today = new Date();
       if (progress.date === today.getDate()) {
         this.setState({ rating: last })
@@ -30,8 +30,6 @@ export default class Profile extends React.Component {
         this.setState({ rating: 0 })
       }
     })
-  }
-  componentWillMount = () => {
     getFormattedNotifications(this.state.user.id).then((response) => {
       this.setState({ notifications: response })
     })
@@ -41,17 +39,13 @@ export default class Profile extends React.Component {
     return `_${Math.random().toString(36).substr(2, 9)}`
   }
 
-  handleCheckbox = () => {
-    this.setState({ checked: !this.state.checked })
-  }
-
   ratingCompleted(rating) {
     addFeelingToday(this.state.user.id, rating)
   }
 
   render() {
     const { navigate } = this.props.navigation
-    if (this.state.notifications && this.state.rating) {
+    if (this.state.notifications && this.state.rating != null) {
       return (
         <View style={styles.container}>
           <View style={styles.headerContainer}>
