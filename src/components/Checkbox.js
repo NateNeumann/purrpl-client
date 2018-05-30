@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight, Image, DeviceEventEmitter } from 'react-native'
 import moment from 'moment'
 import { updateCompletion, fetchReminderTime } from './../actions/reminder-actions'
 
@@ -24,7 +24,7 @@ export default class Checkbox extends React.Component {
   handleCheck = () => {
     this.setState({ checked: !this.state.checked })
     const checked = !this.state.checked
-
+    DeviceEventEmitter.emit('updateAvatar')
     updateCompletion(this.props.id, moment().format('MMM D, YYYY'), this.props.value, checked)
   }
 

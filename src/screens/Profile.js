@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, DeviceEventEmitter } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
@@ -34,6 +34,13 @@ export default class Profile extends React.Component {
         this.setState({ rating: 0 })
       }
     })
+    DeviceEventEmitter.addListener('updateNotifications', (e) => {
+      this.updateNotifications()
+    })
+    this.updateNotifications()
+  }
+
+  updateNotifications = () => {
     getFormattedNotifications(this.state.user.id).then((response) => {
       this.setState({ notifications: response })
     })
