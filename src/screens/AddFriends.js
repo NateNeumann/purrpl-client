@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image, DeviceEventEmitter } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image, Alert, DeviceEventEmitter } from 'react-native'
 import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
@@ -17,9 +17,11 @@ export default class AddFriends extends React.Component {
       user: this.props.navigation.state.params.user,
     }
   }
+
   handleSearch = (text) => {
     this.setState({ searchText: text })
   }
+
   searchForUsers = () => {
     if (this.state.searchText) {
       fetchSearchedUsers(this.state.user.id, this.state.searchText).then((response) => {
@@ -27,18 +29,42 @@ export default class AddFriends extends React.Component {
       })
     }
   }
+
   handleActionPress = (fn, userId, friendUsername, action) => {
     fn(userId, friendUsername, action).then((response) => {
-      const newUsersResults = this.state.searchedUsers.map((user) => {
-        if (user.id === response.id) {
-          return response
+      if (response !== 208) {
+        const newUsersResults = this.state.searchedUsers.map((user) => {
+          if (user.id === response.id) {
+            return response
+          }
+          return user
+        })
+        this.setState({ searchedUsers: newUsersResults })
+        DeviceEventEmitter.emit('updateFriends')
+
+        if (action === 'friend') {
+          Alert.alert(
+            'Friend request sent! 🎉 ',
+            'You\'ll be notified when your friend accepts your request.',
+            [
+              { text: 'Ok', onPress: () => console.log('Ok pressed') },
+            ],
+            { cancelable: false },
+          )
         }
-        return user
-      })
-      DeviceEventEmitter.emit('updateFriends')
-      this.setState({ searchedUsers: newUsersResults })
+      } else {
+        Alert.alert(
+          'Friend request already sent 🙀',
+          'Please wait for your friend to accept the request!',
+          [
+            { text: 'Ok', onPress: () => console.log('Ok pressed') },
+          ],
+          { cancelable: false },
+        )
+      }
     })
   }
+
   renderActionButton = (item) => {
     if (item.isFriend) {
       return (
@@ -54,6 +80,7 @@ export default class AddFriends extends React.Component {
       )
     }
   }
+
   renderSearchedUsers = () => {
     const { navigate } = this.props.navigation
     if (this.state.searchedUsers) {
@@ -89,6 +116,7 @@ export default class AddFriends extends React.Component {
       return <Text>No users found :(</Text>
     }
   }
+
   render() {
     return (
       <View style={styles.container}>
