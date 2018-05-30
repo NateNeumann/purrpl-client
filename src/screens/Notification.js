@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, DeviceEventEmitter } from 'react-native'
 import Button from 'apsl-react-native-button'
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
@@ -38,6 +38,7 @@ export default class Notification extends React.Component {
             onPress={() => {
               acceptFriend(this.state.user.id, this.state.item.senderId).then((response) => {
                 deleteNotification(this.state.user.id, this.state.item.id).then((response1) => {
+                  DeviceEventEmitter.emit('updateNotifications')
                   this.props.navigation.pop()
                 })
               })

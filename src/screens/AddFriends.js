@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image, DeviceEventEmitter } from 'react-native'
 import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
@@ -35,6 +35,7 @@ export default class AddFriends extends React.Component {
         }
         return user
       })
+      DeviceEventEmitter.emit('updateFriends')
       this.setState({ searchedUsers: newUsersResults })
     })
   }

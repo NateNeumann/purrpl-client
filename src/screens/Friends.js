@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, DeviceEventEmitter} from 'react-native'
 import * as Progress from 'react-native-progress'
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
@@ -20,6 +20,12 @@ export default class Friends extends React.Component {
   }
 
   componentWillMount = () => {
+    DeviceEventEmitter.addListener('updateFriends', (e) => {
+      this.updateFriends()
+    })
+  }
+
+  updateFriends = () => {
     const userId = this.props.navigation.state.params.user.id
     fetchFriends(userId).then((value) => {
       this.setState({ friends: value.map(item => Object.assign(item, { key: item.id })) })
