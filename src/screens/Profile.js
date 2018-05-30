@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#7FD1FF',
-    height: '11%',
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },

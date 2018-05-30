@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import Back from './../components/Back'
+import { scaleHeight } from './../assets/scaling'
 
 export default class About extends React.Component {
   static navigationOptions = { header: null };
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#5B1997',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#7FD1FF',
-    height: 80,
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },

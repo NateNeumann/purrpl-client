@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react
 import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
+import { scaleHeight } from './../assets/scaling'
 
 export default class Reminders extends React.Component {
   static navigationOptions = { header: null };
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#FFC47F',
-    height: responsiveHeight(11),
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },

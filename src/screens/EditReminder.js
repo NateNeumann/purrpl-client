@@ -6,6 +6,7 @@ import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
 import LoadingScreen from './../components/LoadingScreen'
 import { fetchReminder, updateActive } from './../actions/reminder-actions'
+import { scaleHeight } from './../assets/scaling'
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#FFC47F',
-    height: responsiveHeight(11),
+    height: scaleHeight(80),
     flexDirection: 'row',
     alignItems: 'center',
   },
