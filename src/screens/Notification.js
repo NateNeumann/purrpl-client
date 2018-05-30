@@ -59,7 +59,7 @@ fontSize: 20, color: '#FFF', fontWeight: 'bold', fontFamily: 'raleway-bold',
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
   headerContainer: {
