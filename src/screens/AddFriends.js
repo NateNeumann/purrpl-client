@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image, Alert } from 'react-native'
 import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
@@ -45,7 +45,11 @@ export default class AddFriends extends React.Component {
       )
     } else {
       return (
-        <TouchableOpacity onPress={() => this.handleActionPress(addFriend, this.state.user.id, item.username, 'friend')}>
+        <TouchableOpacity onPress={() => {
+            this.handleActionPress(addFriend, this.state.user.id, item.username, 'friend')
+            Alert.alert('Friend Request', 'Successfully sent friend request!😸')
+          }}
+        >
           <Image style={styles.actionIcon} source={require('./../assets/images/plus.png')} />
         </TouchableOpacity>
       )
