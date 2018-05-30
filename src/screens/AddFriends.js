@@ -3,6 +3,7 @@ import { StyleSheet, View, TextInput, TouchableOpacity, Text, FlatList, Image } 
 import { fetchSearchedUsers } from './../actions/user-actions'
 import { addFriend, deleteFriend } from './../actions/friends-actions'
 import Back from './../components/Back'
+import Avatar from './../components/Avatar'
 
 export default class AddFriends extends React.Component {
   static navigationOptions = { header: null }
@@ -68,10 +69,7 @@ export default class AddFriends extends React.Component {
                   }}
                 >
                   <View style={styles.friendContainer}>
-                    <Image
-                      style={styles.animal}
-                      source={require('./../assets/images/plantcircle.png')}
-                    />
+                    <Avatar height={40} width={40} id={item.id} />
                     <View style={{ alignItems: 'flex-start' }}>
                       <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                       <Text style={styles.userAt}>@{item.username}</Text>
