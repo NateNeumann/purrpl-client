@@ -51,7 +51,18 @@ export default class Friends extends React.Component {
                 })}
               >
                 <View style={styles.friendContainer}>
-                  <Avatar height={60} width={60} id={item.id} />
+                  <View
+                    style={{
+                      backgroundColor: '#F1EAFF',
+                      height: scaleHeight(80),
+                      width: scaleWidth(80),
+                      borderRadius: scaleHeight(40),
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Avatar height={scaleHeight(60)} width={scaleWidth(60)} id={item.id} />
+                  </View>
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
                     <Text style={styles.userAt}>@{item.username}</Text>
@@ -146,7 +157,7 @@ export default class Friends extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF5E7',
+    backgroundColor: '#FFFFFF',
     height: '100%',
   },
   headerContainer: {
