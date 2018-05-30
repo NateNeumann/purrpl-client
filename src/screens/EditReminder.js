@@ -141,6 +141,9 @@ const styles = StyleSheet.create({
   animal: {
     alignSelf: 'flex-start',
     marginRight: 10,
+    resizeMode: 'contain',
+    width: scaleWidth(90),
+    height: scaleWidth(90),
   },
   optionsContainer: {
     flexDirection: 'column',

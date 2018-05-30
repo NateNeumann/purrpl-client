@@ -20,7 +20,7 @@ export default class SlideMenu extends React.Component {
   componentWillMount = () => {
     getRemainders(this.state.user.id, moment().format('MMM D, YYYY')).then((response) => {
       this.setState({ numerator: response.numerator })
-      this.setState({ denominator: response.denominator ? response.denominator : 1 })
+      this.setState({ denominator: response.denominator ? response.denominator : -1 })
     })
 
     this._panResponder = PanResponder.create({
@@ -65,6 +65,14 @@ export default class SlideMenu extends React.Component {
     })
   }
 
+  renderText = () => {
+    console.log(this.state.denominator)
+    if (this.state.denominator === -1) {
+      return <Text style={styles.remindersCount}>No Reminders</Text>
+    }
+    return <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
+  }
+
   render() {
     const { navigate } = this.props.navigation
     if (this.state.numerator !== null && this.state.denominator !== null) {
@@ -102,7 +110,7 @@ export default class SlideMenu extends React.Component {
               </View>
             </View>
             <View>
-              <Text style={styles.remindersCount}>{this.state.numerator}/{this.state.denominator} Reminders</Text>
+              {this.renderText()}
             </View>
           </View>
           <View style={styles.secondHalf}>

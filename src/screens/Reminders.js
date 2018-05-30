@@ -109,6 +109,9 @@ const styles = StyleSheet.create({
     height: '90%',
   },
   reminderImage: {
+    resizeMode: 'contain',
+    width: scaleWidth(70),
+    height: scaleWidth(70),
     alignSelf: 'flex-start',
     marginRight: responsiveHeight(3),
   },
