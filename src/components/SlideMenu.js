@@ -111,7 +111,7 @@ export default class SlideMenu extends React.Component {
               </TouchableOpacity>
             </View>
             <TouchableOpacity
-              style={styles.optionButton}
+              style={styles.logoutButton}
               onPress={() => {
                 AsyncStorage.setItem('loggedIn', JSON.stringify(false))
                 this.props.toggleMenu()
