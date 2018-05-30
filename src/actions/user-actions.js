@@ -43,6 +43,16 @@ export function fetchUser(id) {
   })
 }
 
+export function deleteUser(id) {
+  return new Promise((resolve, reject) => {
+    axios.delete(`${ROOT_URL}/user/${id}`).then((response) => {
+      resolve(response.data)
+    }).catch((error) => {
+      reject(error)
+    })
+  })
+}
+
 export function fetchSearchedUsers(id, searchTerm) {
   return new Promise((resolve, reject) => {
     axios.get(`${ROOT_URL}/users/${id}&${searchTerm}`).then((response) => {
