@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings';
 import Back from './../components/Back'
 import Avatar from './../components/Avatar'
@@ -55,11 +55,9 @@ export default class Profile extends React.Component {
             <Back navigation={this.props.navigation} />
             <Text style={styles.header}>PROFILE</Text>
           </View>
-          <Image style={{
-            alignSelf: 'center', height: 160, width: 160, marginTop: '6%', marginBottom: '5%',
-          }}
-            source={require('./../assets/images/sittingcat.png')}
-          />
+          <View style={styles.profileContainer}>
+            <Avatar height={scaleHeight(110)} width={scaleWidth(110)} id={this.state.user.id} />
+          </View>
           <Text style={styles.nameText}>{this.state.user.name}</Text>
           <Text style={styles.addedText}>How are you feeling today?</Text>
           <AirbnbRating
@@ -187,5 +185,15 @@ const styles = StyleSheet.create({
     height: '100%',
     marginLeft: '-21%',
     marginTop: '-1%',
+  },
+  profileContainer: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: scaleWidth(160),
+    height: scaleHeight(160),
+    margin: scaleHeight(20),
+    borderRadius: scaleHeight(80),
+    backgroundColor: '#F1EAFF',
   },
 })
