@@ -33,18 +33,22 @@ export default class SlideMenu extends React.Component {
       onPanResponderTerminationRequest: (evt, gestureState) => false,
       onPanResponderRelease: (evt, gestureState) => {
         if (gestureState.dx < 0) {
-          const toValue = -300
-          Animated.spring(
-            this.state.bounceValue,
-            {
-              toValue,
-              tension: 3,
-            },
-          ).start(() => {
-            this.props.toggleMenu()
-          })
+          this.swipeOut()
         }
       },
+    })
+  }
+
+  swipeOut = () => {
+    const toValue = -300
+    Animated.spring(
+      this.state.bounceValue,
+      {
+        toValue,
+        tension: 3,
+      },
+    ).start(() => {
+      this.props.toggleMenu()
     })
   }
 
@@ -66,7 +70,7 @@ export default class SlideMenu extends React.Component {
         <Animated.View style={[styles.container, { transform: [{ translateX: this.state.bounceValue }] }]} {...this._panResponder.panHandlers}>
           <TouchableOpacity
             style={styles.exitButton}
-            onPress={this.props.toggleMenu}
+            onPress={this.swipeOut}
           >
             <Image style={{ height: scaleHeight(50), width: scaleHeight(50) }} source={require('./../assets/images/x.png')} />
           </TouchableOpacity>

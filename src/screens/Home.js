@@ -46,6 +46,7 @@ export default class Home extends React.Component {
   }
 
   toggleMenu = () => {
+    console.log(!this.state.menuVisible)
     this.setState({ menuVisible: !this.state.menuVisible })
   }
 
@@ -81,7 +82,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         {this.state.menuVisible ? <SlideMenu user={this.state.user} visible={this.state.menuVisible} toggleMenu={this.toggleMenu} navigation={this.props.navigation} /> : null}
         <View style={styles.headerContainer}>
-          <Menu action={() => this.setState({ menuVisible: !this.state.menuVisible })} />
+          <Menu action={this.toggleMenu} />
           <Text style={styles.header}>HOME</Text>
         </View>
         <View>
