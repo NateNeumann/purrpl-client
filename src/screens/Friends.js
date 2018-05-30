@@ -54,14 +54,14 @@ export default class Friends extends React.Component {
                   <View
                     style={{
                       backgroundColor: '#F1EAFF',
-                      height: scaleHeight(80),
+                      height: scaleWidth(80),
                       width: scaleWidth(80),
                       borderRadius: scaleHeight(40),
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}
                   >
-                    <Avatar height={scaleHeight(60)} width={scaleWidth(60)} id={item.id} />
+                    <Avatar height={scaleWidth(60)} width={scaleWidth(60)} id={item.id} />
                   </View>
                   <View>
                     <Text style={styles.bold}>{item.name.toUpperCase()}</Text>
@@ -80,8 +80,8 @@ export default class Friends extends React.Component {
           <Image
             style={{
               alignSelf: 'center',
-              height: scaleHeight(40),
-              width: scaleWidth(40),
+              height: scaleHeight(100),
+              width: scaleHeight(100),
               marginTop: scaleHeight(20),
               resizeMode: 'contain',
             }}
@@ -92,6 +92,7 @@ export default class Friends extends React.Component {
               marginTop: scaleHeight(20),
               textAlign: 'center',
               fontFamily: 'raleway-semi-bold',
+              fontSize: 20,
               color: '#777777',
             }}
           >
@@ -138,8 +139,8 @@ export default class Friends extends React.Component {
           <TouchableOpacity style={{ position: 'absolute', right: scaleWidth(10) }} onPress={() => navigate('AddFriends', { user: this.state.user })}>
             <Image
               style={{
-                height: scaleHeight(25),
-                width: scaleWidth(25),
+                height: scaleHeight(30),
+                width: scaleHeight(30),
                 marginTop: scaleHeight(5),
                 marginRight: scaleWidth(10),
               }}

@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native'
-import { responsiveHeight, responsiveWidth, responsiveFontSize } from 'react-native-responsive-dimensions';
+import { responsiveHeight, responsiveFontSize } from 'react-native-responsive-dimensions';
 import Menu from './../components/Menu'
 import SlideMenu from './../components/SlideMenu'
-import { scaleHeight } from './../assets/scaling'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class Reminders extends React.Component {
   static navigationOptions = { header: null };
@@ -90,12 +90,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: responsiveFontSize(3),
     marginTop: responsiveHeight(2),
-    marginLeft: responsiveWidth(21),
+    marginLeft: scaleWidth(65),
     fontFamily: 'Avenir Next',
   },
   eachContainer: {
     flexDirection: 'row',
-    padding: responsiveHeight(3),
+    paddingTop: scaleHeight(20),
+    paddingBottom: scaleHeight(20),
     borderBottomColor: '#bbb',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },

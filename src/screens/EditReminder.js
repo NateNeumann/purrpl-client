@@ -6,7 +6,7 @@ import SelectTime from './../components/SelectTime'
 import Back from './../components/Back'
 import LoadingScreen from './../components/LoadingScreen'
 import { fetchReminder, updateActive } from './../actions/reminder-actions'
-import { scaleHeight } from './../assets/scaling'
+import { scaleHeight, scaleWidth } from './../assets/scaling'
 
 export default class EditReminder extends React.Component {
   static navigationOptions = { header: null };
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: responsiveFontSize(3),
     marginTop: responsiveHeight(2),
-    marginLeft: responsiveWidth(24),
+    marginLeft: scaleWidth(80),
     fontFamily: 'Avenir Next',
   },
   toggleContainer: {
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   scrollHeight: {
-    height: responsiveHeight(40),
-    width: responsiveWidth(70),
+    height: scaleHeight(280),
+    width: responsiveWidth(80),
     marginTop: responsiveWidth(5),
   },
   welcomeContainer: {
