@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontFamily: 'josefin-sans-bold',
-    fontSize: responsiveFontSize(13),
+    fontSize: responsiveFontSize(11),
     marginTop: responsiveHeight(8),
     textAlign: 'center',
   },
@@ -115,14 +115,14 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: responsiveFontSize(2.8),
+    fontSize: responsiveFontSize(2.3),
     textAlign: 'center',
   },
   secondButtonText: {
     alignSelf: 'center',
     color: 'white',
     fontFamily: 'raleway-bold',
-    fontSize: responsiveFontSize(2.5),
+    fontSize: responsiveFontSize(2.3),
     marginTop: responsiveHeight(1.5),
   },
 });
