@@ -4,7 +4,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
 import Dropdown from './../components/Dropdown'
 import LoadingScreen from './../components/LoadingScreen'
-import { toggleNotifications, fetchUser } from './../actions/user-actions'
+import { toggleNotifications, fetchUser, deleteUser } from './../actions/user-actions'
 import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
 export default class Settings extends React.Component {
@@ -69,6 +69,7 @@ export default class Settings extends React.Component {
               <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>ABOUT</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              onClick={this.deleteUser}
               style={styles.deleteButton}
             >
               <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>DELETE ACCOUNT</Text>
