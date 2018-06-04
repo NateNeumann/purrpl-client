@@ -1,17 +1,25 @@
 # Purple Gorilla 🦍
 
+![](https://i.imgur.com/b2QqScv.png)
+
 ## Architecture 🛠
 
-**Components** - Resuable objects that are used to reduced redundant code
-**Screens** - Individual screens for the project
-**Actions** - Functions that interact with the backend endpoints using `axios`
+- **Components** - Resuable objects that are used to reduced redundant code
+- **Screens** - Individual screens for the project
+- **Actions** - Functions that interact with the backend endpoints using `axios`
 
 ## Setup 🚀
 
 ```bash
-git clone https://github.com/dartmouth-cs52-18S/project-client-black-mirror.git
+git clone https://github.com/dartmouth-cs52-18S/project-client-purple-gorilla.git
 cd project-client-black-mirror
 npm install
+```
+
+Make sure you have Expo installed:
+
+```bash
+npm install -g exp
 ```
 
 In one tab of your terminal run:
