@@ -1,8 +1,8 @@
 # purrpl 🐱
 
-![](https://i.imgur.com/b2QqScv.png)
+### **purrpl** is a self-care app that helps you track your wellness and encourage your friends.
 
-**purrpl** is a self-care app that helps you track your wellness and encourage your friends.
+![](https://i.imgur.com/b2QqScv.png)
 
 ## Architecture 🛠
 
