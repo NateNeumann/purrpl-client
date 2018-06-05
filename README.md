@@ -1,4 +1,4 @@
-# Purple Gorilla 🦍
+# purrpl 🐱
 
 ![](https://i.imgur.com/b2QqScv.png)
 
