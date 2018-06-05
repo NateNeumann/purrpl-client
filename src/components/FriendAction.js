@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native'
 import { sendAction } from './../actions/friends-actions'
 import { scaleHeight, scaleWidth, lesserScalar } from './../assets/scaling'
 
@@ -8,6 +8,14 @@ export default class FriendAction extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => {
+          Alert.alert(
+            'Sent! 🎉 ',
+            'Thanks for being a great friend!',
+            [
+              { text: 'OK', onPress: () => console.log('Ok pressed') },
+            ],
+            { cancelable: false },
+          )
           sendAction(this.props.id, this.props.username, this.props.content)
         }}
         >

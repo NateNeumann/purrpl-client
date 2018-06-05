@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import Back from './../components/Back'
 import Dropdown from './../components/Dropdown'
@@ -27,6 +27,17 @@ export default class Settings extends React.Component {
     // save to database
     toggleNotifications(this.state.user.id, status)
     return !status
+  }
+  deleteAcct = () => {
+    Alert.alert(
+      'Account deleted 🎉 ',
+      'We\'re sad to see you go!',
+      [
+        { text: 'Ok', onPress: () => console.log('Ok pressed') },
+      ],
+      { cancelable: false },
+    )
+    deleteUser(this.state.userID)
   }
   render() {
     const { navigate } = this.props.navigation
@@ -69,7 +80,10 @@ export default class Settings extends React.Component {
               <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>ABOUT</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onClick={this.deleteUser}
+              onPress={() => {
+                this.deleteAcct()
+                navigate('Landing')
+              }}
               style={styles.deleteButton}
             >
               <Text style={{ fontSize: 18, color: '#FFF', textAlign: 'center' }}>DELETE ACCOUNT</Text>
