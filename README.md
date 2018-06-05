@@ -2,6 +2,8 @@
 
 ![](https://i.imgur.com/b2QqScv.png)
 
+**purrpl** is a self-care app that helps you track your wellness and encourage your friends.
+
 ## Architecture 🛠
 
 - **Components** - Resuable objects that are used to reduced redundant code
