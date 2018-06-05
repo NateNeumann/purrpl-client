@@ -12,7 +12,7 @@
 
 ```bash
 git clone https://github.com/dartmouth-cs52-18S/project-client-purple-gorilla.git
-cd project-client-black-mirror
+cd project-client-purple-gorilla
 npm install
 ```
 
