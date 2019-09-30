@@ -45,7 +45,7 @@ Deployed at [https://expo.io/@ijemmao/project-client-black-mirror](https://expo.
 
 * Raul Rodriguez '19
 * Ijemma Onwuzulike '19
-* Nate Neumann '20
+* Sophie Debs '20
 * Amy Guan '20
 * Christina Lu '20
 * Sofia Stanescu-Bellu '20
